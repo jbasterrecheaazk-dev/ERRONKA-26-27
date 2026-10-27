@@ -1,20 +1,45 @@
 <?php
-// Front Controller básico para SoinuTruk MVC
-// Obtiene la ruta solicitada
+/*
+ * FRONT CONTROLLER - PUERTA DE ENTRADA DE LA APLICACIÓN
+ *
+ * El Front Controller es como el recepcionista de un hotel.
+ * Toda petición que llega al sitio pasa primero por aquí,
+ * y él decide a qué página o recurso enviarla.
+ *
+ * Con esto evitamos repetir código en todos lados y tenemos
+ * un único punto de control para las rutas.
+ */
+
+// Obtiene la ruta solicitada por el usuario en la barra de navegación
+// $_SERVER['REQUEST_URI'] contiene todo lo que viene después de 'localhost:8000/'
+// parse_url lo separa para quedarnos solo con la ruta, sin ?query=...
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Normaliza la ruta quitando query strings y trailing slash
+// Normaliza la ruta: quita la barra final '/' para que
+// '/login/' y '/login' sean lo mismo
 $uri = rtrim($uri, '/');
 if ($uri === '') {
-    $uri = '/';
+    $uri = '/'; // Si el usuario está en la raíz, ponemos /
 }
 
-// 1. Si la petición es a un recurso estático dentro de /public, deja que el servidor lo sirva
+/*
+ * 1. RECURSOS ESTÁTICOS
+ *
+ * Si la URL pide algo de /public/, como /public/css/style.css o /public/img/logo.png,
+ * devolvemos false para que el servidor de PHP lo sirva directamente sin pasar por PHP.
+ * Esto es más rápido y evita cargar nuestro código para imágenes y CSS.
+ */
 if (strpos($uri, '/public/') === 0) {
-    return false; // Laravel-ish: devolver false permite que PHP built-in sirva el archivo
+    return false; // Deja que el servidor sirva el archivo estático
 }
 
-// 2. Mapeo de rutas a vistas
+/*
+ * 2. MAPEO DE RUTAS
+ *
+ * Aquí relacionamos cada URL con el archivo PHP que debe mostrarse.
+ * Es como un diccionario: clave = URL que escribe el usuario,
+ * valor = archivo real en el servidor.
+ */
 $routes = [
     '/'             => 'views/pages/index.php',
     '/index'        => 'views/pages/index.php',
@@ -23,7 +48,13 @@ $routes = [
     '/perfil'       => 'views/pages/perfil.php',
 ];
 
-// 3. Determina qué archivo cargar
+/*
+ * 3. ¿QUÉ ARCHIVO CARGAR?
+ *
+ * Primero buscamos la ruta en el array $routes.
+ * Si no está, intentamos buscar un archivo con el mismo nombre que la URL.
+ * Si tampoco existe, mostramos la página principal como fallback.
+ */
 if (array_key_exists($uri, $routes)) {
     $file = $routes[$uri];
 } else {
@@ -37,9 +68,19 @@ if (array_key_exists($uri, $routes)) {
     }
 }
 
-// 4. Seguridad: comprobar que el archivo existe y está dentro del proyecto
-$realBase = realpath(__DIR__);
-$realFile = realpath($file);
+/*
+ * 4. SEGURIDAD ANTES DE CARGAR
+ *
+ * Comprobamos que el archivo:
+ * - Existe realmente en el disco
+ * - Está dentro de nuestra carpeta del proyecto (evita ataques de ruta)
+ *
+ * Si todo es correcto, lo cargamos con require.
+ * Si no, devolvemos error 404 como si la página no existiera.
+ */
+$realBase = realpath(__DIR__);   // Carpeta raíz del proyecto
+$realFile = realpath($file);     // Ruta real del archivo que queremos cargar
+
 if ($realFile && strpos($realFile, $realBase) === 0 && file_exists($realFile)) {
     require $realFile;
 } else {
