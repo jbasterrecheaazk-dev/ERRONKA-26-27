@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoinuTruk — Carrito</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="container header__inner">
+                <div class="header__brand">
+                    <img class="header__logo-icon" src="/public/img/LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
+                    <div class="header__logo">Soinu<span>Truk</span></div>
+                </div>
+                <div class="header__search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input placeholder="Buscar vinilos, CDs, casetes, artistas..." />
+                </div>
+                <div class="header__actions">
+                    <button class="header__icon-btn" aria-label="Carrito" style="position:relative">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="header__icon-btn" aria-label="Login">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main class="cart">
+            <!-- Lista de items -->
+            <section class="cart__items">
+                <article class="item">
+                    <div class="item__media"></div>
+                    <div class="item__content">
+                        <div>
+                            <h3 class="item__title">Pink Floyd — The Dark Side of the Moon: Edición remasterizada 30 aniversario con libreto extra y funda de tela</h3>
+                            <div class="item__meta">
+                                <span>NM</span>
+                                <span>1973 • Harvest</span>
+                            </div>
+                            <div class="item__price">89,00 €</div>
+                        </div>
+                        <button class="item__remove">Eliminar</button>
+                    </div>
+                </article>
+
+                <article class="item">
+                    <div class="item__media"></div>
+                    <div class="item__content">
+                        <div>
+                            <h3 class="item__title">Rumours 1977</h3>
+                            <div class="item__meta">
+                                <span>VG+</span>
+                                <span>1977 • Warner</span>
+                            </div>
+                            <div class="item__price">64,00 €</div>
+                        </div>
+                        <button class="item__remove">Eliminar</button>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Resumen -->
+            <aside class="cart__summary">
+                <h2 class="summary__title">Resumen del pedido</h2>
+                <div class="summary__items">
+                    <div class="summary__item">
+                        <span>2 artículos</span>
+                        <span>153,00 €</span>
+                    </div>
+                    <div class="summary__item">
+                        <span>Envío</span>
+                        <span>0,00 €</span>
+                    </div>
+                </div>
+                <div class="summary__total">
+                    <span>Total</span>
+                    <span class="total">153,00 €</span>
+                </div>
+                <button class="btn btn--primary">Tramitar pago</button>
+            </aside>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer__inner">
+                <div>© 2026 SoinuTruk — Marketplace C2C de música física</div>
+                <div><a href="#">Términos</a> • <a href="#">Privacidad</a> • <a href="#">Contacto</a></div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

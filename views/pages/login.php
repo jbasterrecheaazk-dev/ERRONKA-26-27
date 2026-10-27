@@ -1,0 +1,99 @@
+<?php
+$success = $_GET['success'] ?? '';
+$error   = $_GET['error'] ?? '';
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoinuTruk — Acceso</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <div class="header__brand">
+                <img class="header__logo-icon" src="/public/img/LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
+                <div class="header__logo">Soinu<span>Truk</span></div>
+            </div>
+            <div class="header__search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input placeholder="Buscar vinilos, CDs, casetes, artistas..." />
+            </div>
+            <div class="header__actions">
+                <button class="header__icon-btn" aria-label="Carrito" style="position:relative">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="badge">3</span>
+                </button>
+                <button class="header__icon-btn" aria-label="Login">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="login">
+        <?php if ($success === 'registrado'): ?>
+            <p>Registro completado. Ahora puedes iniciar sesión.</p>
+        <?php endif; ?>
+        <?php if ($error): ?>
+            <p>Error: <?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
+        <div class="login__tabs">
+            <button class="tab tab--active" data-target="login">Iniciar sesión</button>
+            <button class="tab" data-target="register">Registrarse</button>
+        </div>
+
+        <!-- Formulario Login -->
+        <form class="form form--active" id="login" method="POST" action="/controllers/AuthController.php?action=login">
+            <div class="form__group">
+                <label class="form__label" for="email-login">Correo electrónico</label>
+                <input class="input" id="email-login" type="email" name="email" required>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="password-login">Contraseña</label>
+                <input class="input" id="password-login" type="password" name="pasahitza" required>
+            </div>
+            <button class="btn btn--primary" type="submit">Entrar</button>
+            <div class="form__footer">
+                ¿Olvidaste tu contraseña? <a class="link" href="#">Recuperar</a>
+            </div>
+        </form>
+
+        <!-- Formulario Registro -->
+        <form class="form" id="register" method="POST" action="/controllers/AuthController.php?action=registro">
+            <div class="form__group">
+                <label class="form__label" for="email-reg">Correo electrónico</label>
+                <input class="input" id="email-reg" type="email" name="email" required>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="password-reg">Contraseña</label>
+                <input class="input" id="password-reg" type="password" name="pasahitza" required>
+            </div>
+            <div class="form__group">
+                <label class="form__label" for="username">Nombre</label>
+                <input class="input" id="username" type="text" name="izena" required>
+            </div>
+            <button class="btn btn--primary" type="submit">Crear cuenta</button>
+            <div class="form__footer">
+                Al registrarte aceptas nuestros <a class="link" href="#">Términos</a>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.target;
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab--active'));
+                tab.classList.add('tab--active');
+                document.querySelectorAll('.form').forEach(form => {
+                    form.classList.remove('form--active');
+                });
+                document.getElementById(target).classList.add('form--active');
+            });
+        });
+    </script>
+</body>
+</html>

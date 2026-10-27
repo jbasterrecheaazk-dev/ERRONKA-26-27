@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoinuTruk — Perfil</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="container header__inner">
+                <div class="header__brand">
+                    <img class="header__logo-icon" src="/public/img/LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
+                    <div class="header__logo">Soinu<span>Truk</span></div>
+                </div>
+                <div class="header__search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input placeholder="Buscar vinilos, CDs, casetes, artistas..." />
+                </div>
+                <div class="header__actions">
+                    <button class="header__icon-btn" aria-label="Carrito" style="position:relative">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="header__icon-btn" aria-label="Login">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main class="profile">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h2 class="sidebar__title">Mi perfil</h2>
+                <nav class="nav">
+                    <button class="nav__btn nav__btn--active" data-target="orders">Pedidos</button>
+                    <button class="nav__btn" data-target="sell">Vender disco</button>
+                </nav>
+            </aside>
+
+            <!-- Paneles -->
+            <section class="panels">
+                <!-- Historial de pedidos -->
+                <div class="panel panel--active" id="orders">
+                    <h2 class="panel__title">Historial de pedidos</h2>
+                    <div class="orders">
+                        <article class="order">
+                            <div class="order__header">
+                                <div>
+                                    <div class="order__id">Pedido #00123</div>
+                                    <div>21/03/2026</div>
+                                </div>
+                                <div class="order__total">153,00 €</div>
+                            </div>
+                            <div class="order__items">
+                                <div class="order__item">
+                                    <span>Pink Floyd — The Dark Side of the Moon</span>
+                                    <span>89,00 €</span>
+                                </div>
+                                <div class="order__item">
+                                    <span>Fleetwood Mac — Rumours</span>
+                                    <span>64,00 €</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="order">
+                            <div class="order__header">
+                                <div>
+                                    <div class="order__id">Pedido #00112</div>
+                                    <div>14/03/2026</div>
+                                </div>
+                                <div class="order__total">72,00 €</div>
+                            </div>
+                            <div class="order__items">
+                                <div class="order__item">
+                                    <span>Nirvana — Nevermind</span>
+                                    <span>72,00 €</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Formulario de venta -->
+                <div class="panel" id="sell">
+                    <h2 class="panel__title">Publicar disco en venta</h2>
+                    <form>
+                        <div class="form__grid">
+                            <div class="form__group">
+                                <label class="form__label" for="artist">Artista</label>
+                                <input class="input" id="artist" type="text" required>
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label" for="title">Título</label>
+                                <input class="input" id="title" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="condition">Estado de conservación</label>
+                            <input class="input" id="condition" type="text" required>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="year">Año</label>
+                            <input class="input" id="year" type="number" required>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="price">Precio (€)</label>
+                            <input class="input" id="price" type="number" step="0.01" required>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="description">Descripción</label>
+                            <textarea class="textarea" id="description" required></textarea>
+                        </div>
+                        <button class="btn btn--primary" type="submit">Publicar anuncio</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer__inner">
+                <div>© 2026 SoinuTruk — Marketplace C2C de música física</div>
+                <div><a href="#">Términos</a> • <a href="#">Privacidad</a> • <a href="#">Contacto</a></div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Cambiar paneles
+        document.querySelectorAll('.nav__btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.target;
+                document.querySelectorAll('.nav__btn').forEach(b => b.classList.remove('nav__btn--active'));
+                btn.classList.add('nav__btn--active');
+                document.querySelectorAll('.panel').forEach(panel => {
+                    panel.classList.remove('panel--active');
+                });
+                document.getElementById(target).classList.add('panel--active');
+            });
+        });
+    </script>
+</body>
+</html>
