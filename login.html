@@ -10,7 +10,7 @@
     <header class="header">
         <div class="container header__inner">
             <div class="header__brand">
-                <img class="header__logo-icon" src="LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
+                <img class="header__logo-icon" src="public\img\LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
                 <div class="header__logo">Soinu<span>Truk</span></div>
             </div>
             <div class="header__search">
@@ -70,21 +70,6 @@
             </div>
         </form>
     </main>
-
-    <script>
-        // Cambiar pestañas
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.target;
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab--active'));
-                tab.classList.add('tab--active');
-                document.querySelectorAll('.form').forEach(form => {
-                    form.classList.remove('form--active');
-                });
-                document.getElementById(target).classList.add('form--active');
-            });
-        });
-    </script>
 </body>
 <script src="Loginscript.js"></script>
 </html>

@@ -10,7 +10,7 @@
     <header class="header">
         <div class="container header__inner">
             <div class="header__brand">
-                <img class="header__logo-icon" src="LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
+                <img class="header__logo-icon" src="public\img\LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
                 <div class="header__logo">Soinu<span>Truk</span></div>
             </div>
             <div class="header__search">
@@ -117,21 +117,6 @@
             </div>
         </section>
     </main>
-
-    <script>
-        // Cambiar paneles
-        document.querySelectorAll('.nav__btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.dataset.target;
-                document.querySelectorAll('.nav__btn').forEach(b => b.classList.remove('nav__btn--active'));
-                btn.classList.add('nav__btn--active');
-                document.querySelectorAll('.panel').forEach(panel => {
-                    panel.classList.remove('panel--active');
-                });
-                document.getElementById(target).classList.add('panel--active');
-            });
-        });
-    </script>
 </body>
 <script src="Perfilscript.js"></script>
 </html>
