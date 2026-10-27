@@ -11,27 +11,6 @@ $error   = $_GET['error'] ?? '';
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container header__inner">
-            <div class="header__brand">
-                <img class="header__logo-icon" src="/public/img/LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
-                <div class="header__logo">Soinu<span>Truk</span></div>
-            </div>
-            <div class="header__search">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input placeholder="Buscar vinilos, CDs, casetes, artistas..." />
-            </div>
-            <div class="header__actions">
-                <button class="header__icon-btn" aria-label="Carrito" style="position:relative">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                    <span class="badge">3</span>
-                </button>
-                <button class="header__icon-btn" aria-label="Login">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </button>
-            </div>
-        </div>
-    </header>
     <main class="login">
         <?php if ($success === 'registrado'): ?>
             <p>Registro completado. Ahora puedes iniciar sesión.</p>
@@ -46,7 +25,7 @@ $error   = $_GET['error'] ?? '';
         </div>
 
         <!-- Formulario Login -->
-        <form class="form form--active" id="login" method="POST" action="/controllers/AuthController.php?action=login">
+        <form class="form form--active" id="login" method="POST" action="/controllers/AuthController.php?action=login" novalidate>
             <div class="form__group">
                 <label class="form__label" for="email-login">Correo electrónico</label>
                 <input class="input" id="email-login" type="email" name="email" required>
@@ -62,7 +41,7 @@ $error   = $_GET['error'] ?? '';
         </form>
 
         <!-- Formulario Registro -->
-        <form class="form" id="register" method="POST" action="/controllers/AuthController.php?action=registro">
+        <form class="form" id="register" method="POST" action="/controllers/AuthController.php?action=registro" novalidate>
             <div class="form__group">
                 <label class="form__label" for="email-reg">Correo electrónico</label>
                 <input class="input" id="email-reg" type="email" name="email" required>
@@ -95,5 +74,6 @@ $error   = $_GET['error'] ?? '';
             });
         });
     </script>
+    <script src="/public/js/validations.js"></script>
 </body>
 </html>

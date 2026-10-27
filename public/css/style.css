@@ -534,6 +534,61 @@ a {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
+/* ===================== User Info in Sidebar ===================== */
+.user-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.user-info__avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.user-info__avatar svg {
+    stroke: var(--muted);
+    width: 24px;
+    height: 24px;
+}
+
+.user-info__details {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-info__name {
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info__email {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info__since {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
 .nav {
     display: flex;
     flex-direction: column;
@@ -629,6 +684,26 @@ a {
     .form__grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ===================== Form Feedback ===================== */
+.form__feedback {
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+}
+
+.form__feedback--success {
+    background: #1a2e1a;
+    border-color: #3a7a3a;
+    color: #8bc34a;
+}
+
+.form__feedback--error {
+    background: #2e1a1a;
+    border-color: #7a3a3a;
+    color: #ef5350;
 }
 
 /* ===================== Footer ===================== */

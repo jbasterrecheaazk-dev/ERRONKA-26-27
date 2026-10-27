@@ -1,0 +1,1365 @@
+[Tue Oct 27 09:47:22 2026] PHP 8.1.25 Development Server (http://localhost:8000) started
+[Tue Oct 27 10:19:32 2026] [::1]:49289 Accepted
+[Tue Oct 27 10:19:32 2026] [::1]:49290 Accepted
+[Tue Oct 27 10:19:32 2026] [::1]:49291 Accepted
+[Tue Oct 27 10:19:32 2026] [::1]:49292 Accepted
+[Tue Oct 27 10:19:34 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:19:34 2026] [::1]:49289 [200]: GET /login
+[Tue Oct 27 10:19:34 2026] [::1]:49289 Closing
+[Tue Oct 27 10:19:34 2026] [::1]:49291 [200]: GET /public/css/style.css
+[Tue Oct 27 10:19:34 2026] [::1]:49290 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:19:34 2026] [::1]:49291 Closing
+[Tue Oct 27 10:19:34 2026] [::1]:49292 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:19:34 2026] [::1]:49290 Closing
+[Tue Oct 27 10:19:34 2026] [::1]:49292 Closing
+[Tue Oct 27 10:19:40 2026] [::1]:55507 Accepted
+[Tue Oct 27 10:19:41 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:19:41 2026] [::1]:55507 [200]: GET /
+[Tue Oct 27 10:19:41 2026] [::1]:55507 Closing
+[Tue Oct 27 10:19:41 2026] [::1]:51733 Accepted
+[Tue Oct 27 10:19:41 2026] [::1]:58315 Accepted
+[Tue Oct 27 10:19:41 2026] [::1]:51733 [200]: GET /public/css/style.css
+[Tue Oct 27 10:19:41 2026] [::1]:58315 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:19:41 2026] [::1]:51733 Closing
+[Tue Oct 27 10:19:41 2026] [::1]:58315 Closing
+[Tue Oct 27 10:19:44 2026] [::1]:58317 Accepted
+[Tue Oct 27 10:19:45 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:19:45 2026] [::1]:58317 [200]: GET /
+[Tue Oct 27 10:19:45 2026] [::1]:58317 Closing
+[Tue Oct 27 10:19:45 2026] [::1]:58320 Accepted
+[Tue Oct 27 10:19:45 2026] [::1]:58320 [200]: GET /public/css/style.css
+[Tue Oct 27 10:19:45 2026] [::1]:58320 Closing
+[Tue Oct 27 10:19:45 2026] [::1]:58321 Accepted
+[Tue Oct 27 10:19:45 2026] [::1]:58321 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:19:45 2026] [::1]:58321 Closing
+[Tue Oct 27 10:19:52 2026] [::1]:51699 Accepted
+[Tue Oct 27 10:19:55 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:19:55 2026] [::1]:51699 [200]: GET /login
+[Tue Oct 27 10:19:55 2026] [::1]:51699 Closing
+[Tue Oct 27 10:19:55 2026] [::1]:51702 Accepted
+[Tue Oct 27 10:19:55 2026] [::1]:51702 [200]: GET /public/css/style.css
+[Tue Oct 27 10:19:55 2026] [::1]:51702 Closing
+[Tue Oct 27 10:19:55 2026] [::1]:51703 Accepted
+[Tue Oct 27 10:19:55 2026] [::1]:51703 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:19:55 2026] [::1]:51703 Closing
+[Tue Oct 27 10:19:55 2026] [::1]:51704 Accepted
+[Tue Oct 27 10:19:55 2026] [::1]:51704 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:19:55 2026] [::1]:51704 Closing
+[Tue Oct 27 10:20:10 2026] [::1]:51710 Accepted
+[Tue Oct 27 10:20:10 2026] [::1]:51711 Accepted
+[Tue Oct 27 10:20:10 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:20:10 2026] [::1]:51711 [200]: GET /login
+[Tue Oct 27 10:20:10 2026] [::1]:51711 Closing
+[Tue Oct 27 10:20:10 2026] [::1]:51710 [200]: GET /public/css/style.css
+[Tue Oct 27 10:20:10 2026] [::1]:51710 Closing
+[Tue Oct 27 10:20:10 2026] [::1]:51714 Accepted
+[Tue Oct 27 10:20:10 2026] [::1]:51714 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:20:10 2026] [::1]:51714 Closing
+[Tue Oct 27 10:20:10 2026] [::1]:51715 Accepted
+[Tue Oct 27 10:20:10 2026] [::1]:51715 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:20:10 2026] [::1]:51715 Closing
+[Tue Oct 27 10:20:10 2026] [::1]:51716 Accepted
+[Tue Oct 27 10:20:10 2026] [::1]:51716 [404]: GET /favicon.ico - No such file or directory
+[Tue Oct 27 10:20:10 2026] [::1]:51716 Closing
+[Tue Oct 27 10:27:33 2026] [::1]:58460 Accepted
+[Tue Oct 27 10:27:34 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:27:34 2026] [::1]:58460 [200]: GET /
+[Tue Oct 27 10:27:34 2026] [::1]:58460 Closing
+[Tue Oct 27 10:27:34 2026] [::1]:50868 Accepted
+[Tue Oct 27 10:27:34 2026] [::1]:58206 Accepted
+[Tue Oct 27 10:27:34 2026] [::1]:50868 [200]: GET /public/css/style.css
+[Tue Oct 27 10:27:34 2026] [::1]:58206 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:27:34 2026] [::1]:50868 Closing
+[Tue Oct 27 10:27:34 2026] [::1]:58206 Closing
+[Tue Oct 27 10:27:41 2026] [::1]:58209 Accepted
+[Tue Oct 27 10:27:41 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:27:41 2026] [::1]:58209 [200]: GET /
+[Tue Oct 27 10:27:41 2026] [::1]:58209 Closing
+[Tue Oct 27 10:27:41 2026] [::1]:58212 Accepted
+[Tue Oct 27 10:27:41 2026] [::1]:58212 [200]: GET /public/css/style.css
+[Tue Oct 27 10:27:41 2026] [::1]:58212 Closing
+[Tue Oct 27 10:27:41 2026] [::1]:58213 Accepted
+[Tue Oct 27 10:27:41 2026] [::1]:58213 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:27:41 2026] [::1]:58213 Closing
+[Tue Oct 27 10:27:47 2026] [::1]:58221 Accepted
+[Tue Oct 27 10:27:48 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:27:48 2026] [::1]:58221 [200]: GET /login
+[Tue Oct 27 10:27:48 2026] [::1]:58221 Closing
+[Tue Oct 27 10:27:48 2026] [::1]:58224 Accepted
+[Tue Oct 27 10:27:48 2026] [::1]:58224 [200]: GET /public/css/style.css
+[Tue Oct 27 10:27:48 2026] [::1]:58224 Closing
+[Tue Oct 27 10:27:48 2026] [::1]:58225 Accepted
+[Tue Oct 27 10:27:48 2026] [::1]:58226 Accepted
+[Tue Oct 27 10:27:48 2026] [::1]:58225 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:27:48 2026] [::1]:58226 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:27:48 2026] [::1]:58225 Closing
+[Tue Oct 27 10:27:48 2026] [::1]:58226 Closing
+[Tue Oct 27 10:27:48 2026] [::1]:58227 Accepted
+[Tue Oct 27 10:27:49 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:27:49 2026] [::1]:58227 [200]: GET /carrito
+[Tue Oct 27 10:27:49 2026] [::1]:58227 Closing
+[Tue Oct 27 10:27:49 2026] [::1]:58234 Accepted
+[Tue Oct 27 10:27:49 2026] [::1]:58234 [200]: GET /public/css/style.css
+[Tue Oct 27 10:27:49 2026] [::1]:58234 Closing
+[Tue Oct 27 10:27:49 2026] [::1]:58235 Accepted
+[Tue Oct 27 10:27:49 2026] [::1]:58235 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:27:49 2026] [::1]:58235 Closing
+[Tue Oct 27 10:27:49 2026] [::1]:58236 Accepted
+[Tue Oct 27 10:27:51 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:27:51 2026] [::1]:58236 [200]: GET /checkout
+[Tue Oct 27 10:27:51 2026] [::1]:58236 Closing
+[Tue Oct 27 10:27:51 2026] [::1]:58239 Accepted
+[Tue Oct 27 10:27:51 2026] [::1]:58239 [200]: GET /public/css/style.css
+[Tue Oct 27 10:27:51 2026] [::1]:58239 Closing
+[Tue Oct 27 10:27:51 2026] [::1]:58240 Accepted
+[Tue Oct 27 10:27:51 2026] [::1]:58240 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:27:51 2026] [::1]:58240 Closing
+[Tue Oct 27 10:27:52 2026] [::1]:58242 Accepted
+[Tue Oct 27 10:27:53 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:27:53 2026] [::1]:58242 [200]: GET /login
+[Tue Oct 27 10:27:53 2026] [::1]:58242 Closing
+[Tue Oct 27 10:27:53 2026] [::1]:58248 Accepted
+[Tue Oct 27 10:27:53 2026] [::1]:58248 [200]: GET /public/css/style.css
+[Tue Oct 27 10:27:53 2026] [::1]:58248 Closing
+[Tue Oct 27 10:27:53 2026] [::1]:58249 Accepted
+[Tue Oct 27 10:27:53 2026] [::1]:58249 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:27:53 2026] [::1]:58249 Closing
+[Tue Oct 27 10:27:53 2026] [::1]:58250 Accepted
+[Tue Oct 27 10:27:53 2026] [::1]:58250 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:27:53 2026] [::1]:58250 Closing
+[Tue Oct 27 10:28:05 2026] [::1]:58255 Accepted
+[Tue Oct 27 10:28:07 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:28:07 2026] [::1]:58255 [200]: GET /login
+[Tue Oct 27 10:28:07 2026] [::1]:58255 Closing
+[Tue Oct 27 10:28:07 2026] [::1]:58258 Accepted
+[Tue Oct 27 10:28:07 2026] [::1]:58259 Accepted
+[Tue Oct 27 10:28:07 2026] [::1]:58259 [200]: GET /public/css/style.css
+[Tue Oct 27 10:28:07 2026] [::1]:58258 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:28:07 2026] [::1]:58259 Closing
+[Tue Oct 27 10:28:07 2026] [::1]:58258 Closing
+[Tue Oct 27 10:28:07 2026] [::1]:58260 Accepted
+[Tue Oct 27 10:28:07 2026] [::1]:58260 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:28:07 2026] [::1]:58260 Closing
+[Tue Oct 27 10:29:38 2026] [::1]:58307 Accepted
+[Tue Oct 27 10:29:39 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:29:39 2026] [::1]:58307 [200]: GET /login
+[Tue Oct 27 10:29:39 2026] [::1]:58307 Closing
+[Tue Oct 27 10:29:39 2026] [::1]:58310 Accepted
+[Tue Oct 27 10:29:39 2026] [::1]:58311 Accepted
+[Tue Oct 27 10:29:39 2026] [::1]:58310 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:29:39 2026] [::1]:58310 Closing
+[Tue Oct 27 10:29:39 2026] [::1]:58311 [200]: GET /public/css/style.css
+[Tue Oct 27 10:29:39 2026] [::1]:58311 Closing
+[Tue Oct 27 10:29:39 2026] [::1]:58312 Accepted
+[Tue Oct 27 10:29:39 2026] [::1]:58312 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:29:39 2026] [::1]:58312 Closing
+[Tue Oct 27 10:29:57 2026] [::1]:51028 Accepted
+[Tue Oct 27 10:29:58 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:29:58 2026] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'soinutruk' in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\config\Conexion.php:52
+Stack trace:
+#0 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\config\Conexion.php(52): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\models\ErabiltzaileaModel.php(30): Conexion->getConexion()
+#2 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\AuthController.php(34): ErabiltzaileaModel->__construct()
+#3 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\AuthController.php(172): AuthController->__construct()
+#4 {main}
+  thrown in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\config\Conexion.php on line 52
+[Tue Oct 27 10:29:58 2026] [::1]:51028 [200]: POST /controllers/AuthController.php?action=registro - Uncaught PDOException: SQLSTATE[HY000] [1049] Unknown database 'soinutruk' in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\config\Conexion.php:52
+Stack trace:
+#0 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\config\Conexion.php(52): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\models\ErabiltzaileaModel.php(30): Conexion->getConexion()
+#2 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\AuthController.php(34): ErabiltzaileaModel->__construct()
+#3 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\AuthController.php(172): AuthController->__construct()
+#4 {main}
+  thrown in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\config\Conexion.php on line 52
+[Tue Oct 27 10:29:58 2026] [::1]:51028 Closing
+[Tue Oct 27 10:32:15 2026] [::1]:54407 Accepted
+[Tue Oct 27 10:32:16 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:16 2026] [::1]:54407 [200]: GET /
+[Tue Oct 27 10:32:16 2026] [::1]:54407 Closing
+[Tue Oct 27 10:32:16 2026] [::1]:59707 Accepted
+[Tue Oct 27 10:32:16 2026] [::1]:58203 Accepted
+[Tue Oct 27 10:32:16 2026] [::1]:59707 [200]: GET /public/css/style.css
+[Tue Oct 27 10:32:16 2026] [::1]:58203 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:32:16 2026] [::1]:59707 Closing
+[Tue Oct 27 10:32:16 2026] [::1]:58203 Closing
+[Tue Oct 27 10:32:18 2026] [::1]:58205 Accepted
+[Tue Oct 27 10:32:19 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:19 2026] [::1]:58205 [200]: GET /
+[Tue Oct 27 10:32:19 2026] [::1]:58205 Closing
+[Tue Oct 27 10:32:19 2026] [::1]:58208 Accepted
+[Tue Oct 27 10:32:19 2026] [::1]:58208 [200]: GET /public/css/style.css
+[Tue Oct 27 10:32:19 2026] [::1]:58208 Closing
+[Tue Oct 27 10:32:19 2026] [::1]:58209 Accepted
+[Tue Oct 27 10:32:19 2026] [::1]:58209 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:32:19 2026] [::1]:58209 Closing
+[Tue Oct 27 10:32:20 2026] [::1]:58211 Accepted
+[Tue Oct 27 10:32:21 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:21 2026] [::1]:58211 [200]: GET /login
+[Tue Oct 27 10:32:21 2026] [::1]:58211 Closing
+[Tue Oct 27 10:32:21 2026] [::1]:58213 Accepted
+[Tue Oct 27 10:32:21 2026] [::1]:58213 [200]: GET /public/css/style.css
+[Tue Oct 27 10:32:21 2026] [::1]:58213 Closing
+[Tue Oct 27 10:32:21 2026] [::1]:58215 Accepted
+[Tue Oct 27 10:32:21 2026] [::1]:58215 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:32:21 2026] [::1]:58215 Closing
+[Tue Oct 27 10:32:21 2026] [::1]:58216 Accepted
+[Tue Oct 27 10:32:21 2026] [::1]:58216 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:32:21 2026] [::1]:58216 Closing
+[Tue Oct 27 10:32:41 2026] [::1]:58245 Accepted
+[Tue Oct 27 10:32:41 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:41 2026] [::1]:58245 [302]: POST /controllers/AuthController.php?action=registro
+[Tue Oct 27 10:32:41 2026] [::1]:58245 Closing
+[Tue Oct 27 10:32:41 2026] [::1]:58249 Accepted
+[Tue Oct 27 10:32:42 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:42 2026] [::1]:58249 [200]: GET /views/pages/login.php?success=registrado
+[Tue Oct 27 10:32:42 2026] [::1]:58249 Closing
+[Tue Oct 27 10:32:42 2026] [::1]:58253 Accepted
+[Tue Oct 27 10:32:42 2026] [::1]:58253 [200]: GET /public/css/style.css
+[Tue Oct 27 10:32:42 2026] [::1]:58254 Accepted
+[Tue Oct 27 10:32:42 2026] [::1]:58253 Closing
+[Tue Oct 27 10:32:42 2026] [::1]:58254 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:32:42 2026] [::1]:58254 Closing
+[Tue Oct 27 10:32:42 2026] [::1]:58255 Accepted
+[Tue Oct 27 10:32:42 2026] [::1]:58255 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:32:42 2026] [::1]:58255 Closing
+[Tue Oct 27 10:32:54 2026] [::1]:58260 Accepted
+[Tue Oct 27 10:32:54 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:54 2026] [::1]:58260 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:32:54 2026] [::1]:58260 Closing
+[Tue Oct 27 10:32:54 2026] [::1]:58264 Accepted
+[Tue Oct 27 10:32:55 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:55 2026] [::1]:58264 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:32:55 2026] [::1]:58264 Closing
+[Tue Oct 27 10:32:55 2026] [::1]:58267 Accepted
+[Tue Oct 27 10:32:55 2026] [::1]:58267 [200]: GET /public/css/style.css
+[Tue Oct 27 10:32:55 2026] [::1]:58267 Closing
+[Tue Oct 27 10:32:55 2026] [::1]:58268 Accepted
+[Tue Oct 27 10:32:55 2026] [::1]:58268 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:32:55 2026] [::1]:58268 Closing
+[Tue Oct 27 10:32:56 2026] [::1]:58269 Accepted
+[Tue Oct 27 10:32:57 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:32:57 2026] [::1]:58269 [200]: GET /login
+[Tue Oct 27 10:32:57 2026] [::1]:58269 Closing
+[Tue Oct 27 10:32:57 2026] [::1]:58278 Accepted
+[Tue Oct 27 10:32:57 2026] [::1]:58279 Accepted
+[Tue Oct 27 10:32:57 2026] [::1]:58278 [200]: GET /public/css/style.css
+[Tue Oct 27 10:32:57 2026] [::1]:58279 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:32:57 2026] [::1]:58278 Closing
+[Tue Oct 27 10:32:57 2026] [::1]:58279 Closing
+[Tue Oct 27 10:32:57 2026] [::1]:58280 Accepted
+[Tue Oct 27 10:32:57 2026] [::1]:58280 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:32:57 2026] [::1]:58280 Closing
+[Tue Oct 27 10:32:57 2026] [::1]:58281 Accepted
+[Tue Oct 27 10:33:02 2026] [::1]:58281 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:33:02 2026] [::1]:58281 Closing
+[Tue Oct 27 10:33:02 2026] [::1]:58300 Accepted
+[Tue Oct 27 10:33:03 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:03 2026] [::1]:58300 [302]: GET /logout
+[Tue Oct 27 10:33:03 2026] [::1]:58300 Closing
+[Tue Oct 27 10:33:03 2026] [::1]:58303 Accepted
+[Tue Oct 27 10:33:03 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:03 2026] [::1]:58303 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:33:03 2026] [::1]:58303 Closing
+[Tue Oct 27 10:33:03 2026] [::1]:58307 Accepted
+[Tue Oct 27 10:33:03 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:03 2026] [::1]:58307 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:33:03 2026] [::1]:58307 Closing
+[Tue Oct 27 10:33:04 2026] [::1]:58310 Accepted
+[Tue Oct 27 10:33:04 2026] [::1]:58310 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:04 2026] [::1]:58310 Closing
+[Tue Oct 27 10:33:04 2026] [::1]:58311 Accepted
+[Tue Oct 27 10:33:04 2026] [::1]:58311 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:04 2026] [::1]:58311 Closing
+[Tue Oct 27 10:33:07 2026] [::1]:58313 Accepted
+[Tue Oct 27 10:33:08 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:08 2026] [::1]:58313 [200]: GET /carrito
+[Tue Oct 27 10:33:08 2026] [::1]:58313 Closing
+[Tue Oct 27 10:33:08 2026] [::1]:58315 Accepted
+[Tue Oct 27 10:33:08 2026] [::1]:58315 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:08 2026] [::1]:58315 Closing
+[Tue Oct 27 10:33:08 2026] [::1]:58317 Accepted
+[Tue Oct 27 10:33:08 2026] [::1]:58317 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:08 2026] [::1]:58317 Closing
+[Tue Oct 27 10:33:08 2026] [::1]:58319 Accepted
+[Tue Oct 27 10:33:10 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:10 2026] [::1]:58319 [302]: GET /logout
+[Tue Oct 27 10:33:10 2026] [::1]:58319 Closing
+[Tue Oct 27 10:33:10 2026] [::1]:58322 Accepted
+[Tue Oct 27 10:33:10 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:10 2026] [::1]:58322 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:33:10 2026] [::1]:58322 Closing
+[Tue Oct 27 10:33:10 2026] [::1]:58326 Accepted
+[Tue Oct 27 10:33:11 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:11 2026] [::1]:58326 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:33:11 2026] [::1]:58326 Closing
+[Tue Oct 27 10:33:11 2026] [::1]:58330 Accepted
+[Tue Oct 27 10:33:11 2026] [::1]:58330 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:11 2026] [::1]:58330 Closing
+[Tue Oct 27 10:33:11 2026] [::1]:58331 Accepted
+[Tue Oct 27 10:33:11 2026] [::1]:58331 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:11 2026] [::1]:58331 Closing
+[Tue Oct 27 10:33:14 2026] [::1]:58335 Accepted
+[Tue Oct 27 10:33:14 2026] [::1]:58336 Accepted
+[Tue Oct 27 10:33:14 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:14 2026] [::1]:58335 [200]: GET /login
+[Tue Oct 27 10:33:14 2026] [::1]:58335 Closing
+[Tue Oct 27 10:33:14 2026] [::1]:58336 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:14 2026] [::1]:58336 Closing
+[Tue Oct 27 10:33:14 2026] [::1]:58339 Accepted
+[Tue Oct 27 10:33:14 2026] [::1]:58339 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:33:14 2026] [::1]:58339 Closing
+[Tue Oct 27 10:33:14 2026] [::1]:58340 Accepted
+[Tue Oct 27 10:33:14 2026] [::1]:58340 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:14 2026] [::1]:58340 Closing
+[Tue Oct 27 10:33:14 2026] [::1]:58341 Accepted
+[Tue Oct 27 10:33:16 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:16 2026] [::1]:58341 [200]: GET /carrito
+[Tue Oct 27 10:33:16 2026] [::1]:58341 Closing
+[Tue Oct 27 10:33:16 2026] [::1]:58344 Accepted
+[Tue Oct 27 10:33:16 2026] [::1]:58344 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:16 2026] [::1]:58344 Closing
+[Tue Oct 27 10:33:16 2026] [::1]:58345 Accepted
+[Tue Oct 27 10:33:16 2026] [::1]:58345 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:16 2026] [::1]:58345 Closing
+[Tue Oct 27 10:33:16 2026] [::1]:58346 Accepted
+[Tue Oct 27 10:33:18 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:18 2026] [::1]:58346 [302]: GET /logout
+[Tue Oct 27 10:33:18 2026] [::1]:58346 Closing
+[Tue Oct 27 10:33:18 2026] [::1]:58349 Accepted
+[Tue Oct 27 10:33:19 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:19 2026] [::1]:58349 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:33:19 2026] [::1]:58349 Closing
+[Tue Oct 27 10:33:19 2026] [::1]:58353 Accepted
+[Tue Oct 27 10:33:19 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:19 2026] [::1]:58353 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:33:19 2026] [::1]:58353 Closing
+[Tue Oct 27 10:33:19 2026] [::1]:58356 Accepted
+[Tue Oct 27 10:33:19 2026] [::1]:58356 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:19 2026] [::1]:58356 Closing
+[Tue Oct 27 10:33:19 2026] [::1]:58357 Accepted
+[Tue Oct 27 10:33:19 2026] [::1]:58357 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:19 2026] [::1]:58357 Closing
+[Tue Oct 27 10:33:19 2026] [::1]:58358 Accepted
+[Tue Oct 27 10:33:22 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:33:22 2026] [::1]:58358 [200]: GET /
+[Tue Oct 27 10:33:22 2026] [::1]:58358 Closing
+[Tue Oct 27 10:33:22 2026] [::1]:58360 Accepted
+[Tue Oct 27 10:33:22 2026] [::1]:58360 [200]: GET /public/css/style.css
+[Tue Oct 27 10:33:22 2026] [::1]:58360 Closing
+[Tue Oct 27 10:33:22 2026] [::1]:58362 Accepted
+[Tue Oct 27 10:33:22 2026] [::1]:58362 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:33:22 2026] [::1]:58362 Closing
+[Tue Oct 27 10:33:23 2026] [::1]:58363 Accepted
+[Tue Oct 27 10:33:29 2026] [::1]:58363 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:33:29 2026] [::1]:58363 Closing
+[Tue Oct 27 10:34:19 2026] [::1]:58380 Accepted
+[Tue Oct 27 10:34:19 2026] [::1]:58381 Accepted
+[Tue Oct 27 10:34:20 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:20 2026] [::1]:58380 [200]: GET /login
+[Tue Oct 27 10:34:20 2026] [::1]:58380 Closing
+[Tue Oct 27 10:34:20 2026] [::1]:58381 [200]: GET /public/css/style.css
+[Tue Oct 27 10:34:20 2026] [::1]:58381 Closing
+[Tue Oct 27 10:34:20 2026] [::1]:58384 Accepted
+[Tue Oct 27 10:34:20 2026] [::1]:58384 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:34:20 2026] [::1]:58384 Closing
+[Tue Oct 27 10:34:20 2026] [::1]:58385 Accepted
+[Tue Oct 27 10:34:20 2026] [::1]:58385 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:34:20 2026] [::1]:58385 Closing
+[Tue Oct 27 10:34:20 2026] [::1]:58386 Accepted
+[Tue Oct 27 10:34:21 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:21 2026] [::1]:58386 [302]: GET /logout
+[Tue Oct 27 10:34:21 2026] [::1]:58386 Closing
+[Tue Oct 27 10:34:21 2026] [::1]:58389 Accepted
+[Tue Oct 27 10:34:22 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:22 2026] [::1]:58389 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:34:22 2026] [::1]:58389 Closing
+[Tue Oct 27 10:34:22 2026] [::1]:58393 Accepted
+[Tue Oct 27 10:34:22 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:22 2026] [::1]:58393 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:34:22 2026] [::1]:58393 Closing
+[Tue Oct 27 10:34:22 2026] [::1]:58398 Accepted
+[Tue Oct 27 10:34:22 2026] [::1]:58399 Accepted
+[Tue Oct 27 10:34:22 2026] [::1]:58399 [200]: GET /public/css/style.css
+[Tue Oct 27 10:34:22 2026] [::1]:58399 Closing
+[Tue Oct 27 10:34:22 2026] [::1]:58398 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:34:22 2026] [::1]:58398 Closing
+[Tue Oct 27 10:34:23 2026] [::1]:58401 Accepted
+[Tue Oct 27 10:34:23 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:23 2026] [::1]:58401 [200]: GET /login
+[Tue Oct 27 10:34:23 2026] [::1]:58401 Closing
+[Tue Oct 27 10:34:23 2026] [::1]:58404 Accepted
+[Tue Oct 27 10:34:23 2026] [::1]:58405 Accepted
+[Tue Oct 27 10:34:23 2026] [::1]:58404 [200]: GET /public/css/style.css
+[Tue Oct 27 10:34:23 2026] [::1]:58405 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:34:23 2026] [::1]:58404 Closing
+[Tue Oct 27 10:34:23 2026] [::1]:58405 Closing
+[Tue Oct 27 10:34:23 2026] [::1]:58406 Accepted
+[Tue Oct 27 10:34:23 2026] [::1]:58406 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:34:23 2026] [::1]:58406 Closing
+[Tue Oct 27 10:34:23 2026] [::1]:58407 Accepted
+[Tue Oct 27 10:34:29 2026] [::1]:58407 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:34:29 2026] [::1]:58407 Closing
+[Tue Oct 27 10:34:37 2026] [::1]:58412 Accepted
+[Tue Oct 27 10:34:37 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:37 2026] [::1]:58412 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:34:37 2026] [::1]:58412 Closing
+[Tue Oct 27 10:34:37 2026] [::1]:58416 Accepted
+[Tue Oct 27 10:34:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:34:38 2026] [::1]:58416 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:34:38 2026] [::1]:58416 Closing
+[Tue Oct 27 10:34:38 2026] [::1]:58419 Accepted
+[Tue Oct 27 10:34:38 2026] [::1]:58419 [200]: GET /public/css/style.css
+[Tue Oct 27 10:34:38 2026] [::1]:58419 Closing
+[Tue Oct 27 10:34:38 2026] [::1]:58420 Accepted
+[Tue Oct 27 10:34:38 2026] [::1]:58420 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:34:38 2026] [::1]:58420 Closing
+[Tue Oct 27 10:34:39 2026] [::1]:58421 Accepted
+[Tue Oct 27 10:34:45 2026] [::1]:58421 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:34:45 2026] [::1]:58421 Closing
+[Tue Oct 27 10:34:46 2026] [::1]:62931 Accepted
+[Tue Oct 27 10:34:51 2026] [::1]:62931 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:34:51 2026] [::1]:62931 Closing
+[Tue Oct 27 10:37:37 2026] [::1]:62995 Accepted
+[Tue Oct 27 10:37:37 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:37:37 2026] [::1]:62995 [302]: GET /controllers/AuthController.php?action=registro
+[Tue Oct 27 10:37:37 2026] [::1]:62995 Closing
+[Tue Oct 27 10:37:37 2026] [::1]:63000 Accepted
+[Tue Oct 27 10:37:37 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:37:37 2026] [::1]:63000 [200]: GET /views/pages/login.php
+[Tue Oct 27 10:37:37 2026] [::1]:63000 Closing
+[Tue Oct 27 10:39:26 2026] [::1]:63136 Accepted
+[Tue Oct 27 10:39:26 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:26 2026] [::1]:63136 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:39:26 2026] [::1]:63136 Closing
+[Tue Oct 27 10:39:26 2026] [::1]:63139 Accepted
+[Tue Oct 27 10:39:26 2026] [::1]:63139 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:26 2026] [::1]:63139 Closing
+[Tue Oct 27 10:39:26 2026] [::1]:63140 Accepted
+[Tue Oct 27 10:39:26 2026] [::1]:63140 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:26 2026] [::1]:63140 Closing
+[Tue Oct 27 10:39:27 2026] [::1]:63141 Accepted
+[Tue Oct 27 10:39:28 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:28 2026] [::1]:63141 [200]: GET /perfil
+[Tue Oct 27 10:39:28 2026] [::1]:63141 Closing
+[Tue Oct 27 10:39:28 2026] [::1]:63144 Accepted
+[Tue Oct 27 10:39:28 2026] [::1]:63144 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:28 2026] [::1]:63144 Closing
+[Tue Oct 27 10:39:28 2026] [::1]:63145 Accepted
+[Tue Oct 27 10:39:28 2026] [::1]:63145 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:28 2026] [::1]:63145 Closing
+[Tue Oct 27 10:39:28 2026] [::1]:63146 Accepted
+[Tue Oct 27 10:39:33 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:33 2026] [::1]:63146 [200]: GET /perfil
+[Tue Oct 27 10:39:33 2026] [::1]:63146 Closing
+[Tue Oct 27 10:39:33 2026] [::1]:63150 Accepted
+[Tue Oct 27 10:39:33 2026] [::1]:63150 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:33 2026] [::1]:63150 Closing
+[Tue Oct 27 10:39:33 2026] [::1]:63151 Accepted
+[Tue Oct 27 10:39:33 2026] [::1]:63151 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:33 2026] [::1]:63151 Closing
+[Tue Oct 27 10:39:33 2026] [::1]:63152 Accepted
+[Tue Oct 27 10:39:35 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:35 2026] [::1]:63152 [200]: GET /perfil
+[Tue Oct 27 10:39:35 2026] [::1]:63152 Closing
+[Tue Oct 27 10:39:35 2026] [::1]:63155 Accepted
+[Tue Oct 27 10:39:35 2026] [::1]:63155 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:35 2026] [::1]:63155 Closing
+[Tue Oct 27 10:39:35 2026] [::1]:63156 Accepted
+[Tue Oct 27 10:39:35 2026] [::1]:63156 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:35 2026] [::1]:63156 Closing
+[Tue Oct 27 10:39:35 2026] [::1]:63157 Accepted
+[Tue Oct 27 10:39:37 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:37 2026] [::1]:63157 [302]: GET /logout
+[Tue Oct 27 10:39:37 2026] [::1]:63157 Closing
+[Tue Oct 27 10:39:37 2026] [::1]:63161 Accepted
+[Tue Oct 27 10:39:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:38 2026] [::1]:63161 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:39:38 2026] [::1]:63161 Closing
+[Tue Oct 27 10:39:38 2026] [::1]:63165 Accepted
+[Tue Oct 27 10:39:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:38 2026] [::1]:63165 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:39:38 2026] [::1]:63165 Closing
+[Tue Oct 27 10:39:38 2026] [::1]:63168 Accepted
+[Tue Oct 27 10:39:38 2026] [::1]:63168 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:38 2026] [::1]:63168 Closing
+[Tue Oct 27 10:39:38 2026] [::1]:63169 Accepted
+[Tue Oct 27 10:39:38 2026] [::1]:63169 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:38 2026] [::1]:63169 Closing
+[Tue Oct 27 10:39:38 2026] [::1]:63170 Accepted
+[Tue Oct 27 10:39:40 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:40 2026] [::1]:63170 [302]: GET /perfil
+[Tue Oct 27 10:39:40 2026] [::1]:63170 Closing
+[Tue Oct 27 10:39:40 2026] [::1]:63173 Accepted
+[Tue Oct 27 10:39:40 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:40 2026] [::1]:63173 [200]: GET /login
+[Tue Oct 27 10:39:40 2026] [::1]:63173 Closing
+[Tue Oct 27 10:39:40 2026] [::1]:63176 Accepted
+[Tue Oct 27 10:39:40 2026] [::1]:63177 Accepted
+[Tue Oct 27 10:39:40 2026] [::1]:63176 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:40 2026] [::1]:63176 Closing
+[Tue Oct 27 10:39:40 2026] [::1]:63177 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:39:41 2026] [::1]:63177 Closing
+[Tue Oct 27 10:39:41 2026] [::1]:63178 Accepted
+[Tue Oct 27 10:39:41 2026] [::1]:63178 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:41 2026] [::1]:63178 Closing
+[Tue Oct 27 10:39:41 2026] [::1]:63179 Accepted
+[Tue Oct 27 10:39:44 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:44 2026] [::1]:63179 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:39:44 2026] [::1]:63179 Closing
+[Tue Oct 27 10:39:44 2026] [::1]:63183 Accepted
+[Tue Oct 27 10:39:45 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:45 2026] [::1]:63183 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:39:45 2026] [::1]:63183 Closing
+[Tue Oct 27 10:39:45 2026] [::1]:63186 Accepted
+[Tue Oct 27 10:39:45 2026] [::1]:63186 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:45 2026] [::1]:63186 Closing
+[Tue Oct 27 10:39:45 2026] [::1]:63187 Accepted
+[Tue Oct 27 10:39:45 2026] [::1]:63187 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:45 2026] [::1]:63187 Closing
+[Tue Oct 27 10:39:46 2026] [::1]:63190 Accepted
+[Tue Oct 27 10:39:46 2026] [::1]:63191 Accepted
+[Tue Oct 27 10:39:46 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:39:46 2026] [::1]:63190 [200]: GET /perfil
+[Tue Oct 27 10:39:46 2026] [::1]:63190 Closing
+[Tue Oct 27 10:39:46 2026] [::1]:63191 [200]: GET /public/css/style.css
+[Tue Oct 27 10:39:46 2026] [::1]:63191 Closing
+[Tue Oct 27 10:39:46 2026] [::1]:63195 Accepted
+[Tue Oct 27 10:39:46 2026] [::1]:63195 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:39:46 2026] [::1]:63195 Closing
+[Tue Oct 27 10:39:55 2026] [::1]:49739 Accepted
+[Tue Oct 27 10:40:00 2026] [::1]:49739 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:40:00 2026] [::1]:49739 Closing
+[Tue Oct 27 10:42:38 2026] [::1]:63306 Accepted
+[Tue Oct 27 10:42:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:38 2026] [::1]:63306 [200]: GET /perfil
+[Tue Oct 27 10:42:38 2026] [::1]:63306 Closing
+[Tue Oct 27 10:42:38 2026] [::1]:63309 Accepted
+[Tue Oct 27 10:42:38 2026] [::1]:63309 [200]: GET /public/css/style.css
+[Tue Oct 27 10:42:38 2026] [::1]:63309 Closing
+[Tue Oct 27 10:42:38 2026] [::1]:63310 Accepted
+[Tue Oct 27 10:42:38 2026] [::1]:63310 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:42:38 2026] [::1]:63310 Closing
+[Tue Oct 27 10:42:41 2026] [::1]:63311 Accepted
+[Tue Oct 27 10:42:42 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:42 2026] [::1]:63311 [302]: GET /logout
+[Tue Oct 27 10:42:42 2026] [::1]:63311 Closing
+[Tue Oct 27 10:42:42 2026] [::1]:63314 Accepted
+[Tue Oct 27 10:42:42 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:42 2026] [::1]:63314 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:42:42 2026] [::1]:63314 Closing
+[Tue Oct 27 10:42:42 2026] [::1]:63318 Accepted
+[Tue Oct 27 10:42:43 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:43 2026] [::1]:63318 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:42:43 2026] [::1]:63318 Closing
+[Tue Oct 27 10:42:43 2026] [::1]:63321 Accepted
+[Tue Oct 27 10:42:43 2026] [::1]:63321 [200]: GET /public/css/style.css
+[Tue Oct 27 10:42:43 2026] [::1]:63321 Closing
+[Tue Oct 27 10:42:43 2026] [::1]:63322 Accepted
+[Tue Oct 27 10:42:43 2026] [::1]:63322 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:42:43 2026] [::1]:63322 Closing
+[Tue Oct 27 10:42:43 2026] [::1]:63323 Accepted
+[Tue Oct 27 10:42:45 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:45 2026] [::1]:63323 [302]: GET /perfil
+[Tue Oct 27 10:42:45 2026] [::1]:63323 Closing
+[Tue Oct 27 10:42:45 2026] [::1]:63327 Accepted
+[Tue Oct 27 10:42:45 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:45 2026] [::1]:63327 [200]: GET /login
+[Tue Oct 27 10:42:45 2026] [::1]:63327 Closing
+[Tue Oct 27 10:42:45 2026] [::1]:63330 Accepted
+[Tue Oct 27 10:42:45 2026] [::1]:63330 [200]: GET /public/css/style.css
+[Tue Oct 27 10:42:45 2026] [::1]:63330 Closing
+[Tue Oct 27 10:42:45 2026] [::1]:63331 Accepted
+[Tue Oct 27 10:42:45 2026] [::1]:63331 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:42:45 2026] [::1]:63331 Closing
+[Tue Oct 27 10:42:45 2026] [::1]:63332 Accepted
+[Tue Oct 27 10:42:45 2026] [::1]:63332 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:42:45 2026] [::1]:63332 Closing
+[Tue Oct 27 10:42:45 2026] [::1]:63333 Accepted
+[Tue Oct 27 10:42:50 2026] [::1]:63333 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:42:50 2026] [::1]:63333 Closing
+[Tue Oct 27 10:42:52 2026] [::1]:63338 Accepted
+[Tue Oct 27 10:42:52 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:52 2026] [::1]:63338 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:42:52 2026] [::1]:63338 Closing
+[Tue Oct 27 10:42:52 2026] [::1]:63342 Accepted
+[Tue Oct 27 10:42:53 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:53 2026] [::1]:63342 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:42:53 2026] [::1]:63342 Closing
+[Tue Oct 27 10:42:53 2026] [::1]:63345 Accepted
+[Tue Oct 27 10:42:53 2026] [::1]:63345 [200]: GET /public/css/style.css
+[Tue Oct 27 10:42:53 2026] [::1]:63345 Closing
+[Tue Oct 27 10:42:53 2026] [::1]:63346 Accepted
+[Tue Oct 27 10:42:53 2026] [::1]:63346 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:42:53 2026] [::1]:63346 Closing
+[Tue Oct 27 10:42:54 2026] [::1]:63347 Accepted
+[Tue Oct 27 10:42:58 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:42:58 2026] [::1]:63347 [200]: GET /add-cart?id=1
+[Tue Oct 27 10:42:58 2026] [::1]:63347 Closing
+[Tue Oct 27 10:42:58 2026] [::1]:63351 Accepted
+[Tue Oct 27 10:42:58 2026] [::1]:63351 [200]: GET /public/css/style.css
+[Tue Oct 27 10:42:58 2026] [::1]:63351 Closing
+[Tue Oct 27 10:42:58 2026] [::1]:63352 Accepted
+[Tue Oct 27 10:42:58 2026] [::1]:63352 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:42:58 2026] [::1]:63352 Closing
+[Tue Oct 27 10:42:58 2026] [::1]:63353 Accepted
+[Tue Oct 27 10:43:04 2026] [::1]:63353 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:43:04 2026] [::1]:63353 Closing
+[Tue Oct 27 10:43:11 2026] [::1]:57341 Accepted
+[Tue Oct 27 10:43:11 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:43:11 2026] [::1]:57341 [200]: GET /
+[Tue Oct 27 10:43:11 2026] [::1]:57341 Closing
+[Tue Oct 27 10:43:11 2026] [::1]:49394 Accepted
+[Tue Oct 27 10:43:11 2026] [::1]:57777 Accepted
+[Tue Oct 27 10:43:11 2026] [::1]:49394 [200]: GET /public/css/style.css
+[Tue Oct 27 10:43:11 2026] [::1]:57777 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:43:11 2026] [::1]:49394 Closing
+[Tue Oct 27 10:43:11 2026] [::1]:57777 Closing
+[Tue Oct 27 10:43:15 2026] [::1]:49677 Accepted
+[Tue Oct 27 10:43:15 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:43:15 2026] [::1]:49677 [200]: GET /
+[Tue Oct 27 10:43:15 2026] [::1]:49677 Closing
+[Tue Oct 27 10:43:15 2026] [::1]:49680 Accepted
+[Tue Oct 27 10:43:15 2026] [::1]:49680 [200]: GET /public/css/style.css
+[Tue Oct 27 10:43:15 2026] [::1]:49680 Closing
+[Tue Oct 27 10:43:15 2026] [::1]:49681 Accepted
+[Tue Oct 27 10:43:15 2026] [::1]:49681 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:43:15 2026] [::1]:49681 Closing
+[Tue Oct 27 10:43:20 2026] [::1]:49684 Accepted
+[Tue Oct 27 10:43:20 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:43:20 2026] [::1]:49684 [200]: GET /perfil
+[Tue Oct 27 10:43:20 2026] [::1]:49684 Closing
+[Tue Oct 27 10:43:20 2026] [::1]:49687 Accepted
+[Tue Oct 27 10:43:20 2026] [::1]:49687 [200]: GET /public/css/style.css
+[Tue Oct 27 10:43:20 2026] [::1]:49687 Closing
+[Tue Oct 27 10:43:20 2026] [::1]:49688 Accepted
+[Tue Oct 27 10:43:20 2026] [::1]:49688 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:43:20 2026] [::1]:49688 Closing
+[Tue Oct 27 10:43:20 2026] [::1]:49689 Accepted
+[Tue Oct 27 10:43:26 2026] [::1]:49689 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:43:26 2026] [::1]:49689 Closing
+[Tue Oct 27 10:43:26 2026] [::1]:49690 Accepted
+[Tue Oct 27 10:43:26 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:43:26 2026] [::1]:49690 [200]: GET /perfil
+[Tue Oct 27 10:43:26 2026] [::1]:49690 Closing
+[Tue Oct 27 10:43:26 2026] [::1]:49693 Accepted
+[Tue Oct 27 10:43:26 2026] [::1]:49693 [200]: GET /public/css/style.css
+[Tue Oct 27 10:43:26 2026] [::1]:49693 Closing
+[Tue Oct 27 10:43:26 2026] [::1]:49694 Accepted
+[Tue Oct 27 10:43:26 2026] [::1]:49694 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:43:26 2026] [::1]:49694 Closing
+[Tue Oct 27 10:43:26 2026] [::1]:49695 Accepted
+[Tue Oct 27 10:43:30 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:43:30 2026] [::1]:49695 [200]: GET /
+[Tue Oct 27 10:43:30 2026] [::1]:49695 Closing
+[Tue Oct 27 10:43:30 2026] [::1]:49698 Accepted
+[Tue Oct 27 10:43:30 2026] [::1]:49698 [200]: GET /public/css/style.css
+[Tue Oct 27 10:43:30 2026] [::1]:49698 Closing
+[Tue Oct 27 10:43:30 2026] [::1]:49699 Accepted
+[Tue Oct 27 10:43:30 2026] [::1]:49699 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:43:30 2026] [::1]:49699 Closing
+[Tue Oct 27 10:43:30 2026] [::1]:49700 Accepted
+[Tue Oct 27 10:43:35 2026] [::1]:49700 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:43:35 2026] [::1]:49700 Closing
+[Tue Oct 27 10:44:30 2026] [::1]:49728 Accepted
+[Tue Oct 27 10:44:35 2026] [::1]:49728 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:44:35 2026] [::1]:49728 Closing
+[Tue Oct 27 10:44:37 2026] [::1]:49731 Accepted
+[Tue Oct 27 10:44:37 2026] [::1]:49732 Accepted
+[Tue Oct 27 10:44:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:38 2026] [::1]:49731 [200]: GET /carrito
+[Tue Oct 27 10:44:38 2026] [::1]:49731 Closing
+[Tue Oct 27 10:44:38 2026] [::1]:49732 [200]: GET /public/css/style.css
+[Tue Oct 27 10:44:38 2026] [::1]:49732 Closing
+[Tue Oct 27 10:44:38 2026] [::1]:49735 Accepted
+[Tue Oct 27 10:44:38 2026] [::1]:49735 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:44:38 2026] [::1]:49735 Closing
+[Tue Oct 27 10:44:38 2026] [::1]:49736 Accepted
+[Tue Oct 27 10:44:43 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:43 2026] [::1]:49736 [302]: GET /logout
+[Tue Oct 27 10:44:43 2026] [::1]:49736 Closing
+[Tue Oct 27 10:44:43 2026] [::1]:55731 Accepted
+[Tue Oct 27 10:44:43 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:43 2026] [::1]:55731 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:44:43 2026] [::1]:55731 Closing
+[Tue Oct 27 10:44:43 2026] [::1]:55735 Accepted
+[Tue Oct 27 10:44:44 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:44 2026] [::1]:55735 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:44:44 2026] [::1]:55735 Closing
+[Tue Oct 27 10:44:44 2026] [::1]:55738 Accepted
+[Tue Oct 27 10:44:44 2026] [::1]:55738 [200]: GET /public/css/style.css
+[Tue Oct 27 10:44:44 2026] [::1]:55738 Closing
+[Tue Oct 27 10:44:44 2026] [::1]:55739 Accepted
+[Tue Oct 27 10:44:44 2026] [::1]:55739 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:44:44 2026] [::1]:55739 Closing
+[Tue Oct 27 10:44:44 2026] [::1]:55740 Accepted
+[Tue Oct 27 10:44:46 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:46 2026] [::1]:55740 [302]: GET /perfil
+[Tue Oct 27 10:44:46 2026] [::1]:55740 Closing
+[Tue Oct 27 10:44:46 2026] [::1]:55744 Accepted
+[Tue Oct 27 10:44:46 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:46 2026] [::1]:55744 [200]: GET /login
+[Tue Oct 27 10:44:46 2026] [::1]:55744 Closing
+[Tue Oct 27 10:44:46 2026] [::1]:62673 Accepted
+[Tue Oct 27 10:44:46 2026] [::1]:62674 Accepted
+[Tue Oct 27 10:44:46 2026] [::1]:62673 [200]: GET /public/css/style.css
+[Tue Oct 27 10:44:46 2026] [::1]:62674 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:44:46 2026] [::1]:62673 Closing
+[Tue Oct 27 10:44:46 2026] [::1]:62674 Closing
+[Tue Oct 27 10:44:46 2026] [::1]:62675 Accepted
+[Tue Oct 27 10:44:46 2026] [::1]:62675 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:44:46 2026] [::1]:62675 Closing
+[Tue Oct 27 10:44:46 2026] [::1]:62676 Accepted
+[Tue Oct 27 10:44:51 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:51 2026] [::1]:62676 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:44:51 2026] [::1]:62676 Closing
+[Tue Oct 27 10:44:51 2026] [::1]:60773 Accepted
+[Tue Oct 27 10:44:51 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:51 2026] [::1]:60773 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:44:51 2026] [::1]:60773 Closing
+[Tue Oct 27 10:44:51 2026] [::1]:60776 Accepted
+[Tue Oct 27 10:44:51 2026] [::1]:60776 [200]: GET /public/css/style.css
+[Tue Oct 27 10:44:51 2026] [::1]:60776 Closing
+[Tue Oct 27 10:44:51 2026] [::1]:60777 Accepted
+[Tue Oct 27 10:44:51 2026] [::1]:60777 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:44:51 2026] [::1]:60777 Closing
+[Tue Oct 27 10:44:54 2026] [::1]:60781 Accepted
+[Tue Oct 27 10:44:55 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:44:55 2026] [::1]:60781 [200]: GET /perfil
+[Tue Oct 27 10:44:55 2026] [::1]:60781 Closing
+[Tue Oct 27 10:44:55 2026] [::1]:60784 Accepted
+[Tue Oct 27 10:44:55 2026] [::1]:60784 [200]: GET /public/css/style.css
+[Tue Oct 27 10:44:55 2026] [::1]:60784 Closing
+[Tue Oct 27 10:44:55 2026] [::1]:60785 Accepted
+[Tue Oct 27 10:44:55 2026] [::1]:60785 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:44:55 2026] [::1]:60785 Closing
+[Tue Oct 27 10:44:58 2026] [::1]:60787 Accepted
+[Tue Oct 27 10:45:00 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:00 2026] [::1]:60787 [200]: GET /carrito
+[Tue Oct 27 10:45:00 2026] [::1]:60787 Closing
+[Tue Oct 27 10:45:00 2026] [::1]:60791 Accepted
+[Tue Oct 27 10:45:00 2026] [::1]:60791 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:00 2026] [::1]:60791 Closing
+[Tue Oct 27 10:45:00 2026] [::1]:60792 Accepted
+[Tue Oct 27 10:45:00 2026] [::1]:60792 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:00 2026] [::1]:60792 Closing
+[Tue Oct 27 10:45:00 2026] [::1]:60793 Accepted
+[Tue Oct 27 10:45:02 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:02 2026] [::1]:60793 [200]: GET /
+[Tue Oct 27 10:45:02 2026] [::1]:60793 Closing
+[Tue Oct 27 10:45:02 2026] [::1]:60796 Accepted
+[Tue Oct 27 10:45:02 2026] [::1]:60796 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:02 2026] [::1]:60796 Closing
+[Tue Oct 27 10:45:02 2026] [::1]:60797 Accepted
+[Tue Oct 27 10:45:02 2026] [::1]:60797 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:02 2026] [::1]:60797 Closing
+[Tue Oct 27 10:45:02 2026] [::1]:60798 Accepted
+[Tue Oct 27 10:45:04 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:04 2026] [::1]:60798 [200]: GET /perfil
+[Tue Oct 27 10:45:04 2026] [::1]:60798 Closing
+[Tue Oct 27 10:45:04 2026] [::1]:60803 Accepted
+[Tue Oct 27 10:45:04 2026] [::1]:60803 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:04 2026] [::1]:60803 Closing
+[Tue Oct 27 10:45:04 2026] [::1]:60804 Accepted
+[Tue Oct 27 10:45:04 2026] [::1]:60804 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:04 2026] [::1]:60804 Closing
+[Tue Oct 27 10:45:04 2026] [::1]:60805 Accepted
+[Tue Oct 27 10:45:10 2026] [::1]:60805 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:45:10 2026] [::1]:60805 Closing
+[Tue Oct 27 10:45:10 2026] [::1]:60811 Accepted
+[Tue Oct 27 10:45:10 2026] [::1]:60812 Accepted
+[Tue Oct 27 10:45:10 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:10 2026] [::1]:60812 [200]: GET /perfil
+[Tue Oct 27 10:45:10 2026] [::1]:60812 Closing
+[Tue Oct 27 10:45:11 2026] [::1]:60811 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:11 2026] [::1]:60811 Closing
+[Tue Oct 27 10:45:11 2026] [::1]:60815 Accepted
+[Tue Oct 27 10:45:11 2026] [::1]:60815 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:11 2026] [::1]:60815 Closing
+[Tue Oct 27 10:45:11 2026] [::1]:60816 Accepted
+[Tue Oct 27 10:45:16 2026] [::1]:60816 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:45:16 2026] [::1]:60816 Closing
+[Tue Oct 27 10:45:17 2026] [::1]:62750 Accepted
+[Tue Oct 27 10:45:17 2026] [::1]:62751 Accepted
+[Tue Oct 27 10:45:18 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:18 2026] [::1]:62750 [200]: GET /carrito
+[Tue Oct 27 10:45:18 2026] [::1]:62750 Closing
+[Tue Oct 27 10:45:18 2026] [::1]:62751 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:18 2026] [::1]:62751 Closing
+[Tue Oct 27 10:45:18 2026] [::1]:62760 Accepted
+[Tue Oct 27 10:45:18 2026] [::1]:62760 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:18 2026] [::1]:62760 Closing
+[Tue Oct 27 10:45:18 2026] [::1]:62761 Accepted
+[Tue Oct 27 10:45:23 2026] [::1]:62761 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:45:23 2026] [::1]:62761 Closing
+[Tue Oct 27 10:45:28 2026] [::1]:53704 Accepted
+[Tue Oct 27 10:45:30 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:30 2026] [::1]:53704 [200]: GET /carrito
+[Tue Oct 27 10:45:30 2026] [::1]:53704 Closing
+[Tue Oct 27 10:45:30 2026] [::1]:53707 Accepted
+[Tue Oct 27 10:45:30 2026] [::1]:53707 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:30 2026] [::1]:53707 Closing
+[Tue Oct 27 10:45:30 2026] [::1]:53708 Accepted
+[Tue Oct 27 10:45:30 2026] [::1]:53708 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:30 2026] [::1]:53708 Closing
+[Tue Oct 27 10:45:31 2026] [::1]:53709 Accepted
+[Tue Oct 27 10:45:33 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:33 2026] [::1]:53709 [200]: GET /carrito
+[Tue Oct 27 10:45:33 2026] [::1]:53709 Closing
+[Tue Oct 27 10:45:33 2026] [::1]:53713 Accepted
+[Tue Oct 27 10:45:33 2026] [::1]:53713 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:33 2026] [::1]:53713 Closing
+[Tue Oct 27 10:45:33 2026] [::1]:53714 Accepted
+[Tue Oct 27 10:45:33 2026] [::1]:53714 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:33 2026] [::1]:53714 Closing
+[Tue Oct 27 10:45:33 2026] [::1]:53715 Accepted
+[Tue Oct 27 10:45:35 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:35 2026] [::1]:53715 [200]: GET /
+[Tue Oct 27 10:45:35 2026] [::1]:53715 Closing
+[Tue Oct 27 10:45:35 2026] [::1]:53718 Accepted
+[Tue Oct 27 10:45:35 2026] [::1]:53718 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:35 2026] [::1]:53718 Closing
+[Tue Oct 27 10:45:35 2026] [::1]:53719 Accepted
+[Tue Oct 27 10:45:35 2026] [::1]:53719 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:35 2026] [::1]:53719 Closing
+[Tue Oct 27 10:45:35 2026] [::1]:53720 Accepted
+[Tue Oct 27 10:45:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:38 2026] [::1]:53720 [200]: GET /perfil
+[Tue Oct 27 10:45:38 2026] [::1]:53720 Closing
+[Tue Oct 27 10:45:38 2026] [::1]:53723 Accepted
+[Tue Oct 27 10:45:38 2026] [::1]:53723 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:38 2026] [::1]:53723 Closing
+[Tue Oct 27 10:45:38 2026] [::1]:53724 Accepted
+[Tue Oct 27 10:45:38 2026] [::1]:53724 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:38 2026] [::1]:53724 Closing
+[Tue Oct 27 10:45:38 2026] [::1]:53725 Accepted
+[Tue Oct 27 10:45:40 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:40 2026] [::1]:53725 [302]: GET /logout
+[Tue Oct 27 10:45:40 2026] [::1]:53725 Closing
+[Tue Oct 27 10:45:40 2026] [::1]:53728 Accepted
+[Tue Oct 27 10:45:41 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:41 2026] [::1]:53728 [302]: GET /controllers/AuthController.php?action=logout
+[Tue Oct 27 10:45:41 2026] [::1]:53728 Closing
+[Tue Oct 27 10:45:41 2026] [::1]:53732 Accepted
+[Tue Oct 27 10:45:41 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:45:41 2026] [::1]:53732 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:45:41 2026] [::1]:53732 Closing
+[Tue Oct 27 10:45:41 2026] [::1]:53735 Accepted
+[Tue Oct 27 10:45:41 2026] [::1]:53735 [200]: GET /public/css/style.css
+[Tue Oct 27 10:45:41 2026] [::1]:53735 Closing
+[Tue Oct 27 10:45:41 2026] [::1]:53736 Accepted
+[Tue Oct 27 10:45:41 2026] [::1]:53736 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:45:41 2026] [::1]:53736 Closing
+[Tue Oct 27 10:45:41 2026] [::1]:53737 Accepted
+[Tue Oct 27 10:45:47 2026] [::1]:53737 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:45:47 2026] [::1]:53737 Closing
+[Tue Oct 27 10:47:29 2026] [::1]:53762 Accepted
+[Tue Oct 27 10:47:29 2026] [::1]:53763 Accepted
+[Tue Oct 27 10:47:30 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:30 2026] [::1]:53762 [302]: GET /carrito
+[Tue Oct 27 10:47:30 2026] [::1]:53762 Closing
+[Tue Oct 27 10:47:31 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:31 2026] [::1]:53763 [200]: GET /login
+[Tue Oct 27 10:47:31 2026] [::1]:53763 Closing
+[Tue Oct 27 10:47:31 2026] [::1]:53769 Accepted
+[Tue Oct 27 10:47:31 2026] [::1]:53770 Accepted
+[Tue Oct 27 10:47:31 2026] [::1]:53769 [200]: GET /public/css/style.css
+[Tue Oct 27 10:47:31 2026] [::1]:53769 Closing
+[Tue Oct 27 10:47:31 2026] [::1]:53770 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:47:31 2026] [::1]:53770 Closing
+[Tue Oct 27 10:47:31 2026] [::1]:53771 Accepted
+[Tue Oct 27 10:47:31 2026] [::1]:53771 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:47:31 2026] [::1]:53771 Closing
+[Tue Oct 27 10:47:31 2026] [::1]:53772 Accepted
+[Tue Oct 27 10:47:36 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:36 2026] [::1]:53772 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:47:36 2026] [::1]:53772 Closing
+[Tue Oct 27 10:47:36 2026] [::1]:53779 Accepted
+[Tue Oct 27 10:47:37 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:37 2026] [::1]:53779 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:47:37 2026] [::1]:53779 Closing
+[Tue Oct 27 10:47:37 2026] [::1]:53782 Accepted
+[Tue Oct 27 10:47:37 2026] [::1]:53782 [200]: GET /public/css/style.css
+[Tue Oct 27 10:47:37 2026] [::1]:53782 Closing
+[Tue Oct 27 10:47:37 2026] [::1]:53783 Accepted
+[Tue Oct 27 10:47:37 2026] [::1]:53783 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:47:37 2026] [::1]:53783 Closing
+[Tue Oct 27 10:47:38 2026] [::1]:53784 Accepted
+[Tue Oct 27 10:47:39 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:39 2026] [::1]:53784 [200]: GET /carrito
+[Tue Oct 27 10:47:39 2026] [::1]:53784 Closing
+[Tue Oct 27 10:47:39 2026] [::1]:53787 Accepted
+[Tue Oct 27 10:47:39 2026] [::1]:53787 [200]: GET /public/css/style.css
+[Tue Oct 27 10:47:39 2026] [::1]:53787 Closing
+[Tue Oct 27 10:47:39 2026] [::1]:53788 Accepted
+[Tue Oct 27 10:47:39 2026] [::1]:53788 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:47:39 2026] [::1]:53788 Closing
+[Tue Oct 27 10:47:39 2026] [::1]:53789 Accepted
+[Tue Oct 27 10:47:42 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:42 2026] [::1]:53789 [200]: GET /checkout
+[Tue Oct 27 10:47:42 2026] [::1]:53789 Closing
+[Tue Oct 27 10:47:42 2026] [::1]:53792 Accepted
+[Tue Oct 27 10:47:42 2026] [::1]:53792 [200]: GET /public/css/style.css
+[Tue Oct 27 10:47:42 2026] [::1]:53792 Closing
+[Tue Oct 27 10:47:42 2026] [::1]:53793 Accepted
+[Tue Oct 27 10:47:42 2026] [::1]:53793 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:47:42 2026] [::1]:53793 Closing
+[Tue Oct 27 10:47:44 2026] [::1]:53796 Accepted
+[Tue Oct 27 10:47:45 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:45 2026] [::1]:53796 [200]: GET /perfil
+[Tue Oct 27 10:47:45 2026] [::1]:53796 Closing
+[Tue Oct 27 10:47:45 2026] [::1]:53799 Accepted
+[Tue Oct 27 10:47:45 2026] [::1]:53799 [200]: GET /public/css/style.css
+[Tue Oct 27 10:47:45 2026] [::1]:53800 Accepted
+[Tue Oct 27 10:47:45 2026] [::1]:53799 Closing
+[Tue Oct 27 10:47:45 2026] [::1]:53800 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:47:45 2026] [::1]:53800 Closing
+[Tue Oct 27 10:47:45 2026] [::1]:53801 Accepted
+[Tue Oct 27 10:47:50 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:47:50 2026] [::1]:53801 [200]: GET /perfil
+[Tue Oct 27 10:47:50 2026] [::1]:53801 Closing
+[Tue Oct 27 10:47:50 2026] [::1]:53804 Accepted
+[Tue Oct 27 10:47:50 2026] [::1]:53804 [200]: GET /public/css/style.css
+[Tue Oct 27 10:47:50 2026] [::1]:53804 Closing
+[Tue Oct 27 10:47:50 2026] [::1]:53805 Accepted
+[Tue Oct 27 10:47:50 2026] [::1]:53805 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:47:50 2026] [::1]:53805 Closing
+[Tue Oct 27 10:51:12 2026] [::1]:64449 Accepted
+[Tue Oct 27 10:51:14 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:14 2026] [::1]:64449 [200]: GET /perfil
+[Tue Oct 27 10:51:14 2026] [::1]:64449 Closing
+[Tue Oct 27 10:51:14 2026] [::1]:64453 Accepted
+[Tue Oct 27 10:51:14 2026] [::1]:64453 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:14 2026] [::1]:64453 Closing
+[Tue Oct 27 10:51:14 2026] [::1]:64454 Accepted
+[Tue Oct 27 10:51:14 2026] [::1]:64454 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:14 2026] [::1]:64454 Closing
+[Tue Oct 27 10:51:16 2026] [::1]:64455 Accepted
+[Tue Oct 27 10:51:19 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:19 2026] [::1]:64455 [200]: GET /carrito
+[Tue Oct 27 10:51:19 2026] [::1]:64455 Closing
+[Tue Oct 27 10:51:19 2026] [::1]:64460 Accepted
+[Tue Oct 27 10:51:19 2026] [::1]:64460 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:19 2026] [::1]:64460 Closing
+[Tue Oct 27 10:51:19 2026] [::1]:64461 Accepted
+[Tue Oct 27 10:51:19 2026] [::1]:64461 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:19 2026] [::1]:64461 Closing
+[Tue Oct 27 10:51:19 2026] [::1]:64462 Accepted
+[Tue Oct 27 10:51:22 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:22 2026] [::1]:64462 [200]: GET /carrito
+[Tue Oct 27 10:51:22 2026] [::1]:64462 Closing
+[Tue Oct 27 10:51:22 2026] [::1]:64466 Accepted
+[Tue Oct 27 10:51:22 2026] [::1]:64466 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:22 2026] [::1]:64466 Closing
+[Tue Oct 27 10:51:22 2026] [::1]:64467 Accepted
+[Tue Oct 27 10:51:22 2026] [::1]:64467 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:22 2026] [::1]:64467 Closing
+[Tue Oct 27 10:51:22 2026] [::1]:64468 Accepted
+[Tue Oct 27 10:51:23 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:23 2026] [::1]:64468 [200]: GET /login
+[Tue Oct 27 10:51:23 2026] [::1]:64468 Closing
+[Tue Oct 27 10:51:23 2026] [::1]:64471 Accepted
+[Tue Oct 27 10:51:23 2026] [::1]:64471 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:23 2026] [::1]:64472 Accepted
+[Tue Oct 27 10:51:23 2026] [::1]:64472 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:51:23 2026] [::1]:64471 Closing
+[Tue Oct 27 10:51:23 2026] [::1]:64472 Closing
+[Tue Oct 27 10:51:23 2026] [::1]:64473 Accepted
+[Tue Oct 27 10:51:23 2026] [::1]:64473 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:23 2026] [::1]:64473 Closing
+[Tue Oct 27 10:51:23 2026] [::1]:64474 Accepted
+[Tue Oct 27 10:51:28 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:28 2026] [::1]:64474 [302]: POST /controllers/AuthController.php?action=login
+[Tue Oct 27 10:51:28 2026] [::1]:64474 Closing
+[Tue Oct 27 10:51:28 2026] [::1]:64479 Accepted
+[Tue Oct 27 10:51:29 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:29 2026] [::1]:64479 [200]: GET /views/pages/index.php
+[Tue Oct 27 10:51:29 2026] [::1]:64479 Closing
+[Tue Oct 27 10:51:29 2026] [::1]:64482 Accepted
+[Tue Oct 27 10:51:29 2026] [::1]:64482 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:29 2026] [::1]:64482 Closing
+[Tue Oct 27 10:51:29 2026] [::1]:64483 Accepted
+[Tue Oct 27 10:51:29 2026] [::1]:64483 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:29 2026] [::1]:64483 Closing
+[Tue Oct 27 10:51:30 2026] [::1]:64484 Accepted
+[Tue Oct 27 10:51:31 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:31 2026] [::1]:64484 [200]: GET /perfil
+[Tue Oct 27 10:51:31 2026] [::1]:64484 Closing
+[Tue Oct 27 10:51:31 2026] [::1]:64487 Accepted
+[Tue Oct 27 10:51:31 2026] [::1]:64487 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:31 2026] [::1]:64487 Closing
+[Tue Oct 27 10:51:31 2026] [::1]:64488 Accepted
+[Tue Oct 27 10:51:31 2026] [::1]:64488 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:31 2026] [::1]:64488 Closing
+[Tue Oct 27 10:51:32 2026] [::1]:64490 Accepted
+[Tue Oct 27 10:51:33 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:33 2026] [::1]:64490 [200]: GET /carrito
+[Tue Oct 27 10:51:33 2026] [::1]:64490 Closing
+[Tue Oct 27 10:51:33 2026] [::1]:64493 Accepted
+[Tue Oct 27 10:51:33 2026] [::1]:64493 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:33 2026] [::1]:64493 Closing
+[Tue Oct 27 10:51:33 2026] [::1]:64494 Accepted
+[Tue Oct 27 10:51:33 2026] [::1]:64494 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:33 2026] [::1]:64494 Closing
+[Tue Oct 27 10:51:33 2026] [::1]:64495 Accepted
+[Tue Oct 27 10:51:35 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:35 2026] [::1]:64495 [200]: GET /login
+[Tue Oct 27 10:51:35 2026] [::1]:64495 Closing
+[Tue Oct 27 10:51:35 2026] [::1]:64498 Accepted
+[Tue Oct 27 10:51:35 2026] [::1]:64498 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:35 2026] [::1]:64499 Accepted
+[Tue Oct 27 10:51:35 2026] [::1]:64498 Closing
+[Tue Oct 27 10:51:35 2026] [::1]:64499 [200]: GET /public/js/validations.js
+[Tue Oct 27 10:51:35 2026] [::1]:64499 Closing
+[Tue Oct 27 10:51:35 2026] [::1]:64500 Accepted
+[Tue Oct 27 10:51:35 2026] [::1]:64500 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:35 2026] [::1]:64500 Closing
+[Tue Oct 27 10:51:35 2026] [::1]:64501 Accepted
+[Tue Oct 27 10:51:40 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:40 2026] [::1]:64501 [200]: GET /
+[Tue Oct 27 10:51:40 2026] [::1]:64501 Closing
+[Tue Oct 27 10:51:40 2026] [::1]:64505 Accepted
+[Tue Oct 27 10:51:40 2026] [::1]:64505 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:40 2026] [::1]:64505 Closing
+[Tue Oct 27 10:51:40 2026] [::1]:64506 Accepted
+[Tue Oct 27 10:51:40 2026] [::1]:64506 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:40 2026] [::1]:64506 Closing
+[Tue Oct 27 10:51:40 2026] [::1]:64507 Accepted
+[Tue Oct 27 10:51:46 2026] [::1]:64507 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:51:46 2026] [::1]:64507 Closing
+[Tue Oct 27 10:51:49 2026] [::1]:64512 Accepted
+[Tue Oct 27 10:51:50 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:50 2026] [::1]:64512 [200]: GET /carrito
+[Tue Oct 27 10:51:50 2026] [::1]:64512 Closing
+[Tue Oct 27 10:51:50 2026] [::1]:64515 Accepted
+[Tue Oct 27 10:51:50 2026] [::1]:64515 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:50 2026] [::1]:64515 Closing
+[Tue Oct 27 10:51:50 2026] [::1]:64516 Accepted
+[Tue Oct 27 10:51:50 2026] [::1]:64516 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:50 2026] [::1]:64516 Closing
+[Tue Oct 27 10:51:50 2026] [::1]:64517 Accepted
+[Tue Oct 27 10:51:54 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:54 2026] [::1]:64517 [200]: GET /
+[Tue Oct 27 10:51:54 2026] [::1]:64517 Closing
+[Tue Oct 27 10:51:54 2026] [::1]:64520 Accepted
+[Tue Oct 27 10:51:54 2026] [::1]:64520 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:54 2026] [::1]:64520 Closing
+[Tue Oct 27 10:51:54 2026] [::1]:64521 Accepted
+[Tue Oct 27 10:51:54 2026] [::1]:64521 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:54 2026] [::1]:64521 Closing
+[Tue Oct 27 10:51:54 2026] [::1]:64522 Accepted
+[Tue Oct 27 10:51:54 2026] [::1]:64523 Accepted
+[Tue Oct 27 10:51:56 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:51:56 2026] [::1]:64522 [200]: GET /perfil
+[Tue Oct 27 10:51:56 2026] [::1]:64522 Closing
+[Tue Oct 27 10:51:56 2026] [::1]:64523 [200]: GET /public/css/style.css
+[Tue Oct 27 10:51:56 2026] [::1]:64523 Closing
+[Tue Oct 27 10:51:56 2026] [::1]:64526 Accepted
+[Tue Oct 27 10:51:56 2026] [::1]:64526 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:51:56 2026] [::1]:64526 Closing
+[Tue Oct 27 10:51:56 2026] [::1]:64527 Accepted
+[Tue Oct 27 10:52:01 2026] [::1]:64527 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:52:01 2026] [::1]:64527 Closing
+[Tue Oct 27 10:57:05 2026] [::1]:62735 Accepted
+[Tue Oct 27 10:57:06 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:57:06 2026] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\views\pages\perfil.php on line 8
+[Tue Oct 27 10:57:06 2026] [::1]:62735 [200]: GET /perfil
+[Tue Oct 27 10:57:06 2026] [::1]:62735 Closing
+[Tue Oct 27 10:57:06 2026] [::1]:62739 Accepted
+[Tue Oct 27 10:57:06 2026] [::1]:62739 [200]: GET /public/css/style.css
+[Tue Oct 27 10:57:06 2026] [::1]:62739 Closing
+[Tue Oct 27 10:57:06 2026] [::1]:62740 Accepted
+[Tue Oct 27 10:57:06 2026] [::1]:62740 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:57:06 2026] [::1]:62740 Closing
+[Tue Oct 27 10:57:27 2026] [::1]:62744 Accepted
+[Tue Oct 27 10:57:28 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:57:28 2026] [::1]:62744 [200]: GET /carrito
+[Tue Oct 27 10:57:28 2026] [::1]:62744 Closing
+[Tue Oct 27 10:57:28 2026] [::1]:62747 Accepted
+[Tue Oct 27 10:57:28 2026] [::1]:62747 [200]: GET /public/css/style.css
+[Tue Oct 27 10:57:28 2026] [::1]:62747 Closing
+[Tue Oct 27 10:57:28 2026] [::1]:62748 Accepted
+[Tue Oct 27 10:57:28 2026] [::1]:62748 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:57:28 2026] [::1]:62748 Closing
+[Tue Oct 27 10:57:29 2026] [::1]:62749 Accepted
+[Tue Oct 27 10:57:30 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:57:30 2026] [::1]:62749 [200]: GET /
+[Tue Oct 27 10:57:30 2026] [::1]:62749 Closing
+[Tue Oct 27 10:57:30 2026] [::1]:62752 Accepted
+[Tue Oct 27 10:57:30 2026] [::1]:62752 [200]: GET /public/css/style.css
+[Tue Oct 27 10:57:30 2026] [::1]:62752 Closing
+[Tue Oct 27 10:57:30 2026] [::1]:62753 Accepted
+[Tue Oct 27 10:57:30 2026] [::1]:62753 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:57:30 2026] [::1]:62753 Closing
+[Tue Oct 27 10:57:31 2026] [::1]:62754 Accepted
+[Tue Oct 27 10:57:32 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:57:32 2026] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\views\pages\perfil.php on line 8
+[Tue Oct 27 10:57:32 2026] [::1]:62754 [200]: GET /perfil
+[Tue Oct 27 10:57:32 2026] [::1]:62754 Closing
+[Tue Oct 27 10:57:32 2026] [::1]:62759 Accepted
+[Tue Oct 27 10:57:32 2026] [::1]:62759 [200]: GET /public/css/style.css
+[Tue Oct 27 10:57:32 2026] [::1]:62759 Closing
+[Tue Oct 27 10:57:32 2026] [::1]:62760 Accepted
+[Tue Oct 27 10:57:32 2026] [::1]:62760 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:57:32 2026] [::1]:62760 Closing
+[Tue Oct 27 10:59:00 2026] [::1]:62786 Accepted
+[Tue Oct 27 10:59:00 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:59:00 2026] [::1]:62786 [200]: GET /perfil
+[Tue Oct 27 10:59:00 2026] [::1]:62786 Closing
+[Tue Oct 27 10:59:00 2026] [::1]:62790 Accepted
+[Tue Oct 27 10:59:00 2026] [::1]:62790 [200]: GET /public/css/style.css
+[Tue Oct 27 10:59:00 2026] [::1]:62790 Closing
+[Tue Oct 27 10:59:00 2026] [::1]:62791 Accepted
+[Tue Oct 27 10:59:00 2026] [::1]:62791 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:59:00 2026] [::1]:62791 Closing
+[Tue Oct 27 10:59:01 2026] [::1]:62792 Accepted
+[Tue Oct 27 10:59:03 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:59:03 2026] [::1]:62792 [200]: GET /carrito
+[Tue Oct 27 10:59:03 2026] [::1]:62792 Closing
+[Tue Oct 27 10:59:03 2026] [::1]:62797 Accepted
+[Tue Oct 27 10:59:03 2026] [::1]:62797 [200]: GET /public/css/style.css
+[Tue Oct 27 10:59:03 2026] [::1]:62797 Closing
+[Tue Oct 27 10:59:03 2026] [::1]:62798 Accepted
+[Tue Oct 27 10:59:03 2026] [::1]:62798 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:59:03 2026] [::1]:62798 Closing
+[Tue Oct 27 10:59:04 2026] [::1]:62799 Accepted
+[Tue Oct 27 10:59:05 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:59:05 2026] [::1]:62799 [200]: GET /
+[Tue Oct 27 10:59:05 2026] [::1]:62799 Closing
+[Tue Oct 27 10:59:05 2026] [::1]:62804 Accepted
+[Tue Oct 27 10:59:05 2026] [::1]:62804 [200]: GET /public/css/style.css
+[Tue Oct 27 10:59:05 2026] [::1]:62804 Closing
+[Tue Oct 27 10:59:05 2026] [::1]:62805 Accepted
+[Tue Oct 27 10:59:05 2026] [::1]:62805 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:59:05 2026] [::1]:62805 Closing
+[Tue Oct 27 10:59:05 2026] [::1]:62806 Accepted
+[Tue Oct 27 10:59:07 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 10:59:07 2026] [::1]:62806 [200]: GET /perfil
+[Tue Oct 27 10:59:07 2026] [::1]:62806 Closing
+[Tue Oct 27 10:59:07 2026] [::1]:62810 Accepted
+[Tue Oct 27 10:59:07 2026] [::1]:62810 [200]: GET /public/css/style.css
+[Tue Oct 27 10:59:07 2026] [::1]:62810 Closing
+[Tue Oct 27 10:59:07 2026] [::1]:62811 Accepted
+[Tue Oct 27 10:59:07 2026] [::1]:62811 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 10:59:07 2026] [::1]:62811 Closing
+[Tue Oct 27 10:59:07 2026] [::1]:62812 Accepted
+[Tue Oct 27 10:59:12 2026] [::1]:62812 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:59:12 2026] [::1]:62812 Closing
+[Tue Oct 27 10:59:12 2026] [::1]:62815 Accepted
+[Tue Oct 27 10:59:17 2026] [::1]:62815 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:59:17 2026] [::1]:62815 Closing
+[Tue Oct 27 10:59:18 2026] [::1]:62818 Accepted
+[Tue Oct 27 10:59:18 2026] [::1]:62819 Accepted
+[Tue Oct 27 10:59:23 2026] [::1]:62818 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:59:23 2026] [::1]:62818 Closing
+[Tue Oct 27 10:59:23 2026] [::1]:62819 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:59:23 2026] [::1]:62819 Closing
+[Tue Oct 27 10:59:26 2026] [::1]:62843 Accepted
+[Tue Oct 27 10:59:31 2026] [::1]:62843 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 10:59:31 2026] [::1]:62843 Closing
+[Tue Oct 27 11:03:37 2026] [::1]:53878 Accepted
+[Tue Oct 27 11:03:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:38 2026] [::1]:53878 [200]: GET /perfil
+[Tue Oct 27 11:03:38 2026] [::1]:53878 Closing
+[Tue Oct 27 11:03:38 2026] [::1]:53882 Accepted
+[Tue Oct 27 11:03:38 2026] [::1]:53882 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:38 2026] [::1]:53882 Closing
+[Tue Oct 27 11:03:38 2026] [::1]:53883 Accepted
+[Tue Oct 27 11:03:38 2026] [::1]:53883 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:38 2026] [::1]:53883 Closing
+[Tue Oct 27 11:03:39 2026] [::1]:53884 Accepted
+[Tue Oct 27 11:03:40 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:40 2026] [::1]:53884 [200]: GET /perfil
+[Tue Oct 27 11:03:40 2026] [::1]:53884 Closing
+[Tue Oct 27 11:03:40 2026] [::1]:53888 Accepted
+[Tue Oct 27 11:03:40 2026] [::1]:53888 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:40 2026] [::1]:53888 Closing
+[Tue Oct 27 11:03:40 2026] [::1]:53889 Accepted
+[Tue Oct 27 11:03:40 2026] [::1]:53889 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:40 2026] [::1]:53889 Closing
+[Tue Oct 27 11:03:40 2026] [::1]:53890 Accepted
+[Tue Oct 27 11:03:42 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:42 2026] [::1]:53890 [200]: GET /carrito
+[Tue Oct 27 11:03:42 2026] [::1]:53890 Closing
+[Tue Oct 27 11:03:42 2026] [::1]:53893 Accepted
+[Tue Oct 27 11:03:42 2026] [::1]:53893 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:42 2026] [::1]:53893 Closing
+[Tue Oct 27 11:03:42 2026] [::1]:53894 Accepted
+[Tue Oct 27 11:03:42 2026] [::1]:53894 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:42 2026] [::1]:53894 Closing
+[Tue Oct 27 11:03:42 2026] [::1]:53895 Accepted
+[Tue Oct 27 11:03:45 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:45 2026] [::1]:53895 [200]: GET /perfil
+[Tue Oct 27 11:03:45 2026] [::1]:53895 Closing
+[Tue Oct 27 11:03:45 2026] [::1]:53902 Accepted
+[Tue Oct 27 11:03:45 2026] [::1]:53902 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:45 2026] [::1]:53902 Closing
+[Tue Oct 27 11:03:45 2026] [::1]:53903 Accepted
+[Tue Oct 27 11:03:45 2026] [::1]:53903 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:45 2026] [::1]:53903 Closing
+[Tue Oct 27 11:03:45 2026] [::1]:53904 Accepted
+[Tue Oct 27 11:03:50 2026] [::1]:53904 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:03:50 2026] [::1]:53904 Closing
+[Tue Oct 27 11:03:50 2026] [::1]:53908 Accepted
+[Tue Oct 27 11:03:50 2026] [::1]:53909 Accepted
+[Tue Oct 27 11:03:51 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:51 2026] [::1]:53908 [200]: GET /
+[Tue Oct 27 11:03:51 2026] [::1]:53908 Closing
+[Tue Oct 27 11:03:51 2026] [::1]:53909 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:51 2026] [::1]:53909 Closing
+[Tue Oct 27 11:03:51 2026] [::1]:53912 Accepted
+[Tue Oct 27 11:03:51 2026] [::1]:53912 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:51 2026] [::1]:53912 Closing
+[Tue Oct 27 11:03:51 2026] [::1]:53913 Accepted
+[Tue Oct 27 11:03:53 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:53 2026] [::1]:53913 [200]: GET /perfil
+[Tue Oct 27 11:03:53 2026] [::1]:53913 Closing
+[Tue Oct 27 11:03:53 2026] [::1]:53917 Accepted
+[Tue Oct 27 11:03:53 2026] [::1]:53917 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:53 2026] [::1]:53917 Closing
+[Tue Oct 27 11:03:53 2026] [::1]:53918 Accepted
+[Tue Oct 27 11:03:53 2026] [::1]:53918 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:53 2026] [::1]:53918 Closing
+[Tue Oct 27 11:03:53 2026] [::1]:53919 Accepted
+[Tue Oct 27 11:03:55 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:55 2026] [::1]:53919 [200]: GET /
+[Tue Oct 27 11:03:55 2026] [::1]:53919 Closing
+[Tue Oct 27 11:03:55 2026] [::1]:53922 Accepted
+[Tue Oct 27 11:03:55 2026] [::1]:53922 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:55 2026] [::1]:53922 Closing
+[Tue Oct 27 11:03:55 2026] [::1]:53923 Accepted
+[Tue Oct 27 11:03:55 2026] [::1]:53923 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:55 2026] [::1]:53923 Closing
+[Tue Oct 27 11:03:57 2026] [::1]:53924 Accepted
+[Tue Oct 27 11:03:58 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:03:58 2026] [::1]:53924 [200]: GET /perfil
+[Tue Oct 27 11:03:58 2026] [::1]:53924 Closing
+[Tue Oct 27 11:03:58 2026] [::1]:53928 Accepted
+[Tue Oct 27 11:03:58 2026] [::1]:53928 [200]: GET /public/css/style.css
+[Tue Oct 27 11:03:58 2026] [::1]:53929 Accepted
+[Tue Oct 27 11:03:58 2026] [::1]:53928 Closing
+[Tue Oct 27 11:03:58 2026] [::1]:53929 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:03:58 2026] [::1]:53929 Closing
+[Tue Oct 27 11:04:02 2026] [::1]:53930 Accepted
+[Tue Oct 27 11:04:03 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:04:03 2026] [::1]:53930 [200]: GET /
+[Tue Oct 27 11:04:03 2026] [::1]:53930 Closing
+[Tue Oct 27 11:04:03 2026] [::1]:53933 Accepted
+[Tue Oct 27 11:04:03 2026] [::1]:53933 [200]: GET /public/css/style.css
+[Tue Oct 27 11:04:03 2026] [::1]:53933 Closing
+[Tue Oct 27 11:04:03 2026] [::1]:53934 Accepted
+[Tue Oct 27 11:04:03 2026] [::1]:53934 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:04:03 2026] [::1]:53934 Closing
+[Tue Oct 27 11:04:03 2026] [::1]:53935 Accepted
+[Tue Oct 27 11:04:08 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:04:08 2026] [::1]:53935 [200]: GET /perfil
+[Tue Oct 27 11:04:08 2026] [::1]:53935 Closing
+[Tue Oct 27 11:04:08 2026] [::1]:53940 Accepted
+[Tue Oct 27 11:04:08 2026] [::1]:53940 [200]: GET /public/css/style.css
+[Tue Oct 27 11:04:08 2026] [::1]:53940 Closing
+[Tue Oct 27 11:04:08 2026] [::1]:53941 Accepted
+[Tue Oct 27 11:04:08 2026] [::1]:53941 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:04:08 2026] [::1]:53941 Closing
+[Tue Oct 27 11:04:08 2026] [::1]:53942 Accepted
+[Tue Oct 27 11:04:12 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:04:12 2026] [::1]:53942 [200]: GET /
+[Tue Oct 27 11:04:12 2026] [::1]:53942 Closing
+[Tue Oct 27 11:04:12 2026] [::1]:53946 Accepted
+[Tue Oct 27 11:04:12 2026] [::1]:53946 [200]: GET /public/css/style.css
+[Tue Oct 27 11:04:12 2026] [::1]:53946 Closing
+[Tue Oct 27 11:04:12 2026] [::1]:53947 Accepted
+[Tue Oct 27 11:04:12 2026] [::1]:53947 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:04:12 2026] [::1]:53947 Closing
+[Tue Oct 27 11:04:12 2026] [::1]:53948 Accepted
+[Tue Oct 27 11:04:17 2026] [::1]:53948 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:04:17 2026] [::1]:53948 Closing
+[Tue Oct 27 11:22:59 2026] [::1]:52051 Accepted
+[Tue Oct 27 11:22:59 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:22:59 2026] [::1]:52051 [200]: GET /
+[Tue Oct 27 11:22:59 2026] [::1]:52051 Closing
+[Tue Oct 27 11:22:59 2026] [::1]:52055 Accepted
+[Tue Oct 27 11:22:59 2026] [::1]:52055 [200]: GET /public/css/style.css
+[Tue Oct 27 11:22:59 2026] [::1]:52055 Closing
+[Tue Oct 27 11:22:59 2026] [::1]:52056 Accepted
+[Tue Oct 27 11:22:59 2026] [::1]:52056 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:22:59 2026] [::1]:52056 Closing
+[Tue Oct 27 11:23:00 2026] [::1]:52057 Accepted
+[Tue Oct 27 11:23:01 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:23:01 2026] [::1]:52057 [200]: GET /carrito
+[Tue Oct 27 11:23:01 2026] [::1]:52057 Closing
+[Tue Oct 27 11:23:01 2026] [::1]:52062 Accepted
+[Tue Oct 27 11:23:01 2026] [::1]:52062 [200]: GET /public/css/style.css
+[Tue Oct 27 11:23:01 2026] [::1]:52062 Closing
+[Tue Oct 27 11:23:01 2026] [::1]:52063 Accepted
+[Tue Oct 27 11:23:01 2026] [::1]:52063 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:23:01 2026] [::1]:52063 Closing
+[Tue Oct 27 11:23:01 2026] [::1]:52064 Accepted
+[Tue Oct 27 11:23:05 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:23:05 2026] [::1]:52064 [200]: GET /perfil
+[Tue Oct 27 11:23:05 2026] [::1]:52064 Closing
+[Tue Oct 27 11:23:05 2026] [::1]:52072 Accepted
+[Tue Oct 27 11:23:05 2026] [::1]:52072 [200]: GET /public/css/style.css
+[Tue Oct 27 11:23:05 2026] [::1]:52072 Closing
+[Tue Oct 27 11:23:05 2026] [::1]:52073 Accepted
+[Tue Oct 27 11:23:05 2026] [::1]:52073 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:23:05 2026] [::1]:52073 Closing
+[Tue Oct 27 11:23:05 2026] [::1]:52074 Accepted
+[Tue Oct 27 11:23:11 2026] [::1]:52074 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:23:11 2026] [::1]:52074 Closing
+[Tue Oct 27 11:23:49 2026] [::1]:52086 Accepted
+[Tue Oct 27 11:23:49 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:23:49 2026] [::1]:52086 [200]: GET /perfil?
+[Tue Oct 27 11:23:49 2026] [::1]:52086 Closing
+[Tue Oct 27 11:23:49 2026] [::1]:52091 Accepted
+[Tue Oct 27 11:23:49 2026] [::1]:52091 [200]: GET /public/css/style.css
+[Tue Oct 27 11:23:49 2026] [::1]:52091 Closing
+[Tue Oct 27 11:23:49 2026] [::1]:52092 Accepted
+[Tue Oct 27 11:23:49 2026] [::1]:52092 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:23:49 2026] [::1]:52092 Closing
+[Tue Oct 27 11:23:53 2026] [::1]:52095 Accepted
+[Tue Oct 27 11:23:54 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:23:54 2026] [::1]:52095 [200]: GET /
+[Tue Oct 27 11:23:54 2026] [::1]:52095 Closing
+[Tue Oct 27 11:23:54 2026] [::1]:52099 Accepted
+[Tue Oct 27 11:23:54 2026] [::1]:52099 [200]: GET /public/css/style.css
+[Tue Oct 27 11:23:54 2026] [::1]:52099 Closing
+[Tue Oct 27 11:23:54 2026] [::1]:52100 Accepted
+[Tue Oct 27 11:23:54 2026] [::1]:52100 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:23:54 2026] [::1]:52100 Closing
+[Tue Oct 27 11:23:54 2026] [::1]:52101 Accepted
+[Tue Oct 27 11:24:00 2026] [::1]:52101 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:24:00 2026] [::1]:52101 Closing
+[Tue Oct 27 11:24:02 2026] [::1]:52105 Accepted
+[Tue Oct 27 11:24:02 2026] [::1]:52106 Accepted
+[Tue Oct 27 11:24:08 2026] [::1]:52106 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:24:08 2026] [::1]:52106 Closing
+[Tue Oct 27 11:24:08 2026] [::1]:52105 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:24:08 2026] [::1]:52105 Closing
+[Tue Oct 27 11:24:08 2026] [::1]:52109 Accepted
+[Tue Oct 27 11:24:08 2026] [::1]:52110 Accepted
+[Tue Oct 27 11:24:08 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:24:08 2026] [::1]:52110 [200]: GET /perfil
+[Tue Oct 27 11:24:08 2026] [::1]:52110 Closing
+[Tue Oct 27 11:24:08 2026] [::1]:52109 [200]: GET /public/css/style.css
+[Tue Oct 27 11:24:08 2026] [::1]:52109 Closing
+[Tue Oct 27 11:24:08 2026] [::1]:52115 Accepted
+[Tue Oct 27 11:24:08 2026] [::1]:52115 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:24:08 2026] [::1]:52115 Closing
+[Tue Oct 27 11:24:08 2026] [::1]:52116 Accepted
+[Tue Oct 27 11:24:14 2026] [::1]:52116 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:24:14 2026] [::1]:52116 Closing
+[Tue Oct 27 11:24:58 2026] [::1]:62470 Accepted
+[Tue Oct 27 11:25:03 2026] [::1]:62470 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:25:03 2026] [::1]:62470 Closing
+[Tue Oct 27 11:27:16 2026] [::1]:62502 Accepted
+[Tue Oct 27 11:27:18 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Tue Oct 27 11:27:18 2026] [::1]:62502 [200]: GET /
+[Tue Oct 27 11:27:18 2026] [::1]:62502 Closing
+[Tue Oct 27 11:27:18 2026] [::1]:62509 Accepted
+[Tue Oct 27 11:27:18 2026] [::1]:62509 [200]: GET /public/css/style.css
+[Tue Oct 27 11:27:18 2026] [::1]:62509 Closing
+[Tue Oct 27 11:27:18 2026] [::1]:62510 Accepted
+[Tue Oct 27 11:27:18 2026] [::1]:62510 [200]: GET /public/img/LogoErronka_Logo_sinfonfo.png
+[Tue Oct 27 11:27:18 2026] [::1]:62510 Closing
+[Tue Oct 27 11:27:18 2026] [::1]:62511 Accepted
+[Tue Oct 27 11:27:24 2026] [::1]:62511 Closed without sending a request; it was probably just an unused speculative preconnection
+[Tue Oct 27 11:27:24 2026] [::1]:62511 Closing

@@ -86,4 +86,20 @@ class ErabiltzaileaModel
         // Si no encontramos usuario, devolvemos null
         return $usuario ?: null;
     }
+
+    /*
+     * buscarPorId()
+     * Busca un usuario en la base de datos por su ID
+     *
+     * Recibe un ID numérico
+     * Devuelve un array con los datos del usuario (incluyendo fecha de registro) o null si no existe
+     */
+    public function buscarPorId(int $id): ?array
+    {
+        $sql = "SELECT * FROM erabiltzaileak WHERE id = :id LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        $usuario = $stmt->fetch();
+        return $usuario ?: null;
+    }
 }

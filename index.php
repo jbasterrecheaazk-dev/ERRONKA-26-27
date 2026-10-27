@@ -10,6 +10,20 @@
  * un único punto de control para las rutas.
  */
 
+// session_start() debe ir al principio para que toda la aplicación
+// pueda comprobar si el usuario está logueado mediante $_SESSION
+session_start();
+
+// Contador de carrito desde base de datos
+// Si el usuario tiene sesión iniciada, consulta la BD; si no, muestra 0
+if (isset($_SESSION['usuario_id'])) {
+    require_once __DIR__ . '/models/CarritoModel.php';
+    $carritoModel = new CarritoModel();
+    $num_productos_carrito = $carritoModel->getContador((int)$_SESSION['usuario_id']);
+} else {
+    $num_productos_carrito = 0;
+}
+
 // Obtiene la ruta solicitada por el usuario en la barra de navegación
 // $_SERVER['REQUEST_URI'] contiene todo lo que viene después de 'localhost:8000/'
 // parse_url lo separa para quedarnos solo con la ruta, sin ?query=...
@@ -34,11 +48,14 @@ if (strpos($uri, '/public/') === 0) {
 }
 
 /*
- * 2. MAPEO DE RUTAS
+ * 2. MAPEO DE RUTAS CON PROTECCIÓN DE SESIÓN
  *
  * Aquí relacionamos cada URL con el archivo PHP que debe mostrarse.
  * Es como un diccionario: clave = URL que escribe el usuario,
  * valor = archivo real en el servidor.
+ *
+ * Algunas rutas son privadas y requieren que el usuario esté logueado.
+ * En esas rutas comprobamos $_SESSION['usuario_id'] antes de cargar la vista.
  */
 $routes = [
     '/'             => 'views/pages/index.php',
@@ -46,7 +63,11 @@ $routes = [
     '/login'        => 'views/pages/login.php',
     '/carrito'      => 'views/pages/carrito.php',
     '/perfil'       => 'views/pages/perfil.php',
+    '/logout'       => 'controllers/AuthController.php?action=logout',
 ];
+
+// Rutas que requieren sesión activa
+$privateRoutes = ['/perfil', '/carrito'];
 
 /*
  * 3. ¿QUÉ ARCHIVO CARGAR?
@@ -54,9 +75,24 @@ $routes = [
  * Primero buscamos la ruta en el array $routes.
  * Si no está, intentamos buscar un archivo con el mismo nombre que la URL.
  * Si tampoco existe, mostramos la página principal como fallback.
+ *
+ * Protección: si la ruta es privada y no hay sesión, redirigimos a /login
  */
 if (array_key_exists($uri, $routes)) {
     $file = $routes[$uri];
+
+    // Comprobar si la ruta necesita sesión activa
+    if (in_array($uri, $privateRoutes) && !isset($_SESSION['usuario_id'])) {
+        header('Location: /login');
+        exit;
+    }
+
+    // Si la ruta apunta a un controlador, delegamos la ejecución
+    if (strpos($file, 'controllers/') === 0) {
+        // Redirigimos directamente al controlador con sus parámetros
+        header('Location: /' . $file);
+        exit;
+    }
 } else {
     // Intento inteligente: quitar extensión .php de la URL y mapear a archivo
     $possible = __DIR__ . '/' . ltrim($uri, '/') . '.php';
@@ -84,6 +120,11 @@ $realFile = realpath($file);     // Ruta real del archivo que queremos cargar
 if ($realFile && strpos($realFile, $realBase) === 0 && file_exists($realFile)) {
     require $realFile;
 } else {
-    http_response_code(404);
-    echo 'Página no encontrada';
+    // Si el archivo no existe como vista, intentamos de forma directa como controlador
+    if (strpos($file, 'controllers/') === 0) {
+        require $realBase . '/' . $file;
+    } else {
+        http_response_code(404);
+        echo 'Página no encontrada';
+    }
 }

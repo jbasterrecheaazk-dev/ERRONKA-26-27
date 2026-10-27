@@ -130,6 +130,7 @@ class AuthController
              */
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nombre'] = $usuario['izena'];
+            $_SESSION['usuario_email'] = $usuario['email'];
             $_SESSION['usuario_rol'] = $usuario['rol'];
 
             // Login correcto, vamos a la página principal

@@ -18,17 +18,29 @@ CREATE TABLE kategoriak (
     izena VARCHAR(50) NOT NULL UNIQUE
 );
 
+-- Semillas de categorías por defecto
+INSERT INTO kategoriak (izena) VALUES
+('Biniloak'),
+('CDak'),
+('Kasetak'),
+('Instrumentu musikala'),
+('Merchandising'),
+('Sondu ekipamendua'),
+('Bestelakoa');
+
 -- 3. Taula: Produktuak (Artículos a la venta)
 CREATE TABLE produktuak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izenburua VARCHAR(150) NOT NULL,
     deskribapena TEXT NOT NULL,
     prezioa DECIMAL(10, 2) NOT NULL,
-    egoera ENUM('Mint', 'Near Mint', 'Good', 'Fair', 'Poor') NOT NULL, -- Goldmine standard
-    irudia VARCHAR(255), -- Ruta de la imagen subida
+    egoera ENUM('Mint', 'Near Mint', 'Good', 'Fair', 'Poor') DEFAULT NULL,
+    irudia VARCHAR(255),
     saltzaile_id INT NOT NULL,
     kategoria_id INT,
-    salgai BOOLEAN DEFAULT TRUE, -- TRUE = disponible, FALSE = vendido
+    artista VARCHAR(150) DEFAULT NULL,
+    urtea SMALLINT DEFAULT NULL,
+    salgai BOOLEAN DEFAULT TRUE,
     sortze_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (saltzaile_id) REFERENCES erabiltzaileak(id) ON DELETE CASCADE,
     FOREIGN KEY (kategoria_id) REFERENCES kategoriak(id) ON DELETE SET NULL
@@ -42,5 +54,16 @@ CREATE TABLE eskaerak (
     totala DECIMAL(10, 2) NOT NULL,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (erosle_id) REFERENCES erabiltzaileak(id) ON DELETE CASCADE,
+    FOREIGN KEY (produktu_id) REFERENCES produktuak(id) ON DELETE CASCADE
+);
+
+-- 5. Taula: Carrito (Items en el carrito de compra temporal)
+CREATE TABLE carrito (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    erabiltzaile_id INT NOT NULL,
+    produktu_id INT NOT NULL,
+    kantitatea INT NOT NULL DEFAULT 1,
+    sortze_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (erabiltzaile_id) REFERENCES erabiltzaileak(id) ON DELETE CASCADE,
     FOREIGN KEY (produktu_id) REFERENCES produktuak(id) ON DELETE CASCADE
 );
