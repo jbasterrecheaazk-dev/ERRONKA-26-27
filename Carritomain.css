@@ -105,7 +105,16 @@
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             font-size: 1.1rem;
         }
-
+        .item__edit {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 12px;
+        }
         .item__remove {
             background: transparent;
             border: none;
