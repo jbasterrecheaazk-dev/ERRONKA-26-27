@@ -55,7 +55,7 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
         </header>
         <main class="profile">
             <!-- Sidebar -->
-            <aside class="sidebar">
+            <aside class="sidebar" id="profileSidebar">
                 <h2 class="sidebar__title">Mi perfil</h2>
 
                 <!-- Información del usuario -->
@@ -83,6 +83,8 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                     <a class="nav__btn" href="/historial-ventas">Historial de ventas</a>
                 </nav>
             </aside>
+            <!-- Placeholder para mantener el espacio del grid cuando la sidebar es fixed -->
+            <div class="sidebar-placeholder" id="sidebarPlaceholder"></div>
 
             <!-- Paneles -->
             <section class="panels">
@@ -178,7 +180,7 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                             </div>
                         </div>
                         <!-- Campos condicionales por categoría -->
-                        <div class="form__conditional form__conditional--visible" data-condition="1">
+                        <div class="form__conditional" data-condition="1">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label class="form__label" for="artist">Artista</label>
@@ -200,7 +202,7 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                                 </select>
                             </div>
                         </div>
-                        <div class="form__conditional form__conditional--visible" data-condition="2">
+                        <div class="form__conditional" data-condition="2">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label class="form__label" for="artist-cd">Artista / Banda</label>
@@ -222,7 +224,7 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                                 </select>
                             </div>
                         </div>
-                        <div class="form__conditional form__conditional--visible" data-condition="3">
+                        <div class="form__conditional" data-condition="3">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label class="form__label" for="artist-k">Artista / Banda</label>

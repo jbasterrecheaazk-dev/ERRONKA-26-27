@@ -61,6 +61,7 @@ a {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: 1;
 }
 
 .header__logo-icon {
@@ -208,20 +209,6 @@ a {
     gap: 12px;
 }
 
-.chip {
-    padding: 8px 12px;
-    border-radius: 0;
-    background: #151515;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-size: .85rem;
-}
-
-.chip--active {
-    background: #151515;
-    color: var(--accent);
-    border-color: var(--accent);
-}
 
 .products__grid {
     display: grid;
@@ -380,6 +367,11 @@ a {
     font-weight: 600;
 }
 
+.required {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
 .input, .textarea {
     width: 100%;
     background: var(--bg);
@@ -415,15 +407,20 @@ a {
 /* ===================== Cart & Profile Layouts ===================== */
 .cart, .profile {
     display: grid;
-    grid-template-columns: 1fr minmax(320px, 420px);
+    grid-template-columns: minmax(300px, 360px) 1fr;
     gap: 48px;
     padding: 80px 20px 120px;
     max-width: 1200px;
     margin: 0 auto;
+    align-items: start;
 }
 
 .profile {
     grid-template-columns: minmax(300px, 360px) 1fr;
+}
+
+.cart {
+    grid-template-columns: 1fr minmax(320px, 420px);
 }
 
 @media (max-width: 960px) {
@@ -496,7 +493,28 @@ a {
     padding: 32px;
     position: sticky;
     top: 24px;
-    height: fit-content;
+    align-self: start;
+}
+
+.sidebar {
+    /* La sidebar se fija con JavaScript cuando se carga la página */
+}
+
+/* Placeholder para mantener el espacio del grid cuando la sidebar es fixed */
+.sidebar-placeholder {
+    /* Solo ocupa espacio, no tiene visibilidad propia */
+}
+
+/* Layout dentro del perfil - panels ocupa todo el espacio restante */
+.panels {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cada panel debe llenar la altura disponible para consistencia */
+.profile .panels {
+    min-height: calc(100vh - 200px);
 }
 
 .summary__title, .sidebar__title, .panel__title {
@@ -542,6 +560,15 @@ a {
     margin-bottom: 24px;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
+    min-height: 80px;
+}
+
+.user-info__details {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .user-info__avatar {
@@ -559,11 +586,6 @@ a {
     stroke: var(--muted);
     width: 24px;
     height: 24px;
-}
-
-.user-info__details {
-    flex: 1;
-    min-width: 0;
 }
 
 .user-info__name {
@@ -616,7 +638,31 @@ a {
     display: flex;
     flex-direction: column;
     gap: 48px;
+    width: 100%;
 }
+
+/* Ajuste para productos dentro del perfil */
+main.profile .products__grid,
+.profile .products__grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+}
+
+@media (max-width: 640px) {
+    .profile .products__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tarjetas más compactas en el perfil */
+.profile .card {
+    min-height: 0;
+}
+
+.profile .card__media {
+    aspect-ratio: 4/3;
+}
+
 
 .panel {
     display: none;
@@ -706,6 +752,132 @@ a {
     color: #ef5350;
 }
 
+/* ===================== Product Detail ===================== */
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    padding: 60px 0 120px;
+}
+
+.product-detail__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #1a1a1a;
+    border: 1px solid var(--border);
+}
+
+.product-detail__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-detail__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Cabecera con título + corazón */
+.product-detail__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.product-detail__header .btn-favorite {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.product-detail__meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: .9rem;
+    margin-bottom: 20px;
+}
+
+.product-detail__price {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+
+.product-detail__seller {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: .9rem;
+    margin-bottom: 32px;
+    padding: 16px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+}
+
+.product-detail__seller strong {
+    color: var(--text);
+}
+
+.product-detail__description {
+    margin-bottom: 40px;
+}
+
+.product-detail__description h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
+.product-detail__description p {
+    color: var(--muted);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.product-detail__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.product-detail__actions .btn {
+    padding: 16px 28px;
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .product-detail__header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .product-detail__header .btn-favorite {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 900px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .product-detail__price {
+        font-size: 1.8rem;
+    }
+}
+
 /* ===================== Footer ===================== */
 .footer {
     border-top: 1px solid var(--border);
@@ -719,4 +891,411 @@ a {
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+/* ===================== Botón Favoritos ===================== */
+.btn-favorite {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s;
+    flex-shrink: 0;
+}
+
+.btn-favorite:hover {
+    background: var(--bg-2);
+    border-color: var(--muted);
+}
+
+.btn-favorite--active {
+    color: #e53e3e;
+    border-color: #e53e3e;
+}
+
+.btn-favorite--active:hover {
+    background: #e53e3e;
+    color: #fff;
+    border-color: #e53e3e;
+}
+
+.btn-favorite--lg {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: .9rem;
+    width: auto;
+}
+
+/* ===================== Inline Style Replacements ===================== */
+
+/* Cart icon button requiring position:relative for badge */
+.header__icon-btn--cart {
+    position: relative;
+}
+
+/* Search/filter bar wrapper */
+.search-filter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+}
+
+/* Category filter select */
+.filter-select {
+    width: auto;
+    min-width: 120px;
+}
+
+/* "Sin imagen" placeholder */
+.no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: .8rem;
+}
+
+/* Absolutely positioned badge-state (inside card__media) */
+.badge-state--abs {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+/* Shipping note in card footer */
+.shipping-note {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* No-results / loading messages in grid */
+.grid-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+    color: var(--muted);
+}
+
+.grid-message--loading {
+    padding: 40px 0;
+}
+
+/* Pagination container */
+.pagination-container {
+    margin-top: 32px;
+}
+
+/* Pagination wrapper */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Pagination buttons */
+.pagination-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--text);
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.pagination-btn--page {
+    padding: 8px 12px;
+}
+
+.pagination-btn--active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Form conditional panels */
+.form__conditional {
+    display: none;
+}
+
+.form__conditional--visible {
+    display: block;
+}
+
+/* Image preview in sell form */
+.image-preview {
+    margin-bottom: 8px;
+    display: none;
+}
+
+.image-preview--visible {
+    display: block;
+}
+
+.image-preview img {
+    max-height: 120px;
+    border: 1px solid var(--border);
+    display: block;
+}
+
+.image-preview__caption {
+    color: var(--muted);
+    font-size: .8rem;
+    margin-top: 4px;
+}
+
+/* Logout section */
+.logout-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logout-btn {
+    max-width: 240px;
+}
+
+/* Empty state messages */
+.empty-state {
+    color: var(--muted);
+    padding: 40px 0;
+}
+
+/* Product status in card footer */
+.product-status {
+    font-size: .8rem;
+    color: var(--muted);
+}
+
+.product-status--available {
+    color: #3a7a3a;
+}
+
+.product-status--sold {
+    color: var(--muted);
+}
+
+/* Favorite notification */
+.favorite-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.favorite-notification--success {
+    background: #3a7a3a;
+}
+
+.favorite-notification--removed {
+    background: #666;
+}
+
+/* Form error styling */
+.input--error {
+    border-color: #ff4444;
+    border-width: 2px;
+}
+
+.form__error {
+    color: #ff4444;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    font-family: inherit;
+}
+
+/* ===================== Utility & Inline Styles Migration ===================== */
+
+/* Badge positioning for header icons (cart/profile) */
+.header__icon-btn {
+    position: relative;
+}
+
+/* Badge state absolute positioning on cards */
+.card__media .badge-state,
+.product-detail__media .badge-state {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+/* "Sin imagen" placeholder */
+.card__media--empty,
+.product-detail__media--empty {
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: .8rem;
+}
+
+/* Products filter/search bar in catalog */
+.products__filter .search-filter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+}
+
+.products__filter .header__search--compact {
+    margin: 0;
+}
+
+.products__filter .header__search--compact input {
+    border: none;
+    background: transparent;
+    outline: none;
+    color: inherit;
+}
+
+.products__filter .category-select {
+    width: auto;
+    min-width: 120px;
+}
+
+/* Empty states */
+.products__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 0;
+    color: var(--muted);
+}
+
+.products__loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 0;
+    color: var(--muted);
+}
+
+/* Card shipping text */
+.card__shipping {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* Profile: no articles message */
+.profile__empty {
+    color: var(--muted);
+    padding: 40px 0;
+}
+
+/* Profile: article availability status */
+.article-status {
+    font-size: .8rem;
+    color: var(--muted);
+}
+
+.article-status--available {
+    color: #3a7a3a;
+}
+
+.article-status--sold {
+    color: var(--muted);
+}
+
+/* Form conditionals (hidden by default) */
+.form__conditional {
+    display: none;
+}
+
+/* Image preview */
+.image-preview {
+    margin-bottom: 8px;
+    display: none;
+}
+
+.image-preview img {
+    max-height: 120px;
+    border: 1px solid var(--border);
+    display: block;
+}
+
+.image-preview p {
+    color: var(--muted);
+    font-size: .8rem;
+    margin-top: 4px;
+}
+
+/* Pagination container */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--text);
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.pagination button:first-child {
+    padding: 8px 16px;
+}
+
+.pagination button:last-child {
+    padding: 8px 16px;
+}
+
+.pagination button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination button.active {
+    background: var(--accent);
+    color: #121212;
+}
+
+/* Logout button container */
+.logout-container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logout-btn {
+    max-width: 240px;
+}
+
+/* Toast/notification (for favoritos.js) */
+.toast-notification {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 12px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--text);
+    font-size: .9rem;
+    z-index: 1000;
+    animation: toast-in .3s ease;
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

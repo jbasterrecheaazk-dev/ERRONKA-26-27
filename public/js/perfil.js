@@ -1,23 +1,74 @@
 // Perfil - gestión de paneles, formulario de venta y edición de artículos
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ---------- Navegación entre paneles ----------
-    document.querySelectorAll('.nav__btn[data-target]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.dataset.target;
-            document.querySelectorAll('.nav__btn[data-target]').forEach(b => b.classList.remove('nav__btn--active'));
-            btn.classList.add('nav__btn--active');
-            document.querySelectorAll('.panel').forEach(panel => {
-                panel.classList.remove('panel--active');
-            });
-            document.getElementById(target).classList.add('panel--active');
+    // ---------- Fijar posición de la sidebar ----------
+    let sidebarFixed = false;
+    const sidebar = document.getElementById('profileSidebar');
+    const placeholder = document.getElementById('sidebarPlaceholder');
 
-            // Si se abre el panel de vender, resetear formulario a modo crear
-            if (target === 'sell') {
-                resetForm();
-            }
-        });
+    function fixSidebarPosition() {
+        if (!sidebar || !placeholder) return;
+
+        // Si ya está fijada, solo actualizar dimensiones si es necesario
+        if (sidebarFixed) {
+            const rect = sidebar.getBoundingClientRect();
+            placeholder.style.width = rect.width + 'px';
+            return;
+        }
+
+        // Obtener posición y dimensiones actuales
+        const rect = sidebar.getBoundingClientRect();
+
+        // Crear placeholder con las mismas dimensiones
+        placeholder.style.width = rect.width + 'px';
+        placeholder.style.height = rect.height + 'px';
+
+        // Fijar la sidebar
+        sidebar.style.position = 'fixed';
+        sidebar.style.top = '80px';
+        sidebar.style.left = rect.left + 'px';
+        sidebar.style.width = rect.width + 'px';
+        sidebar.style.zIndex = '100';
+
+        sidebarFixed = true;
+    }
+
+    // Ejecutar cuando carga la página
+    requestAnimationFrame(fixSidebarPosition);
+
+    // Reajustar al cambiar el tamaño de la ventana
+    window.addEventListener('resize', fixSidebarPosition);
+
+    // ---------- Utilidad: cambiar panel activo ----------
+    function switchPanel(target) {
+        document.querySelectorAll('.nav__btn[data-target]').forEach(b => b.classList.remove('nav__btn--active'));
+        const btn = document.querySelector(`.nav__btn[data-target="${target}"]`);
+        if (btn) btn.classList.add('nav__btn--active');
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('panel--active'));
+        const panel = document.getElementById(target);
+        if (panel) panel.classList.add('panel--active');
+    }
+
+    // ---------- Navegación entre paneles (botones del nav) ----------
+    document.querySelectorAll('.nav__btn[data-target]').forEach(btn => {
+        btn.addEventListener('click', () => switchPanel(btn.dataset.target));
     });
+
+    // ---------- Navegación por hash (ej: /perfil#sell) ----------
+    function handleHash() {
+        const hash = window.location.hash?.slice(1);
+        if (!hash) return;
+        // /perfil#sell → panel-sell
+        const target = hash === 'sell' ? 'panel-sell' : hash;
+        // Si el panel existe, abrirlo; si no, ignorar
+        if (document.getElementById(target)) {
+            switchPanel(target);
+            if (target === 'panel-sell') resetForm();
+        }
+    }
+    // Ejecutar after one frame (el browser habrá procesado el scroll nativo)
+    requestAnimationFrame(() => { handleHash(); });
+    window.addEventListener('hashchange', handleHash);
 
     // ---------- Variables globales del formulario ----------
     const form             = document.getElementById('productForm');
@@ -31,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('editId').value = '';
         document.getElementById('formTitle').textContent = 'Publicar artículo en venta';
         document.getElementById('submitBtn').textContent = 'Publicar anuncio';
-        document.getElementById('currentImagePreview').style.display = 'none';
-        conditionals.forEach(el => { el.style.display = 'none'; });
+        document.getElementById('currentImagePreview').classList.remove('image-preview--visible');
+        conditionals.forEach(el => { el.classList.remove('form__conditional--visible'); });
         editingId = null;
     }
 
@@ -40,16 +91,17 @@ document.addEventListener('DOMContentLoaded', () => {
     categorySelect?.addEventListener('change', () => {
         const val = categorySelect.value;
         conditionals.forEach(el => {
-            el.style.display = el.dataset.condition === val ? 'block' : 'none';
+            if (el.dataset.condition === val) {
+                el.classList.add('form__conditional--visible');
+            } else {
+                el.classList.remove('form__conditional--visible');
+            }
         });
     });
 
-    // ---------- Abrir panel "Vender" sin resetear ----------
+    // ---------- Abrir panel "Vender" para editar ----------
     function openSellPanel() {
-        document.querySelectorAll('.nav__btn[data-target]').forEach(b => b.classList.remove('nav__btn--active'));
-        document.querySelector('.nav__btn[data-target="sell"]')?.classList.add('nav__btn--active');
-        document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('panel--active'));
-        document.getElementById('sell').classList.add('panel--active');
+        switchPanel('panel-sell');
     }
 
     // ---------- Cargar datos del producto para editar ----------
@@ -76,16 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (p.irudia) {
                     document.getElementById('currentImage').src = '/' + p.irudia;
-                    document.getElementById('currentImagePreview').style.display = 'block';
+                    document.getElementById('currentImagePreview').classList.add('image-preview--visible');
                 } else {
-                    document.getElementById('currentImagePreview').style.display = 'none';
+                    document.getElementById('currentImagePreview').classList.remove('image-preview--visible');
                 }
 
                 // Activar campos condicionales según categoría
                 const catSelect = document.getElementById('category');
                 const val = catSelect.value;
                 conditionals.forEach(el => {
-                    el.style.display = el.dataset.condition === val ? 'block' : 'none';
+                    if (el.dataset.condition === val) {
+                        el.classList.add('form__conditional--visible');
+                    } else {
+                        el.classList.remove('form__conditional--visible');
+                    }
                 });
 
                 // Rellenar campos condicionales
@@ -100,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 editingId = p.id;
-                document.getElementById('sell').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('panel-sell').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             } catch (err) {
                 const tempErr = document.createElement('div');
