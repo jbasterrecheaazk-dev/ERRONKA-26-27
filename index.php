@@ -48,6 +48,19 @@ if (strpos($uri, '/public/') === 0) {
 }
 
 /*
+ * 2a. PROCESAR FORMULARIO DE CREACIÓN/ACTUALIZACIÓN DE PRODUCTO
+ *
+ * Si la URL tiene ?action=create y es una petición POST,
+ * ejecutamos el controlador directamente aquí para crear o
+ * actualizar un producto antes de cargar cualquier vista.
+ */
+if ($uri === '/mis-articulos' && isset($_GET['action']) && $_GET['action'] === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once __DIR__ . '/controllers/ProductoController.php';
+    $controller = new ProductoController();
+    $controller->create();
+}
+
+/*
  * 2. MAPEO DE RUTAS CON PROTECCIÓN DE SESIÓN
  *
  * Aquí relacionamos cada URL con el archivo PHP que debe mostrarse.
@@ -63,11 +76,13 @@ $routes = [
     '/login'        => 'views/pages/login.php',
     '/carrito'      => 'views/pages/carrito.php',
     '/perfil'       => 'views/pages/perfil.php',
+    '/mis-articulos' => 'views/pages/perfil.php',
+    '/producto'     => 'views/pages/producto.php',
     '/logout'       => 'controllers/AuthController.php?action=logout',
 ];
 
 // Rutas que requieren sesión activa
-$privateRoutes = ['/perfil', '/carrito'];
+$privateRoutes = ['/perfil', '/carrito', '/mis-articulos'];
 
 /*
  * 3. ¿QUÉ ARCHIVO CARGAR?
@@ -93,6 +108,72 @@ if (array_key_exists($uri, $routes)) {
         header('Location: /' . $file);
         exit;
     }
+
+    // Ruta de detalle de producto: cargar datos desde el modelo antes de mostrar la vista
+    if ($uri === '/producto') {
+        $productoId = (int)($_GET['id'] ?? 0);
+        if ($productoId <= 0) {
+            header('Location: /');
+            exit;
+        }
+        require_once __DIR__ . '/models/ProductoModel.php';
+        $productoModel = new ProductoModel();
+        $producto = $productoModel->obtenerPorId($productoId);
+        if ($producto === null) {
+            header('Location: /');
+            exit;
+        }
+        // $producto queda disponible para que la vista lo use
+    }
+} elseif ($uri === '/api/productos') {
+    // API endpoint for product search/filter with pagination
+    // Público: cualquier visitante puede ver los productos
+    if (ob_get_level()) ob_clean();
+
+    require_once __DIR__ . '/models/ProductoModel.php';
+    require_once __DIR__ . '/models/KategoriaModel.php';
+
+    $q = trim($_GET['q'] ?? '');
+    $kategoriaId = (int)($_GET['kategoria'] ?? 0);
+    $page = (int)($_GET['pagina'] ?? 1);
+    $limit = (int)($_GET['limite'] ?? 20);
+
+    $model = new ProductoModel();
+    $result = $model->obtenerFiltrados($q, $kategoriaId, $page, $limit);
+
+    header('Content-Type: application/json');
+    echo json_encode($result);
+    exit;
+} elseif ($uri === '/api/producto') {
+    // API endpoint para obtener datos del producto en JSON
+    // Solo usuarios autenticados pueden editar artículos
+    if (ob_get_level()) ob_clean();
+
+    if (!isset($_SESSION['usuario_id'])) {
+        header('Content-Type: application/json');
+        http_response_code(401);
+        echo json_encode(['error' => 'No autorizado']);
+        exit;
+    }
+    require_once __DIR__ . '/models/ProductoModel.php';
+    $productoId = (int)($_GET['id'] ?? 0);
+    if ($productoId <= 0) {
+        header('Content-Type: application/json');
+        http_response_code(400);
+        echo json_encode(['error' => 'ID inválido']);
+        exit;
+    }
+    $model = new ProductoModel();
+    $producto = $model->obtenerPorId($productoId);
+    if (!$producto || (int)$producto['saltzaile_id'] !== (int)$_SESSION['usuario_id']) {
+        header('Content-Type: application/json');
+        http_response_code(404);
+        echo json_encode(['error' => 'No autorizado o no encontrado']);
+        exit;
+    }
+    header('Content-Type: application/json');
+    echo json_encode($producto);
+    exit;
 } else {
     // Intento inteligente: quitar extensión .php de la URL y mapear a archivo
     $possible = __DIR__ . '/' . ltrim($uri, '/') . '.php';

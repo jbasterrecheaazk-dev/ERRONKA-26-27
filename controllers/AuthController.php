@@ -49,7 +49,7 @@ class AuthController
     {
         // Solo aceptamos peticiones POST (formularios), no visitas directas
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ../views/pages/login.php');
+            header('Location: /login');
             exit;
         }
 
@@ -61,7 +61,7 @@ class AuthController
 
         // Validación básica: todos los campos son obligatorios
         if (!$izena || !$email || !$pasahitza) {
-            header('Location: ../views/pages/login.php?error=datos_incompletos');
+            header('Location: /login?error=datos_incompletos');
             exit;
         }
 
@@ -83,10 +83,10 @@ class AuthController
                 'rol'       => 'erabiltzailea'
             ]);
             // Si todo va bien, redirigimos con mensaje de éxito
-            header('Location: ../views/pages/login.php?success=registrado');
+            header('Location: /login?success=registrado');
         } catch (PDOException $e) {
             // Si hay error de base de datos, redirigimos con mensaje de error
-            header('Location: ../views/pages/login.php?error=registro_fallido');
+            header('Location: /login?error=registro_fallido');
         }
         exit;
     }
@@ -106,7 +106,7 @@ class AuthController
     {
         // Solo aceptamos peticiones POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ../views/pages/login.php');
+            header('Location: /login');
             exit;
         }
 
@@ -134,10 +134,10 @@ class AuthController
             $_SESSION['usuario_rol'] = $usuario['rol'];
 
             // Login correcto, vamos a la página principal
-            header('Location: ../views/pages/index.php');
+            header('Location: /');
         } else {
             // Credenciales incorrectas
-            header('Location: ../views/pages/login.php?error=credenciales_invalidas');
+            header('Location: /login?error=credenciales_invalidas');
         }
         exit;
     }
@@ -153,7 +153,7 @@ class AuthController
     {
         session_unset();
         session_destroy();
-        header('Location: ../views/pages/index.php');
+        header('Location: /');
         exit;
     }
 }

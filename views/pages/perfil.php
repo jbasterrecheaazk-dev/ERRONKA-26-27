@@ -1,6 +1,7 @@
 <?php
 // DATOS DINÁMICOS PARA EL PERFIL
 $pedidos = [];
+$misArticulos = [];
 
 // Nota: session_start() ya se ejecuta en index.php (Front Controller)
 if (!isset($_SESSION['usuario_id'])) {
@@ -10,12 +11,16 @@ if (!isset($_SESSION['usuario_id'])) {
 
 require_once __DIR__ . '/../../models/ErabiltzaileaModel.php';
 require_once __DIR__ . '/../../models/KategoriaModel.php';
+require_once __DIR__ . '/../../models/ProductoModel.php';
 $usuarioModel = new ErabiltzaileaModel();
 $kategoriaModel = new KategoriaModel();
+$productosModel = new ProductoModel();
 $usuario = $usuarioModel->buscarPorId((int)$_SESSION['usuario_id']);
 $categorias = $kategoriaModel->getAll();
-$errorMsg = $_GET['error'] ?? '';
-$successMsg = $_GET['success'] ?? '';
+$misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
+
+// Nota: la carga de datos para edición se hace mediante fetch en JavaScript
+// cuando el usuario hace clic en "Editar" en lugar de cargarlo con PHP al inicio
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,12 +38,8 @@ $successMsg = $_GET['success'] ?? '';
                     <img class="header__logo-icon" src="/public/img/LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
                     <div class="header__logo">Soinu<span>Truk</span></div>
                 </a>
-                <div class="header__search">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    <input placeholder="Buscar vinilos, CDs, casetes, artistas..." />
-                </div>
                 <div class="header__actions">
-                    <a href="/carrito" class="header__icon-btn" aria-label="Carrito" style="position:relative">
+                    <a href="/carrito" class="header__icon-btn" aria-label="Carrito">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         <?php if ($num_productos_carrito > 0): ?>
                         <span class="badge"><?= $num_productos_carrito ?></span>
@@ -76,7 +77,10 @@ $successMsg = $_GET['success'] ?? '';
 
                 <nav class="nav">
                     <button class="nav__btn nav__btn--active" data-target="orders">Pedidos</button>
-                    <button class="nav__btn" data-target="sell">Vender artículo</button>
+                    <button class="nav__btn" data-target="panel-sell">Vender artículo</button>
+                    <button class="nav__btn" data-target="articles">Mis artículos en venta</button>
+                    <a class="nav__btn" href="/favoritos">Favoritos</a>
+                    <a class="nav__btn" href="/historial-ventas">Historial de ventas</a>
                 </nav>
             </aside>
 
@@ -108,20 +112,54 @@ $successMsg = $_GET['success'] ?? '';
                     </div>
                 </div>
 
+                <!-- Panel: Mis artículos -->
+                <div class="panel" id="articles">
+                    <h2 class="panel__title">Mis artículos en venta</h2>
+
+                    <?php if (empty($misArticulos)): ?>
+                        <p class="profile__empty">Aún no has publicado ningún artículo.</p>
+                    <?php else: ?>
+                        <div class="products__grid products__grid--profile" id="misArticulosGrid">
+                            <?php foreach ($misArticulos as $art): ?>
+                            <article class="card" data-url="/producto?id=<?= (int)$art['id'] ?>">
+                                <div class="card__media">
+                                    <?php if (!empty($art['irudia'])): ?>
+                                        <img src="/<?= htmlspecialchars($art['irudia']) ?>" alt="<?= htmlspecialchars($art['izenburua']) ?>" loading="lazy">
+                                    <?php else: ?>
+                                        <div class="card__media--empty">Sin imagen</div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($art['egoera'])): ?>
+                                        <span class="badge-state badge-state--abs"><?= htmlspecialchars($art['egoera']) ?></span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="card__body">
+                                    <div class="card__title"><?= htmlspecialchars($art['izenburua']) ?></div>
+                                    <div class="card__meta">
+                                        <?php if (!empty($art['artista'])): ?><span><?= htmlspecialchars($art['artista']) ?></span><?php endif; ?>
+                                        <?php if (!empty($art['urtea'])): ?><span><?= htmlspecialchars($art['urtea']) ?></span><?php endif; ?>
+                                    </div>
+                                    <div class="card__price"><?= number_format($art['prezioa'], 2) ?> €</div>
+                                </div>
+                                <div class="card__footer">
+                                    <span class="article-status">
+                                        <?php echo ($art['salgai']) ? '<span class="article-status--available">● Disponible</span>' : '<span class="article-status--sold">● Vendido</span>'; ?>
+                                    </span>
+                                    <a href="javascript:void(0)" class="card__buy edit-btn" data-product-id="<?= (int)$art['id'] ?>">Editar</a>
+                                </div>
+                            </article>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
                 <!-- Formulario de venta -->
-                <div class="panel" id="sell">
-                    <h2 class="panel__title">Publicar artículo en venta</h2>
+                <div class="panel" id="panel-sell">
+                    <h2 class="panel__title" id="formTitle">Publicar artículo en venta</h2>
 
-                    <?php if ($successMsg === 'producto_creado'): ?>
-                        <div class="form__feedback form__feedback--success">Artículo publicado correctamente.</div>
-                    <?php endif; ?>
-                    <?php if ($errorMsg === 'datos_incompletos'): ?>
-                        <div class="form__feedback form__feedback--error">Por favor, rellena todos los campos obligatorios.</div>
-                    <?php endif; ?>
-
-                    <form method="POST" action="/controllers/ProductoController.php?action=create" enctype="multipart/form-data" novalidate>
+                    <form method="POST" action="/mis-articulos?action=create" enctype="multipart/form-data" novalidate id="productForm">
+                        <input type="hidden" name="edit_id" id="editId" value="">
                         <div class="form__group">
-                            <label class="form__label" for="category">Categoría</label>
+                            <label class="form__label" for="category">Categoría <span class="required">*</span></label>
                             <select class="input" id="category" name="kategoria_id" required>
                                 <option value="">Selecciona una categoría</option>
                                 <?php foreach ($categorias as $cat): ?>
@@ -131,16 +169,16 @@ $successMsg = $_GET['success'] ?? '';
                         </div>
                         <div class="form__grid">
                             <div class="form__group">
-                                <label class="form__label" for="title">Título</label>
+                                <label class="form__label" for="title">Título <span class="required">*</span></label>
                                 <input class="input" id="title" type="text" name="izenburua" required>
                             </div>
                             <div class="form__group">
-                                <label class="form__label" for="price">Precio (€)</label>
+                                <label class="form__label" for="price">Precio (€) <span class="required">*</span></label>
                                 <input class="input" id="price" type="number" step="0.01" name="prezioa" required>
                             </div>
                         </div>
                         <!-- Campos condicionales por categoría -->
-                        <div class="form__conditional" data-condition="1" style="display:none;">
+                        <div class="form__conditional form__conditional--visible" data-condition="1">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label class="form__label" for="artist">Artista</label>
@@ -162,7 +200,7 @@ $successMsg = $_GET['success'] ?? '';
                                 </select>
                             </div>
                         </div>
-                        <div class="form__conditional" data-condition="2" style="display:none;">
+                        <div class="form__conditional form__conditional--visible" data-condition="2">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label class="form__label" for="artist-cd">Artista / Banda</label>
@@ -184,7 +222,7 @@ $successMsg = $_GET['success'] ?? '';
                                 </select>
                             </div>
                         </div>
-                        <div class="form__conditional" data-condition="3" style="display:none;">
+                        <div class="form__conditional form__conditional--visible" data-condition="3">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label class="form__label" for="artist-k">Artista / Banda</label>
@@ -207,22 +245,26 @@ $successMsg = $_GET['success'] ?? '';
                             </div>
                         </div>
                         <div class="form__group">
-                            <label class="form__label" for="description">Descripción</label>
+                            <label class="form__label" for="description">Descripción <span class="required">*</span></label>
                             <textarea class="textarea" id="description" name="deskribapena" required placeholder="Describe el estado, edición, contenido..."></textarea>
                         </div>
                         <div class="form__group">
                             <label class="form__label" for="image">Imagen del artículo</label>
+                            <div id="currentImagePreview" class="image-preview">
+                                <img id="currentImage" src="" alt="Imagen actual" class="image-preview__img">
+                                <p class="image-preview__caption">Imagen actual — sube otra para cambiarla</p>
+                            </div>
                             <input class="input" id="image" type="file" name="irudia" accept="image/*">
                         </div>
-                        <button class="btn btn--primary" type="submit">Publicar anuncio</button>
+                        <button class="btn btn--primary" type="submit" id="submitBtn">Publicar anuncio</button>
                     </form>
                 </div>
             </section>
         </main>
 
         <!-- Botón de cerrar sesión al final de la vista de perfil -->
-        <div style="padding: 40px 20px; text-align: center;">
-            <a href="/logout" class="btn btn--primary" style="max-width: 240px;">Cerrar sesión</a>
+        <div class="logout-container">
+            <a href="/logout" class="btn btn--primary logout-btn">Cerrar sesión</a>
         </div>
 
         <footer class="footer">
@@ -233,29 +275,6 @@ $successMsg = $_GET['success'] ?? '';
         </footer>
     </div>
 
-    <script>
-        // Cambiar paneles
-        document.querySelectorAll('.nav__btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.dataset.target;
-                document.querySelectorAll('.nav__btn').forEach(b => b.classList.remove('nav__btn--active'));
-                btn.classList.add('nav__btn--active');
-                document.querySelectorAll('.panel').forEach(panel => {
-                    panel.classList.remove('panel--active');
-                });
-                document.getElementById(target).classList.add('panel--active');
-            });
-        });
-
-        // Mostrar campos condicionales según categoría seleccionada
-        const categorySelect = document.getElementById('category');
-        const conditionals = document.querySelectorAll('.form__conditional');
-        categorySelect?.addEventListener('change', () => {
-            const val = categorySelect.value;
-            conditionals.forEach(el => {
-                el.style.display = el.dataset.condition === val ? 'block' : 'none';
-            });
-        });
-    </script>
+    <script src="/public/js/perfil.js"></script>
 </body>
 </html>

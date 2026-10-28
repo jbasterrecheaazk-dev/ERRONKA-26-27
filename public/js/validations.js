@@ -9,19 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función auxiliar para mostrar mensaje de error debajo de un input
     function showError(inputElement, message) {
         // Marcamos el input con borde rojo (siguiendo estilo brutalista)
-        inputElement.style.borderColor = '#ff4444';
-        inputElement.style.borderWidth = '2px';
+        inputElement.classList.add('input--error');
 
         // Comprobamos si ya existe un elemento de error para no duplicarlo
         let errorDiv = inputElement.parentElement.querySelector('.form__error');
         if (!errorDiv) {
             errorDiv = document.createElement('div');
             errorDiv.className = 'form__error';
-            // Estilos BEM / brutalistas acordes al diseño oscuro
-            errorDiv.style.color = '#ff4444';
-            errorDiv.style.fontSize = '0.85rem';
-            errorDiv.style.marginTop = '6px';
-            errorDiv.style.fontFamily = 'inherit';
             inputElement.parentElement.appendChild(errorDiv);
         }
         errorDiv.textContent = message;
@@ -29,8 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función auxiliar para limpiar el error si el campo es correcto
     function clearError(inputElement) {
-        inputElement.style.borderColor = '';
-        inputElement.style.borderWidth = '';
+        inputElement.classList.remove('input--error');
         const errorDiv = inputElement.parentElement.querySelector('.form__error');
         if (errorDiv) {
             errorDiv.remove();

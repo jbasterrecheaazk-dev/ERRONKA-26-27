@@ -1,10 +1,11 @@
 <?php
-// DATOS DE PRODUCTOS DINÁMICOS
-// --------------------------------
-// En una aplicación real, estos datos vendrían de un Modelo (ej. ProductoModel)
-// y se pasarían desde el Controlador a la vista.
-// Aquí definimos el array vacío para evitar errores de "variable no definida"
-$productos = [];
+// Cargar modelo de productos para el catálogo dinámico
+require_once __DIR__ . '/../../models/ProductoModel.php';
+require_once __DIR__ . '/../../models/KategoriaModel.php';
+$productosModel = new ProductoModel();
+$kategoriaModel = new KategoriaModel();
+$productos = $productosModel->obtenerTodos();
+$categorias = $kategoriaModel->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,12 +24,8 @@ $productos = [];
                     <img class="header__logo-icon" src="/public/img/LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
                     <div class="header__logo">Soinu<span>Truk</span></div>
                 </a>
-                <div class="header__search">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    <input placeholder="Buscar vinilos, CDs, casetes, artistas..." />
-                </div>
                 <div class="header__actions">
-                    <a href="/carrito" class="header__icon-btn" aria-label="Carrito" style="position:relative">
+                    <a href="/carrito" class="header__icon-btn" aria-label="Carrito">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         <?php if ($num_productos_carrito > 0): ?>
                         <span class="badge"><?= $num_productos_carrito ?></span>
@@ -55,11 +52,8 @@ $productos = [];
                     <p class="hero__subtitle">SoinuTruk conecta a apasionados del vinilo, CD y casete en un marketplace C2C seguro. Descubre ediciones raras, compra directo a coleccionistas y haz crecer tu colección.</p>
                     <div class="hero__cta">
                         <a class="btn btn--primary" href="#productos">Explorar catálogo</a>
-                        <a class="btn btn--ghost" href="/perfil">Vender mi música</a>
+                        <a class="btn btn--ghost" href="/perfil#sell">Vender mi música</a>
                     </div>
-                </div>
-                <div class="hero__visual" aria-hidden="true">
-                    <div style="position:relative;border-radius:0;overflow:hidden;border:1px solid var(--border);background:#151515;height:260px;display:grid;place-items:center;color:var(--muted)">Vista previa del marketplace</div>
                 </div>
             </div>
         </section>
@@ -68,36 +62,65 @@ $productos = [];
             <!-- PRODUCTS -->
             <section id="productos" class="products">
                 <div class="products__head">
-                    <h2 class="products__title">Vinilos destacados</h2>
+                    <h2 class="products__title">Catálogo completo</h2>
                     <div class="products__filter">
-                        <button class="chip chip--active">Todos</button>
-                        <button class="chip">NM</button>
-                        <button class="chip">VG+</button>
-                        <button class="chip">Raros</button>
+                        <!-- Buscador y filtro de categoría -->
+                        <div class="search-filter">
+                            <div class="header__search header__search--compact">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <input id="searchInput" placeholder="Buscar..." />
+                            </div>
+                            <select id="categoryFilter" class="input category-select">
+                                <option value="">Todas las categorías</option>
+                                <?php foreach ($categorias ?? [] as $cat): ?>
+                                <option value="<?= (int)$cat['id'] ?>"><?= htmlspecialchars($cat['izena']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <div class="products__grid">
+                <div class="products__grid" id="catalogGrid">
+                    <?php if (!empty($productos)): ?>
                     <?php foreach ($productos as $producto): ?>
-                    <article class="card">
+                    <article class="card" data-url="/producto?id=<?= (int)$producto['id'] ?>">
                         <div class="card__media">
-                            <img src="<?= htmlspecialchars($producto['imagen']) ?>" alt="<?= htmlspecialchars($producto['titulo']) ?>" />
+                            <?php if (!empty($producto['irudia'])): ?>
+                                <img src="/<?= htmlspecialchars($producto['irudia']) ?>" alt="<?= htmlspecialchars($producto['izenburua']) ?>" loading="lazy">
+                            <?php else: ?>
+                                <div class="card__media--empty">Sin imagen</div>
+                            <?php endif; ?>
+                            <?php if (!empty($producto['egoera'])): ?>
+                                <span class="badge-state"><?= htmlspecialchars($producto['egoera']) ?></span>
+                            <?php endif; ?>
                         </div>
                         <div class="card__body">
-                            <div class="card__title"><?= htmlspecialchars($producto['titulo']) ?></div>
+                            <div class="card__title"><?= htmlspecialchars($producto['izenburua']) ?></div>
                             <div class="card__meta">
-                                <span class="badge-state"><?= htmlspecialchars($producto['estado']) ?></span>
-                                <span><?= htmlspecialchars($producto['anio']) ?> • <?= htmlspecialchars($producto['sello']) ?></span>
+                                <?php if (!empty($producto['artista'])): ?><span><?= htmlspecialchars($producto['artista']) ?></span><?php endif; ?>
+                                <?php if (!empty($producto['urtea'])): ?><span><?= htmlspecialchars($producto['urtea']) ?></span><?php endif; ?>
+                                <?php if (!empty($producto['categoria_nombre'])): ?><span><?= htmlspecialchars($producto['categoria_nombre']) ?></span><?php endif; ?>
                             </div>
-                            <div class="card__price"><?= htmlspecialchars($producto['precio']) ?> €</div>
+                            <div class="card__price"><?= number_format($producto['prezioa'], 2) ?> €</div>
                         </div>
                         <div class="card__footer">
-                            <span style="color:var(--muted);font-size:.85rem"><?= htmlspecialchars($producto['envio']) ?></span>
-                            <a href="/add-cart?id=<?= (int)$producto['id'] ?>" class="card__buy">Comprar</a>
+                            <span class="card__shipping">Envío disponible</span>
+                            <button class="btn-favorite" data-product-id="<?= (int)$producto['id'] ?>" aria-label="Añadir a favoritos">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
+                            <span class="card__buy">Ver detalle</span>
                         </div>
                     </article>
                     <?php endforeach; ?>
+                    <?php else: ?>
+                    <div class="products__empty">
+                        Aún no hay artículos publicados. ¡Sé el primero en vender!
+                    </div>
+                    <?php endif; ?>
                 </div>
+                <div id="paginationContainer" class="pagination"></div>
             </section>
         </main>
 
@@ -108,5 +131,8 @@ $productos = [];
             </div>
         </footer>
     </div>
+
+    <script src="/public/js/favoritos.js"></script>
+    <script src="/public/js/buscador.js"></script>
 </body>
 </html>
