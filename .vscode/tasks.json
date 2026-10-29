@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "PHP Zerbitzaria",
+            "type": "shell",
+            "command": "php",
+            "args": [
+                "-S",
+                "localhost:8000"
+            ],
+            "isBackground": true,
+            "problemMatcher": []
+        }
+    ]
+}
