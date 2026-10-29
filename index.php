@@ -14,12 +14,12 @@
 // pueda comprobar si el usuario está logueado mediante $_SESSION
 session_start();
 
-// Contador de carrito desde base de datos
+// Contador de cesta desde base de datos
 // Si el usuario tiene sesión iniciada, consulta la BD; si no, muestra 0
 if (isset($_SESSION['usuario_id'])) {
-    require_once __DIR__ . '/models/CarritoModel.php';
-    $carritoModel = new CarritoModel();
-    $num_productos_carrito = $carritoModel->getContador((int)$_SESSION['usuario_id']);
+    require_once __DIR__ . '/models/SaskiaModel.php';
+    $saskiaModel = new SaskiaModel();
+    $num_productos_carrito = $saskiaModel->getContador((int)$_SESSION['usuario_id']);
 } else {
     $num_productos_carrito = 0;
 }
@@ -75,14 +75,17 @@ $routes = [
     '/index'        => 'views/pages/index.php',
     '/login'        => 'views/pages/login.php',
     '/carrito'      => 'views/pages/carrito.php',
+    '/saskia'       => 'views/pages/carrito.php',
     '/perfil'       => 'views/pages/perfil.php',
     '/mis-articulos' => 'views/pages/perfil.php',
+    '/admin'        => 'views/pages/admin.php',
+    '/mis-compras'  => 'views/pages/mis-compras.php',
     '/producto'     => 'views/pages/producto.php',
     '/logout'       => 'controllers/AuthController.php?action=logout',
 ];
 
 // Rutas que requieren sesión activa
-$privateRoutes = ['/perfil', '/carrito', '/mis-articulos'];
+$privateRoutes = ['/perfil', '/carrito', '/mis-articulos', '/saskia', '/admin', '/mis-compras'];
 
 /*
  * 3. ¿QUÉ ARCHIVO CARGAR?
@@ -106,6 +109,15 @@ if (array_key_exists($uri, $routes)) {
     if (strpos($file, 'controllers/') === 0) {
         // Redirigimos directamente al controlador con sus parámetros
         header('Location: /' . $file);
+        exit;
+    }
+
+    // Ruta de administración: cargar datos desde el controlador antes de mostrar la vista
+    if ($uri === '/admin') {
+        if (ob_get_level()) ob_clean();
+        require_once __DIR__ . '/controllers/AdminController.php';
+        $controller = new AdminController();
+        $controller->index();
         exit;
     }
 
@@ -183,6 +195,88 @@ if (array_key_exists($uri, $routes)) {
     header('Content-Type: application/json');
     echo json_encode($producto);
     exit;
+} elseif (strpos($uri, '/api/saskia') === 0) {
+    // API endpoints de la cesta de compra (solo usuarios autenticados)
+    if (ob_get_level()) ob_clean();
+
+    require_once __DIR__ . '/controllers/SaskiaController.php';
+    $controller = new SaskiaController();
+
+    $action = '';
+    if ($uri === '/api/saskia') {
+        $action = 'index';
+    } elseif (preg_match('#^/api/saskia/(\w+)$#', $uri, $m)) {
+        $action = $m[1];
+    }
+
+    switch ($action) {
+        case 'index':
+            $controller->index();
+            break;
+        case 'gehitu':
+            $controller->gehitu();
+            break;
+        case 'kendu':
+            $controller->kendu();
+            break;
+        default:
+            header('Content-Type: application/json');
+            http_response_code(404);
+            echo json_encode(['error' => 'Endpoint no encontrado']);
+            exit;
+    }
+} elseif (strpos($uri, '/api/eskaerak') === 0) {
+    // API endpoints de pedidos (checkout B2C)
+    if (ob_get_level()) ob_clean();
+
+    require_once __DIR__ . '/controllers/EskaerakController.php';
+    $action = '';
+    if (preg_match('#^/api/eskaerak/(\w+)$#', $uri, $m)) {
+        $action = $m[1];
+    }
+
+    if ($action === 'procesar') {
+        $controller = new EskaerakController();
+        $controller->procesar();
+    } else {
+        header('Content-Type: application/json');
+        http_response_code(404);
+        echo json_encode(['error' => 'Endpoint no encontrado']);
+        exit;
+    }
+} elseif (strpos($uri, '/api/admin') === 0) {
+    // API endpoints de administración (solo admins)
+    if (ob_get_level()) ob_clean();
+
+    require_once __DIR__ . '/controllers/AdminController.php';
+    $action = '';
+    if (preg_match('#^/api/admin/(\w+)$#', $uri, $m)) {
+        $action = $m[1];
+    }
+
+    $controller = new AdminController();
+    // Soportar tanto métodos con sufijo Ajax como sin él (onartu, baztertu)
+    $methodName = $action;
+    if (!method_exists($controller, $methodName)) {
+        $methodName = $action . 'Ajax';
+    }
+    if (method_exists($controller, $methodName)) {
+        $controller->{$methodName}();
+    } else {
+        header('Content-Type: application/json');
+        http_response_code(404);
+        echo json_encode(['error' => 'Endpoint no encontrado']);
+        exit;
+    }
+} elseif ($uri === '/admin/aprobar' || $uri === '/admin/deshabilitar') {
+    // Legacy routing para Admin (GET)
+    if (ob_get_level()) ob_clean();
+    require_once __DIR__ . '/controllers/AdminController.php';
+    $controller = new AdminController();
+    $action = basename($uri);
+    if (method_exists($controller, $action)) {
+        $controller->$action();
+    }
 } else {
     // Intento inteligente: quitar extensión .php de la URL y mapear a archivo
     $possible = __DIR__ . '/' . ltrim($uri, '/') . '.php';

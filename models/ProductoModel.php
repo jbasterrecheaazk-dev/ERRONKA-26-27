@@ -22,6 +22,7 @@ class ProductoModel
      * crear()
      * Inserta un nuevo producto en la tabla produktuak.
      * Usa sentencias preparadas para evitar inyección SQL.
+     * Si no se especifica salgai, se establece en 0 (pendiente de revisión por admin).
      *
      * $datos debe contener:
      *   - izenburua: nombre/título del producto
@@ -31,30 +32,31 @@ class ProductoModel
      *   - saltzaile_id: ID del vendedor (usuario logueado)
      *   - artista: nombre del artista/banda (opcional)
      *   - urtea: año de publicación (opcional)
-     *   - egoera: estado de conservación (opcional)
      *   - irudia: ruta de la imagen (opcional)
+     *   - salgai: estado de publicación (0=pendiente, 1=publicado, por defecto 0)
      */
     public function crear(array $datos): bool
     {
         $sql = "INSERT INTO produktuak
                 ( izenburua, deskribapena, prezioa, kategoria_id, saltzaile_id,
-                  artista, urtea, egoera, irudia )
+                  artista, urtea, irudia, salgai, onarpen_egoera )
                 VALUES (
                     :izenburua, :deskribapena, :prezioa, :kategoria_id, :saltzaile_id,
-                    :artista, :urtea, :egoera, :irudia
+                    :artista, :urtea, :irudia, :salgai, :onarpen_egoera
                 )";
 
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':izenburua'    => $datos['izenburua'],
-            ':deskribapena' => $datos['deskribapena'],
-            ':prezioa'      => $datos['prezioa'],
-            ':kategoria_id' => $datos['kategoria_id'],
-            ':saltzaile_id' => $datos['saltzaile_id'],
-            ':artista'      => $datos['artista'] ?? null,
-            ':urtea'        => $datos['urtea'] ?? null,
-            ':egoera'       => $datos['egoera'] ?? null,
-            ':irudia'       => $datos['irudia'] ?? null,
+            ':izenburua'         => $datos['izenburua'],
+            ':deskribapena'      => $datos['deskribapena'],
+            ':prezioa'           => $datos['prezioa'],
+            ':kategoria_id'      => $datos['kategoria_id'],
+            ':saltzaile_id'      => $datos['saltzaile_id'],
+            ':artista'           => $datos['artista'] ?? null,
+            ':urtea'             => $datos['urtea'] ?? null,
+            ':irudia'            => $datos['irudia'] ?? null,
+            ':salgai'            => $datos['salgai'] ?? 0,
+            ':onarpen_egoera'    => $datos['onarpen_egoera'] ?? 'onartua',
         ]);
     }
 
@@ -68,7 +70,7 @@ class ProductoModel
         $sql = "SELECT p.*, k.izena as categoria_nombre
                 FROM produktuak p
                 LEFT JOIN kategoriak k ON p.kategoria_id = k.id
-                WHERE p.salgai = 1
+                WHERE p.salgai = 1 AND p.onarpen_egoera = 'onartua'
                 ORDER BY p.sortze_data DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
@@ -128,7 +130,8 @@ class ProductoModel
                 LEFT JOIN erabiltzaileak u ON p.saltzaile_id = u.id
                 LEFT JOIN kategoriak k        ON p.kategoria_id = k.id
                 WHERE p.id IN ($inClause)
-                AND p.salgai = 1";
+                AND p.salgai = 1
+                AND p.onarpen_egoera = 'onartua'";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
@@ -150,7 +153,6 @@ class ProductoModel
                     kategoria_id = :kategoria_id,
                     artista      = :artista,
                     urtea        = :urtea,
-                    egoera       = :egoera,
                     irudia       = :irudia
                 WHERE id = :id";
 
@@ -163,7 +165,6 @@ class ProductoModel
             ':kategoria_id' => $datos['kategoria_id'],
             ':artista'      => $datos['artista'] ?? null,
             ':urtea'        => $datos['urtea'] ?? null,
-            ':egoera'       => $datos['egoera'] ?? null,
             ':irudia'       => $datos['irudia'] ?? null,
         ]);
     }
@@ -191,7 +192,7 @@ class ProductoModel
         $sql = "SELECT p.*, k.izena as categoria_nombre
                 FROM produktuak p
                 LEFT JOIN kategoriak k ON p.kategoria_id = k.id
-                WHERE p.salgai = 1";
+                WHERE p.salgai = 1 AND p.onarpen_egoera = 'onartua'";
 
         $params = [];
 
@@ -218,7 +219,7 @@ class ProductoModel
         // Get total count for pagination metadata
         $countSql = "SELECT COUNT(*) as total FROM produktuak p
                       LEFT JOIN kategoriak k ON p.kategoria_id = k.id
-                      WHERE p.salgai = 1";
+                      WHERE p.salgai = 1 AND p.onarpen_egoera = 'onartua'";
 
         $countParams = [];
         if ($q !== '') {
@@ -246,5 +247,50 @@ class ProductoModel
                 'offset' => $offset
             ]
         ];
+    }
+
+    /*
+     * lortuPendenteak()
+     * Devuelve todos los productos pendientes de aprobación (onarpen_egoera = 'pendentea').
+     * Usado por el panel de administración para revisar las solicitudes de los usuarios.
+     */
+    public function lortuPendenteak(): array
+    {
+        $sql = "SELECT p.*,
+                       u.izena   as solicitante_nombre,
+                       u.email   as solicitante_email,
+                       k.izena   as categoria_nombre
+                FROM produktuak p
+                JOIN erabiltzaileak u ON p.saltzaile_id = u.id
+                LEFT JOIN kategoriak k ON p.kategoria_id = k.id
+                WHERE p.onarpen_egoera = 'pendentea'
+                ORDER BY p.sortze_data DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /*
+     * eguneratuOnarpenEgoera()
+     * Actualiza el estado de aprobación y la disponibilidad de un producto.
+     * - onartua + salgai=1  → producto aprobado y publicado
+     * - baztertua + salgai=0 → producto rechazado y marcado como no disponible
+     *
+     * @param int    $produktu_id ID del producto
+     * @param string $egoera      'onartua' o 'baztertua'
+     * @param bool   $salgai      true si se publica, false si se rechaza/deshabilita
+     */
+    public function eguneratuOnarpenEgoera(int $produktu_id, string $egoera, bool $salgai): bool
+    {
+        $sql = "UPDATE produktuak
+                SET onarpen_egoera = :egoera,
+                    salgai = :salgai
+                WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':egoera' => $egoera,
+            ':salgai' => $salgai ? 1 : 0,
+            ':id'     => $produktu_id,
+        ]);
     }
 }

@@ -1,11 +1,19 @@
 <?php
-// Cargar modelo de productos para el catálogo dinámico
+// Cargar modelo de productos para el catálogo dinámico y el contador del carrito
 require_once __DIR__ . '/../../models/ProductoModel.php';
 require_once __DIR__ . '/../../models/KategoriaModel.php';
+require_once __DIR__ . '/../../models/SaskiaModel.php';
 $productosModel = new ProductoModel();
 $kategoriaModel = new KategoriaModel();
+$saskiaModel = new SaskiaModel();
 $productos = $productosModel->obtenerTodos();
 $categorias = $kategoriaModel->getAll();
+
+if (isset($_SESSION['usuario_id'])) {
+    $num_productos_carrito = $saskiaModel->getContador((int)$_SESSION['usuario_id']);
+} else {
+    $num_productos_carrito = 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,6 +33,12 @@ $categorias = $kategoriaModel->getAll();
                     <div class="header__logo">Soinu<span>Truk</span></div>
                 </a>
                 <div class="header__actions">
+                    <?php if (isset($_SESSION['usuario_id']) && (($_SESSION['usuario_rol'] ?? '') === 'admin')): ?>
+                        <a href="/admin" class="header__btn header__btn--admin" aria-label="Panel de administración">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg>
+                            <span>Admin</span>
+                        </a>
+                    <?php endif; ?>
                     <a href="/carrito" class="header__icon-btn" aria-label="Carrito">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         <?php if ($num_productos_carrito > 0): ?>
@@ -107,7 +121,9 @@ $categorias = $kategoriaModel->getAll();
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </button>
-                            <span class="card__buy">Ver detalle</span>
+                            <button class="btn-cart" data-product-id="<?= (int)$producto['id'] ?>" aria-label="Añadir al carrito">
+                                Añadir al Carrito
+                            </button>
                         </div>
                     </article>
                     <?php endforeach; ?>
@@ -131,5 +147,6 @@ $categorias = $kategoriaModel->getAll();
 
     <script src="/public/js/favoritos.js"></script>
     <script src="/public/js/buscador.js"></script>
+    <script src="/public/js/saskia.js"></script>
 </body>
 </html>

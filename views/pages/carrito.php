@@ -1,25 +1,20 @@
 <?php
-// DATOS DINÁMICOS PARA EL CARRITO - desde base de datos
-require_once __DIR__ . '/../../models/CarritoModel.php';
-$carritoModel = new CarritoModel();
+/**
+ * VIEWS/PAGES/CARRITO.PHP
+ *
+ * Vista del carrito (saskia/euskara).
+ * El contenido se rellena dinámicamente desde public/js/saskia.js
+ * mediante fetch() al endpoint /api/saskia.
+ * El contador inicial se carga desde BD para el header (SSR).
+ */
+require_once __DIR__ . '/../../models/SaskiaModel.php';
+$saskiaModel = new SaskiaModel();
 
-// Si el usuario tiene sesión iniciada, carga su carrito de la BD; si no, carrito vacío
 if (isset($_SESSION['usuario_id'])) {
-    $items_carrito = $carritoModel->getItems((int)$_SESSION['usuario_id']);
-    $num_productos_carrito = count($items_carrito);
+    $num_productos_carrito = $saskiaModel->getContador((int)$_SESSION['usuario_id']);
 } else {
-    $items_carrito = [];
     $num_productos_carrito = 0;
 }
-
-// Calcular total
-$total = 0;
-foreach ($items_carrito as $item) {
-    $total += (float)$item['prezioa'] * (int)$item['kantitatea'];
-}
-$total = number_format($total, 2, ',', '.');
-
-// session_start() ya se ejecuta en index.php (Front Controller)
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,6 +26,7 @@ $total = number_format($total, 2, ',', '.');
 </head>
 <body>
     <div class="page">
+        <!-- HEADER -->
         <header class="header">
             <div class="container header__inner">
                 <a href="/" class="header__brand">
@@ -38,10 +34,16 @@ $total = number_format($total, 2, ',', '.');
                     <div class="header__logo">Soinu<span>Truk</span></div>
                 </a>
                 <div class="header__actions">
+                    <?php if (isset($_SESSION['usuario_id']) && ((($_SESSION['usuario_rol'] ?? '') === 'admin'))): ?>
+                    <a href="/admin" class="header__btn header__btn--admin" aria-label="Panel de administración">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg>
+                        <span>Admin</span>
+                    </a>
+                    <?php endif; ?>
                     <a href="/carrito" class="header__icon-btn header__icon-btn--cart" aria-label="Carrito">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         <?php if ($num_productos_carrito > 0): ?>
-                        <span class="badge"><?= $num_productos_carrito ?></span>
+                        <span class="badge saskia-badge"><?= $num_productos_carrito ?></span>
                         <?php endif; ?>
                     </a>
                     <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -56,45 +58,39 @@ $total = number_format($total, 2, ',', '.');
                 </div>
             </div>
         </header>
-        <main class="cart">
-            <!-- Lista de items -->
-            <section class="cart__items">
-                <?php foreach ($items_carrito as $item): ?>
-                <article class="item">
-                    <div class="item__media"></div>
-                    <div class="item__content">
-                        <div>
-                            <h3 class="item__title"><?= htmlspecialchars($item['izenburua']) ?></h3>
-                            <div class="item__meta">
-                                <span>×<?= htmlspecialchars($item['kantitatea']) ?></span>
-                            </div>
-                            <div class="item__price"><?= htmlspecialchars(number_format((float)$item['prezioa'], 2, ',', '.')) ?> €</div>
-                        </div>
-                        <a href="/remove-cart?id=<?= (int)$item['carrito_id'] ?>" class="item__remove">Eliminar</a>
+
+        <main class="saskia main container">
+            <h1 class="saskia__title">Carrito</h1>
+
+            <!-- Skeleton placeholder: JS reemplaza todo el contenido -->
+            <div id="saskiaSkeleton" class="saskia__skeleton">
+                <div class="saskia__loading">Cargando...</div>
+            </div>
+
+            <!-- Renderizado dinámico por JS -->
+            <section id="saskiaContent" class="saskia__content" style="display:none;">
+                <!-- Items dinámicos -->
+                <div class="saskia__items" id="saskiaItems"></div>
+
+                <!-- Resumen -->
+                <aside class="saskia__summary">
+                    <h2 class="saskia__summary-title">Resumen</h2>
+                    <div class="saskia__summary-items" id="saskiaSummaryItems"></div>
+                    <div class="saskia__summary-total">
+                        <span>Total</span>
+                        <span class="saskia__total" id="saskiaTotal">0,00 €</span>
                     </div>
-                </article>
-                <?php endforeach; ?>
+                    <button class="btn btn--primary btn--lg saskia__checkout" id="saskiaCheckout" disabled>
+                        Tramitar pago
+                    </button>
+                </aside>
             </section>
 
-            <!-- Resumen -->
-            <aside class="cart__summary">
-                <h2 class="summary__title">Resumen del pedido</h2>
-                <div class="summary__items">
-                    <div class="summary__item">
-                        <span><?= count($items_carrito) ?> artículos</span>
-                        <span><?= htmlspecialchars($total) ?> €</span>
-                    </div>
-                    <div class="summary__item">
-                        <span>Envío</span>
-                        <span>0,00 €</span>
-                    </div>
-                </div>
-                <div class="summary__total">
-                    <span>Total</span>
-                    <span class="total"><?= htmlspecialchars($total) ?> €</span>
-                </div>
-                <a href="/checkout" class="btn btn--primary">Tramitar pago</a>
-            </aside>
+            <!-- Estado vacío (oculto inicialmente) -->
+            <div id="saskiaEmpty" class="saskia__empty" style="display:none;">
+                <p>El carrito está vacío.</p>
+                <a href="/" class="btn btn--primary">Explorar catálogo</a>
+            </div>
         </main>
 
         <footer class="footer">
@@ -104,5 +100,8 @@ $total = number_format($total, 2, ',', '.');
             </div>
         </footer>
     </div>
+
+    <script src="/public/js/favoritos.js"></script>
+    <script src="/public/js/saskia.js"></script>
 </body>
 </html>

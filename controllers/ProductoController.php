@@ -18,28 +18,6 @@ class ProductoController
         $this->model = new ProductoModel();
     }
 
-    public function jsonGet(int $id): void
-    {
-        // Limpiar cualquier buffer de salida previo para evitar basura en la respuesta JSON
-        if (ob_get_level()) {
-            ob_clean();
-        }
-        header('Content-Type: application/json');
-        if (!isset($_SESSION['usuario_id'])) {
-            echo json_encode(['error' => 'No autorizado']);
-            exit;
-        }
-        $producto = $this->model->obtenerPorId($id);
-
-        if (!$producto || (int)$producto['saltzaile_id'] !== (int)$_SESSION['usuario_id']) {
-            echo json_encode(['error' => 'No autorizado o no encontrado']);
-            exit;
-        }
-
-        echo json_encode($producto);
-        exit;
-    }
-
     /*
      * create()
      * Procesa el formulario de venta o edición:
@@ -89,7 +67,6 @@ class ProductoController
 
         $artista = trim($_POST['artista'] ?? '');
         $urtea   = trim($_POST['urtea'] ?? '');
-        $egoera  = trim($_POST['egoera'] ?? '');
 
         if (!$izenburua || !$deskribapena || !$prezioa || !$kategoria_id) {
             $_SESSION['flash_error'] = 'datos_incompletos';
@@ -99,7 +76,6 @@ class ProductoController
 
         $urtea = $urtea !== '' ? (int)$urtea : null;
         $artista = $artista !== '' ? $artista : null;
-        $egoera  = $egoera  !== '' ? $egoera  : null;
 
         $irudia = null;
         $allowedExt = ['jpg', 'jpeg', 'png', 'webp'];
@@ -119,20 +95,22 @@ class ProductoController
 
         try {
             $this->model->crear([
-                'izenburua'    => $izenburua,
-                'deskribapena' => $deskribapena,
-                'prezioa'      => $prezioa,
-                'kategoria_id' => (int)$kategoria_id,
-                'saltzaile_id' => $saltzaile_id,
-                'artista'      => $artista,
-                'urtea'        => $urtea,
-                'egoera'       => $egoera,
-                'irudia'       => $irudia,
+                'izenburua'         => $izenburua,
+                'deskribapena'      => $deskribapena,
+                'prezioa'           => $prezioa,
+                'kategoria_id'      => (int)$kategoria_id,
+                'saltzaile_id'      => $saltzaile_id,
+                'artista'           => $artista,
+                'urtea'             => $urtea,
+                'irudia'            => $irudia,
+                'salgai'            => 0,
+                'onarpen_egoera'    => 'pendentea',
             ]);
             $_SESSION['flash_success'] = 'producto_creado';
             header('Location: /mis-articulos');
         } catch (Throwable $e) {
-            die('Error al guardar en base de datos: ' . $e->getMessage());
+            $_SESSION['flash_error'] = 'error_base_datos';
+            header('Location: /perfil');
         }
         exit;
     }
@@ -158,7 +136,6 @@ class ProductoController
 
         $artista = trim($_POST['artista'] ?? '');
         $urtea   = trim($_POST['urtea'] ?? '');
-        $egoera  = trim($_POST['egoera'] ?? '');
 
         if (!$izenburua || !$deskribapena || !$prezioa || !$kategoria_id) {
             $_SESSION['flash_error'] = 'datos_incompletos';
@@ -168,7 +145,6 @@ class ProductoController
 
         $urtea  = $urtea  !== '' ? (int)$urtea  : null;
         $artista = $artista !== '' ? $artista : null;
-        $egoera = $egoera !== '' ? $egoera  : null;
 
         $irudia = $producto['irudia'] ?? null;
 
@@ -197,13 +173,13 @@ class ProductoController
                 'kategoria_id' => (int)$kategoria_id,
                 'artista'      => $artista,
                 'urtea'        => $urtea,
-                'egoera'       => $egoera,
                 'irudia'       => $irudia,
             ]);
             $_SESSION['flash_success'] = 'actualizado';
             header('Location: /mis-articulos');
         } catch (Throwable $e) {
-            die('Error al actualizar en base de datos: ' . $e->getMessage());
+            $_SESSION['flash_error'] = 'error_base_datos';
+            header('Location: /mis-articulos');
         }
         exit;
     }
