@@ -1,8 +1,24 @@
+fetch ('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html')
+.then(result => result.json())
+.then(data => {
+    console.log("Auek dira zuk aukeratutako produktuak:", data);
+})
+
+fetch ('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        /*
+        id: "3", 
+    izena: "Pantaila LED", 
+    prezioa: 150
+    */
+    })
+});
+
 const item__remove = document.querySelectorAll('item__remove');
 item__remove.addEventListener("click", function () {
-
-});
-const item__edit = document.querySelectorAll('item__edit');
-item__edit.addEventListener("click", function () {
-
+removeItem();
 });
