@@ -26,9 +26,10 @@ INSERT INTO kategoriak (izena) VALUES
 ('Instrumentu musikala'),
 ('Merchandising'),
 ('Sondu ekipamendua'),
-('Bestelakoa');
+('Bestekoa');
 
 -- 3. Taula: Produktuak (Artículos a la venta)
+DROP TABLE IF EXISTS produktuak;
 CREATE TABLE produktuak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izenburua VARCHAR(150) NOT NULL,
@@ -47,7 +48,8 @@ CREATE TABLE produktuak (
 );
 
 -- 4. Taula: Eskaerak (Pedidos/Transacciones)
-CREATE TABLE eskaerak (
+DROP TABLE IF EXISTS eskaera;
+CREATE TABLE eskaera (
     id INT AUTO_INCREMENT PRIMARY KEY,
     erosle_id INT NOT NULL,
     produktu_id INT NOT NULL,
@@ -58,12 +60,13 @@ CREATE TABLE eskaerak (
 );
 
 -- 5. Taula: Carrito (Items en el carrito de compra temporal)
+DROP TABLE IF EXISTS carrito;
 CREATE TABLE carrito (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    erabiltzaile_id INT NOT NULL,
+    erabilitze_id INT NOT NULL,
     produktu_id INT NOT NULL,
     kantitatea INT NOT NULL DEFAULT 1,
     sortze_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (erabiltzaile_id) REFERENCES erabiltzaileak(id) ON DELETE CASCADE,
+    FOREIGN KEY (erabilitze_id) REFERENCES erabiltzaileak(id) ON DELETE CASCADE,
     FOREIGN KEY (produktu_id) REFERENCES produktuak(id) ON DELETE CASCADE
 );
