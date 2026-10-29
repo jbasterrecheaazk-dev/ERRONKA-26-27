@@ -18,6 +18,22 @@ fetch ('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html', {
     })
 });
 
+fetch ('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html', {
+    method: 'PATCH',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        /*
+        prezioa: 30
+        */
+    })
+});
+
+fetch({
+    
+});
+
 const item__remove = document.querySelectorAll('item__remove');
 item__remove.addEventListener("click", function () {
 removeItem();
