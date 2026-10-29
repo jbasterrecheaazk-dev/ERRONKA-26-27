@@ -100,6 +100,42 @@ class ProductoModel
     }
 
     /*
+     * obtenerPorIds()
+     * Busca varios productos por sus IDs y devuelve los datos del vendedor.
+     * Recibe un array de enteros; si está vacío devuelve array vacío.
+     */
+    public function obtenerPorIds(array $ids): array
+    {
+        if (empty($ids)) {
+            return [];
+        }
+        // Preparar placeholders para la cláusula IN
+        $placeholders = [];
+        $params = [];
+        foreach ($ids as $i => $id) {
+            $paramName = ':id_' . $i;
+            $placeholders[] = $paramName;
+            $params[$paramName] = (int)$id;
+        }
+        $inClause = implode(',', $placeholders);
+
+        $sql = "SELECT p.*,
+                       u.id   AS vendedor_id,
+                       u.izena AS vendedor_nombre,
+                       u.email AS vendedor_email,
+                       k.izena AS categoria_nombre
+                FROM produktuak p
+                LEFT JOIN erabiltzaileak u ON p.saltzaile_id = u.id
+                LEFT JOIN kategoriak k        ON p.kategoria_id = k.id
+                WHERE p.id IN ($inClause)
+                AND p.salgai = 1";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll() ?: [];
+    }
+
+    /*
      * actualizar()
      * Actualiza un producto existente por su ID usando una sentencia
      * UPDATE preparada para evitar inyección SQL.

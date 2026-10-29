@@ -90,9 +90,6 @@ $categorias = $kategoriaModel->getAll();
                             <?php else: ?>
                                 <div class="card__media--empty">Sin imagen</div>
                             <?php endif; ?>
-                            <?php if (!empty($producto['egoera'])): ?>
-                                <span class="badge-state"><?= htmlspecialchars($producto['egoera']) ?></span>
-                            <?php endif; ?>
                         </div>
                         <div class="card__body">
                             <div class="card__title"><?= htmlspecialchars($producto['izenburua']) ?></div>

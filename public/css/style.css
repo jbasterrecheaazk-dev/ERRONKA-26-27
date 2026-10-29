@@ -297,16 +297,6 @@ a {
     color: var(--text);
 }
 
-.badge-state {
-    padding: 4px 8px;
-    border-radius: 0;
-    font-size: .75rem;
-    border: 1px solid var(--border);
-    background: #121212;
-    color: var(--accent);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
 /* ===================== Login & Forms ===================== */
 .login {
     width: min(420px, 92%);
@@ -487,7 +477,7 @@ a {
     margin-top: 12px;
 }
 
-.cart__summary, .sidebar {
+.cart__summary {
     background: var(--bg-2);
     border: 1px solid var(--border);
     padding: 32px;
@@ -497,12 +487,20 @@ a {
 }
 
 .sidebar {
-    /* La sidebar se fija con JavaScript cuando se carga la página */
+    width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: sticky;
+    top: 80px;
+    align-self: start;
 }
 
 /* Placeholder para mantener el espacio del grid cuando la sidebar es fixed */
 .sidebar-placeholder {
     /* Solo ocupa espacio, no tiene visibilidad propia */
+    visibility: hidden;
+    pointer-events: none;
 }
 
 /* Layout dentro del perfil - panels ocupa todo el espacio restante */
@@ -510,6 +508,7 @@ a {
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 48px;
 }
 
 /* Cada panel debe llenar la altura disponible para consistencia */
@@ -632,13 +631,6 @@ a {
     background: var(--bg);
     border-color: var(--border);
     color: var(--text);
-}
-
-.panels {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-    width: 100%;
 }
 
 /* Ajuste para productos dentro del perfil */
@@ -967,13 +959,6 @@ main.profile .products__grid,
     font-size: .8rem;
 }
 
-/* Absolutely positioned badge-state (inside card__media) */
-.badge-state--abs {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-}
-
 /* Shipping note in card footer */
 .shipping-note {
     color: var(--muted);
@@ -1125,14 +1110,6 @@ main.profile .products__grid,
 /* Badge positioning for header icons (cart/profile) */
 .header__icon-btn {
     position: relative;
-}
-
-/* Badge state absolute positioning on cards */
-.card__media .badge-state,
-.product-detail__media .badge-state {
-    position: absolute;
-    top: 8px;
-    left: 8px;
 }
 
 /* "Sin imagen" placeholder */

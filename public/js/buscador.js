@@ -106,14 +106,6 @@
             mediaDiv.appendChild(noImage);
         }
 
-        // Badge de estado
-        if (producto.egoera) {
-            const badge = document.createElement('span');
-            badge.className = 'badge-state badge-state--abs';
-            badge.textContent = producto.egoera;
-            mediaDiv.appendChild(badge);
-        }
-
         article.appendChild(mediaDiv);
 
         // Cuerpo de la tarjeta

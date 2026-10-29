@@ -55,7 +55,7 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
         </header>
         <main class="profile">
             <!-- Sidebar -->
-            <aside class="sidebar" id="profileSidebar">
+            <aside class="sidebar">
                 <h2 class="sidebar__title">Mi perfil</h2>
 
                 <!-- Información del usuario -->
@@ -79,12 +79,10 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                     <button class="nav__btn nav__btn--active" data-target="orders">Pedidos</button>
                     <button class="nav__btn" data-target="panel-sell">Vender artículo</button>
                     <button class="nav__btn" data-target="articles">Mis artículos en venta</button>
-                    <a class="nav__btn" href="/favoritos">Favoritos</a>
+                    <button class="nav__btn" data-target="favorites">Favoritos</button>
                     <a class="nav__btn" href="/historial-ventas">Historial de ventas</a>
                 </nav>
             </aside>
-            <!-- Placeholder para mantener el espacio del grid cuando la sidebar es fixed -->
-            <div class="sidebar-placeholder" id="sidebarPlaceholder"></div>
 
             <!-- Paneles -->
             <section class="panels">
@@ -130,9 +128,6 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                                     <?php else: ?>
                                         <div class="card__media--empty">Sin imagen</div>
                                     <?php endif; ?>
-                                    <?php if (!empty($art['egoera'])): ?>
-                                        <span class="badge-state badge-state--abs"><?= htmlspecialchars($art['egoera']) ?></span>
-                                    <?php endif; ?>
                                 </div>
                                 <div class="card__body">
                                     <div class="card__title"><?= htmlspecialchars($art['izenburua']) ?></div>
@@ -152,6 +147,13 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
+                </div>
+
+                <!-- Panel: Favoritos -->
+                <div class="panel" id="favorites">
+                    <h2 class="panel__title">Mis favoritos</h2>
+                    <div class="products__grid products__grid--profile" id="favoritesGrid"></div>
+                    <p class="profile__empty" id="favoritesEmpty" style="display: none;">Aún no tienes productos en favoritos.</p>
                 </div>
 
                 <!-- Formulario de venta -->
@@ -191,16 +193,6 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                                     <input class="input" id="year" type="number" name="urtea">
                                 </div>
                             </div>
-                            <div class="form__group">
-                                <label class="form__label" for="condition">Estado de conservación</label>
-                                <select class="input" id="condition" name="egoera">
-                                    <option value="Mint">Mint</option>
-                                    <option value="Near Mint">Near Mint</option>
-                                    <option value="Good">Good</option>
-                                    <option value="Fair">Fair</option>
-                                    <option value="Poor">Poor</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="form__conditional" data-condition="2">
                             <div class="form__grid">
@@ -213,16 +205,6 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                                     <input class="input" id="year-cd" type="number" name="urtea">
                                 </div>
                             </div>
-                            <div class="form__group">
-                                <label class="form__label" for="condition-cd">Estado del CD</label>
-                                <select class="input" id="condition-cd" name="egoera">
-                                    <option value="Mint">Mint</option>
-                                    <option value="Near Mint">Near Mint</option>
-                                    <option value="Good">Good</option>
-                                    <option value="Fair">Fair</option>
-                                    <option value="Poor">Poor</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="form__conditional" data-condition="3">
                             <div class="form__grid">
@@ -234,16 +216,6 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
                                     <label class="form__label" for="year-k">Año</label>
                                     <input class="input" id="year-k" type="number" name="urtea">
                                 </div>
-                            </div>
-                            <div class="form__group">
-                                <label class="form__label" for="condition-k">Estado de la cinta</label>
-                                <select class="input" id="condition-k" name="egoera">
-                                    <option value="Mint">Mint</option>
-                                    <option value="Near Mint">Near Mint</option>
-                                    <option value="Good">Good</option>
-                                    <option value="Fair">Fair</option>
-                                    <option value="Poor">Poor</option>
-                                </select>
                             </div>
                         </div>
                         <div class="form__group">
@@ -277,6 +249,7 @@ $misArticulos = $productosModel->getPorVendedor((int)$_SESSION['usuario_id']);
         </footer>
     </div>
 
+    <script src="/public/js/favoritos.js"></script>
     <script src="/public/js/perfil.js"></script>
 </body>
 </html>

@@ -48,9 +48,6 @@
                     <?php else: ?>
                         <div class="product-detail__media--empty">Sin imagen</div>
                     <?php endif; ?>
-                    <?php if (!empty($producto['egoera'])): ?>
-                        <span class="badge-state"><?= htmlspecialchars($producto['egoera']) ?></span>
-                    <?php endif; ?>
                 </div>
 
                 <div class="product-detail__info">
@@ -79,10 +76,7 @@
 
                     <div class="product-detail__seller">
                         <span>Vendido por:</span>
-                        <strong><?= htmlspecialchars($producto['vendedorNombre'] ?? 'Vendedor') ?></strong>
-                        <?php if (!empty($producto['vendedorEmail'])): ?>
-                            <span>(<?= htmlspecialchars($producto['vendedorEmail']) ?>)</span>
-                        <?php endif; ?>
+                        <strong><?= htmlspecialchars($producto['vendedor_nombre'] ?? 'Vendedor') ?></strong>
                     </div>
 
                     <div class="product-detail__description">

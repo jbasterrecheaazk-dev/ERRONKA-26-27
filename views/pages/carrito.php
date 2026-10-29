@@ -66,7 +66,6 @@ $total = number_format($total, 2, ',', '.');
                         <div>
                             <h3 class="item__title"><?= htmlspecialchars($item['izenburua']) ?></h3>
                             <div class="item__meta">
-                                <span class="badge-state"><?= htmlspecialchars($item['egoera']) ?></span>
                                 <span>×<?= htmlspecialchars($item['kantitatea']) ?></span>
                             </div>
                             <div class="item__price"><?= htmlspecialchars(number_format((float)$item['prezioa'], 2, ',', '.')) ?> €</div>

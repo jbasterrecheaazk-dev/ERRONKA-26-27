@@ -133,6 +133,15 @@ if (array_key_exists($uri, $routes)) {
     require_once __DIR__ . '/models/ProductoModel.php';
     require_once __DIR__ . '/models/KategoriaModel.php';
 
+    $ids = isset($_GET['ids']) ? array_map('intval', explode(',', $_GET['ids'])) : [];
+    if (!empty($ids)) {
+        $model = new ProductoModel();
+        $result = $model->obtenerPorIds($ids);
+        header('Content-Type: application/json');
+        echo json_encode($result);
+        exit;
+    }
+
     $q = trim($_GET['q'] ?? '');
     $kategoriaId = (int)($_GET['kategoria'] ?? 0);
     $page = (int)($_GET['pagina'] ?? 1);

@@ -1,44 +1,6 @@
 // Perfil - gestión de paneles, formulario de venta y edición de artículos
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ---------- Fijar posición de la sidebar ----------
-    let sidebarFixed = false;
-    const sidebar = document.getElementById('profileSidebar');
-    const placeholder = document.getElementById('sidebarPlaceholder');
-
-    function fixSidebarPosition() {
-        if (!sidebar || !placeholder) return;
-
-        // Si ya está fijada, solo actualizar dimensiones si es necesario
-        if (sidebarFixed) {
-            const rect = sidebar.getBoundingClientRect();
-            placeholder.style.width = rect.width + 'px';
-            return;
-        }
-
-        // Obtener posición y dimensiones actuales
-        const rect = sidebar.getBoundingClientRect();
-
-        // Crear placeholder con las mismas dimensiones
-        placeholder.style.width = rect.width + 'px';
-        placeholder.style.height = rect.height + 'px';
-
-        // Fijar la sidebar
-        sidebar.style.position = 'fixed';
-        sidebar.style.top = '80px';
-        sidebar.style.left = rect.left + 'px';
-        sidebar.style.width = rect.width + 'px';
-        sidebar.style.zIndex = '100';
-
-        sidebarFixed = true;
-    }
-
-    // Ejecutar cuando carga la página
-    requestAnimationFrame(fixSidebarPosition);
-
-    // Reajustar al cambiar el tamaño de la ventana
-    window.addEventListener('resize', fixSidebarPosition);
-
     // ---------- Utilidad: cambiar panel activo ----------
     function switchPanel(target) {
         document.querySelectorAll('.nav__btn[data-target]').forEach(b => b.classList.remove('nav__btn--active'));
@@ -74,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const form             = document.getElementById('productForm');
     const categorySelect   = document.getElementById('category');
     const conditionals     = document.querySelectorAll('.form__conditional');
-    let editingId = null;
 
     // ---------- Resetear formulario a modo crear ----------
     function resetForm() {
@@ -84,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('submitBtn').textContent = 'Publicar anuncio';
         document.getElementById('currentImagePreview').classList.remove('image-preview--visible');
         conditionals.forEach(el => { el.classList.remove('form__conditional--visible'); });
-        editingId = null;
     }
 
     // ---------- Mostrar campos condicionales según categoría ----------
@@ -149,13 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (selectedCond) {
                     const artistInput = selectedCond.querySelector('input[name="artista"]');
                     const yearInput   = selectedCond.querySelector('input[name="urtea"]');
-                    const condSelect  = selectedCond.querySelector('select[name="egoera"]');
                     if (artistInput) artistInput.value = p.artista || '';
                     if (yearInput)   yearInput.value   = p.urtea  || '';
-                    if (condSelect)  condSelect.value  = p.egoera || 'Mint';
                 }
 
-                editingId = p.id;
                 document.getElementById('panel-sell').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             } catch (err) {
@@ -176,4 +133,137 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.closest('.edit-btn')) return;
         window.location.href = card.dataset.url;
     });
+
+    // ---------- Cargar favoritos ----------
+    async function loadFavorites() {
+        const favoritesPanel = document.getElementById('favorites');
+        if (!favoritesPanel) return;
+
+        const favoriteIds = window.SoinutrukFavorites?.getFavorites?.() || [];
+        const grid = document.getElementById('favoritesGrid');
+        const emptyMsg = document.getElementById('favoritesEmpty');
+
+        if (!grid) return;
+
+        if (!favoriteIds.length) {
+            grid.innerHTML = '';
+            if (emptyMsg) emptyMsg.style.display = 'block';
+            return;
+        }
+
+        if (emptyMsg) emptyMsg.style.display = 'none';
+
+        try {
+            const idsParam = favoriteIds.join(',');
+            const res = await fetch(`/api/productos?ids=${encodeURIComponent(idsParam)}`);
+            if (!res.ok) throw new Error('No se pudieron cargar los favoritos');
+            const productos = await res.json();
+
+            grid.innerHTML = '';
+            productos.forEach(p => {
+                const article = document.createElement('article');
+                article.className = 'card';
+                article.dataset.url = `/producto?id=${p.id}`;
+
+                const media = document.createElement('div');
+                media.className = 'card__media';
+                if (p.irudia) {
+                    const img = document.createElement('img');
+                    img.src = '/' + p.irudia;
+                    img.alt = p.izenburua;
+                    img.loading = 'lazy';
+                    media.appendChild(img);
+                } else {
+                    media.innerHTML = '<div class="card__media--empty">Sin imagen</div>';
+                }
+                article.appendChild(media);
+
+                const body = document.createElement('div');
+                body.className = 'card__body';
+
+                const title = document.createElement('div');
+                title.className = 'card__title';
+                title.textContent = p.izenburua;
+                body.appendChild(title);
+
+                const meta = document.createElement('div');
+                meta.className = 'card__meta';
+                if (p.artista) {
+                    const span = document.createElement('span');
+                    span.textContent = p.artista;
+                    meta.appendChild(span);
+                }
+                if (p.urtea) {
+                    const span = document.createElement('span');
+                    span.textContent = p.urtea;
+                    meta.appendChild(span);
+                }
+                body.appendChild(meta);
+
+                const price = document.createElement('div');
+                price.className = 'card__price';
+                price.textContent = `${Number(p.prezioa).toFixed(2)} €`;
+                body.appendChild(price);
+
+                article.appendChild(body);
+
+                const footer = document.createElement('div');
+                footer.className = 'card__footer';
+
+                const favBtn = document.createElement('button');
+                favBtn.className = 'btn-favorite btn-favorite--active';
+                favBtn.dataset.productId = p.id;
+                favBtn.setAttribute('aria-label', 'Quitar de favoritos');
+                favBtn.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                `;
+                footer.appendChild(favBtn);
+
+                const buyBtn = document.createElement('span');
+                buyBtn.className = 'card__buy';
+                buyBtn.textContent = 'Ver detalle';
+                footer.appendChild(buyBtn);
+
+                article.appendChild(footer);
+                grid.appendChild(article);
+            });
+
+            // Delegación de click en favoritos
+            grid.addEventListener('click', (e) => {
+                const card = e.target.closest('article[data-url]');
+                if (!card) return;
+                const favBtn = e.target.closest('.btn-favorite');
+                if (favBtn) {
+                    e.preventDefault();
+                    // El evento global de favoritos.js se encargará de quitarlo
+                    favBtn.click();
+                    // Recargar en 300ms
+                    setTimeout(loadFavorites, 300);
+                    return;
+                }
+                window.location.href = card.dataset.url;
+            });
+        } catch (err) {
+            console.error('Error cargando favoritos:', err);
+            grid.innerHTML = '<p style="color:var(--muted)">No se pudieron cargar los favoritos.</p>';
+        }
+    }
+
+    // Cargar favoritos cuando se abre el panel
+    document.querySelectorAll('.nav__btn[data-target="favorites"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setTimeout(loadFavorites, 50);
+        });
+    });
+
+    // Cargar también si se entra por hash
+    const originalSwitchPanel = switchPanel;
+    switchPanel = function(target) {
+        originalSwitchPanel(target);
+        if (target === 'favorites') {
+            setTimeout(loadFavorites, 50);
+        }
+    };
 });
