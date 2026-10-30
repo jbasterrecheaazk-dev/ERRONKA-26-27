@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target === 'panel-sell') resetForm();
         }
     }
-    // Ejecutar after one frame (el browser habrá procesado el scroll nativo)
-    requestAnimationFrame(() => { handleHash(); });
+    // Ejecutar cuando el DOM esté listo para garantizar que los paneles existen
+    document.addEventListener('DOMContentLoaded', () => { handleHash(); });
     window.addEventListener('hashchange', handleHash);
 
     // ---------- Variables globales del formulario ----------
@@ -46,6 +46,165 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('currentImagePreview').classList.remove('image-preview--visible');
         conditionals.forEach(el => { el.classList.remove('form__conditional--visible'); });
     }
+
+    // ---------- Limpiar errores visuales previos ----------
+    function clearErrors() {
+        document.querySelectorAll('.input--error').forEach(el => el.classList.remove('input--error'));
+        document.querySelectorAll('.form__error').forEach(el => el.remove());
+        const feedback = document.getElementById('formFeedback');
+        if (feedback) {
+            feedback.style.display = 'none';
+            feedback.className = 'panel__feedback';
+            feedback.innerHTML = '';
+        }
+    }
+
+    // ---------- Validación estricta del formulario ----------
+    function validateForm() {
+        const errors = {};
+
+        // Título
+        const title = document.getElementById('title');
+        if (!title.value.trim()) {
+            errors.title = 'El título es obligatorio.';
+        }
+
+        // Precio
+        const price = document.getElementById('price');
+        const priceVal = parseFloat(price.value);
+        if (!price.value.trim() || isNaN(priceVal) || priceVal <= 0) {
+            errors.price = 'El precio debe ser un número mayor que 0.';
+        }
+
+        // Categoría
+        if (!categorySelect.value) {
+            errors.category = 'Debes seleccionar una categoría.';
+        }
+
+        // Descripción
+        const description = document.getElementById('description');
+        if (!description.value.trim()) {
+            errors.description = 'La descripción es obligatoria.';
+        }
+
+        // Imagen: obligatoria solo al crear (no al editar)
+        const editId = document.getElementById('editId').value;
+        const image = document.getElementById('image');
+        if (!editId && (!image.files || image.files.length === 0)) {
+            errors.image = 'Debes adjuntar una foto del artículo.';
+        }
+
+        return errors;
+    }
+
+    // ---------- Renderizar errores en la UI ----------
+    function renderErrors(errors) {
+        clearErrors();
+
+        const fieldMap = {
+            title: 'title',
+            price: 'price',
+            category: 'category',
+            description: 'description',
+            image: 'image',
+        };
+
+        Object.keys(errors).forEach(key => {
+            const el = document.getElementById(fieldMap[key]);
+            if (el) el.classList.add('input--error');
+
+            // Mensaje debajo del campo
+            const msg = document.createElement('div');
+            msg.className = 'form__error';
+            msg.textContent = errors[key];
+            if (el) el.parentElement.appendChild(msg);
+        });
+
+        // Banner de resumen en la parte superior del panel
+        const feedback = document.getElementById('formFeedback');
+        if (feedback && Object.keys(errors).length > 0) {
+            const list = Object.values(errors).map(e => '<li>' + e + '</li>').join('');
+            feedback.innerHTML =
+                '<svg class="panel__feedback-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                '<circle cx="12" cy="12" r="10"/>' +
+                '<line x1="12" y1="8" x2="12" y2="12"/>' +
+                '<line x1="12" y1="16" x2="12.01" y2="16"/>' +
+                '</svg>' +
+                '<div><strong>Corrige los siguientes errores:</strong><ul class="panel__feedback-list">' + list + '</ul></div>';
+            feedback.className = 'panel__feedback panel__feedback--error';
+            feedback.style.display = '';
+        }
+    }
+
+    // ---------- Enviar formulario vía AJAX si pasa la validación ----------
+    form.addEventListener('submit', async (e) => {
+        const errors = validateForm();
+        if (Object.keys(errors).length > 0) {
+            e.preventDefault();
+            renderErrors(errors);
+            const feedback = document.getElementById('formFeedback');
+            if (feedback) feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        e.preventDefault(); // Siempre interceptamos para enviar por AJAX
+        clearErrors();
+
+        const btn = document.getElementById('submitBtn');
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+
+        const formData = new FormData(form);
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            const data = await res.json();
+
+            const feedback = document.getElementById('formFeedback');
+
+            if (data.error) {
+                // Errores devueltos por el backend
+                renderErrors(data.messages || {});
+                feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Éxito: mostrar confirmación y preparar redirección
+                feedback.className = 'panel__feedback panel__feedback--success';
+                feedback.innerHTML =
+                    '<svg class="panel__feedback-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                    '<polyline points="20 6 9 17 4 12"/>' +
+                    '</svg>' +
+                    '<span>Artículo enviado correctamente. Redirigiendo...</span>';
+                feedback.style.display = '';
+                resetForm();
+                // Redirigir a la página de perfil con el hash para artículos y forzar recarga
+                setTimeout(function () {
+                    // Forzar recarga completa para que el nuevo artículo aparezca en la lista
+                    window.location.href = '/perfil?reload=1#articles';
+                }, 1000);
+            }
+        } catch (err) {
+            const feedback = document.getElementById('formFeedback');
+            feedback.className = 'panel__feedback panel__feedback--error';
+            feedback.innerHTML =
+                '<svg class="panel__feedback-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                '<circle cx="12" cy="12" r="10"/>' +
+                '<line x1="12" y1="8" x2="12" y2="12"/>' +
+                '<line x1="12" y1="16" x2="12.01" y2="16"/>' +
+                '</svg>' +
+                '<span>Error de conexión. Inténtalo de nuevo.</span>';
+            feedback.style.display = '';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = originalText;
+        }
+    });
 
     // ---------- Mostrar campos condicionales según categoría ----------
     categorySelect?.addEventListener('change', () => {
@@ -126,12 +285,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ---------- Navegación por delegación en tarjetas de mis artículos ----------
+    // Nota: Las tarjetas de artículos ofrecidos ya no son navegables (no tienen data-url).
+    // Solo el botón "Editar" tiene funcionalidad.
     const misArticulosGrid = document.getElementById('misArticulosGrid');
     misArticulosGrid?.addEventListener('click', (e) => {
-        const card = e.target.closest('article[data-url]');
-        if (!card) return;
-        if (e.target.closest('.edit-btn')) return;
-        window.location.href = card.dataset.url;
+        // No hacemos nada si se hace clic en la tarjeta, solo en el botón de editar
+        if (e.target.closest('.edit-btn')) {
+            e.preventDefault();
+            e.target.click();
+        }
     });
 
     // ---------- Cargar favoritos ----------

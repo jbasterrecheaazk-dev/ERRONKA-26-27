@@ -287,6 +287,7 @@ a {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .card__media {
@@ -344,6 +345,7 @@ a {
     border-radius: 0;
     font-weight: 600;
     color: var(--text);
+    cursor: pointer;
 }
 
 /* ===================== Login & Forms ===================== */
@@ -1152,6 +1154,45 @@ main.profile .products__grid,
     font-size: 0.85rem;
     margin-top: 6px;
     font-family: inherit;
+}
+
+/* Error feedback banner inside the panel */
+.panel__feedback {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border: 1px solid #7a3a3a;
+    background: #2e1a1a;
+    color: #ef5350;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.panel__feedback .panel__feedback-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.panel__feedback .panel__feedback-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.panel__feedback .panel__feedback-list li {
+    margin-bottom: 4px;
+}
+
+.panel__feedback .panel__feedback-list li:last-child {
+    margin-bottom: 0;
+}
+
+.panel__feedback--success {
+    background: #1a2e1a;
+    border-color: #3a7a3a;
+    color: #8bc34a;
 }
 
 /* ===================== Utility & Inline Styles Migration ===================== */

@@ -140,7 +140,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                     <?php else: ?>
                         <div class="products__grid products__grid--profile" id="misArticulosGrid">
                             <?php foreach ($misArticulos as $art): ?>
-                            <article class="card" data-url="/producto?id=<?= (int)$art['id'] ?>">
+                            <article class="card" data-product-id="<?= (int)$art['id'] ?>">
                                 <div class="card__media">
                                     <?php if (!empty($art['irudia'])): ?>
                                         <img src="/<?= htmlspecialchars($art['irudia']) ?>" alt="<?= htmlspecialchars($art['izenburua']) ?>" loading="lazy">
@@ -174,7 +174,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                                         }
                                         ?>
                                     </span>
-                                    <a href="javascript:void(0)" class="card__buy edit-btn" data-product-id="<?= (int)$art['id'] ?>">Editar</a>
+                                    <a href="javascript:void(0)" class="card__buy edit-btn" data-product-id="<?= (int)$art['id'] ?>" aria-label="Editar artículo">Editar</a>
                                 </div>
                             </article>
                             <?php endforeach; ?>
@@ -192,6 +192,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                 <!-- Formulario de venta / oferta a SoinuTruk -->
                 <div class="panel" id="panel-sell">
                     <h2 class="panel__title" id="formTitle">Ofrecer artículo a SoinuTruk</h2>
+                    <div id="formFeedback" class="panel__feedback" style="display: none;"></div>
 
                     <form method="POST" action="/mis-articulos?action=create" enctype="multipart/form-data" novalidate id="productForm">
                         <input type="hidden" name="edit_id" id="editId" value="">
