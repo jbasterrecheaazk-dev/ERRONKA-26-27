@@ -4,199 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoinuTruk — Carrito</title>
-    <style>
-        /* Variables y reset */
-        :root {
-            --bg: #121212;
-            --bg-2: #151515;
-            --text: #EBEBEB;
-            --muted: #a0a0a0;
-            --border: #333333;
-            --accent: #F5F5F5;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Iconos SVG visibles */
-        svg {
-            stroke: var(--text);
-        }
-
-        body {
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-        }
-
-        /* Layout */
-        .header{position:sticky;top:0;z-index:10;background:#121212;border-bottom:1px solid var(--border)}
-        .container{width:min(1120px,92%);margin-inline:auto}
-
-        /* Header BEM */
-        .header__inner{display:flex;align-items:center;gap:24px;padding:18px 0}
-        .header__brand{display:flex;align-items:center;gap:12px}
-        .header__logo-icon{width:36px;height:36px;display:block}
-        .header__logo{font-weight:700;letter-spacing:.2px}
-        .header__logo span{color:var(--accent)}
-        .header__search{flex:1;display:flex;align-items:center;background:var(--bg-2);border:1px solid var(--border);border-radius:0;padding:12px 16px;gap:10px}
-        .header__search input{flex:1;background:transparent;outline:none;color:var(--text)}
-        .header__actions{display:flex;align-items:center;gap:16px}
-        .header__icon-btn{width:44px;height:44px;border-radius:0;background:var(--bg-2);border:1px solid var(--border);display:grid;place-items:center}
-        .badge{position:absolute;transform:translate(10px,-10px);background:var(--border);color:var(--accent);font-size:.7rem;font-weight:600;padding:2px 6px;border-radius:0;border:1px solid var(--border)}
-
-        /* Layout */
-        .cart {
-            display: grid;
-            grid-template-columns: 1fr minmax(320px, 420px);
-            gap: 48px;
-            padding: 80px 20px 120px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 960px) {
-            .cart {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Lista de items */
-        .cart__items {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .item {
-            display: flex;
-            gap: 24px;
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            padding: 24px;
-        }
-
-        .item__media {
-            width: 120px;
-            aspect-ratio: 1/1;
-            background: #1a1a1a;
-            border: 1px solid var(--border);
-        }
-
-        .item__content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .item__title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .item__meta {
-            display: flex;
-            gap: 12px;
-            color: var(--muted);
-            font-size: 0.85rem;
-        }
-
-        .item__price {
-            margin-top: 12px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            font-size: 1.1rem;
-        }
-
-        .item__remove {
-            background: transparent;
-            border: none;
-            color: var(--muted);
-            font-size: 0.85rem;
-            text-decoration: underline;
-            cursor: pointer;
-            padding: 0;
-            margin-top: 12px;
-        }
-
-        /* Resumen */
-        .cart__summary {
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            padding: 32px;
-            position: sticky;
-            top: 24px;
-            height: fit-content;
-        }
-
-        .summary__title {
-            font-weight: 600;
-            font-size: 1.3rem;
-            margin-bottom: 24px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 16px;
-        }
-
-        .summary__items {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .summary__item {
-            display: flex;
-            justify-content: space-between;
-            color: var(--muted);
-        }
-
-        .summary__total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 32px;
-            border-top: 1px solid var(--border);
-            padding-top: 24px;
-        }
-
-        .total {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px 20px;
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            color: var(--text);
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .btn--primary {
-            background: #EBEBEB;
-            color: #121212;
-            border-color: var(--accent);
-        }
-
-        .btn--primary:hover {
-            filter: brightness(0.9);
-        }
-    </style>
+    <link rel="stylesheet" href="Carritomain.css">
 </head>
 <body>
     <header class="header">
         <div class="container header__inner">
             <div class="header__brand">
-                <img class="header__logo-icon" src="LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
+                <img class="header__logo-icon" src="public\img\LogoErronka_Logo_sinfonfo.png" alt="SoinuTruk logo">
                 <div class="header__logo">Soinu<span>Truk</span></div>
             </div>
             <div class="header__search">
@@ -228,6 +42,7 @@
                         </div>
                         <div class="item__price">89,00 €</div>
                     </div>
+                    <!--button class="item__edit">Editar</button-->
                     <button class="item__remove">Eliminar</button>
                 </div>
             </article>
@@ -243,6 +58,7 @@
                         </div>
                         <div class="item__price">64,00 €</div>
                     </div>
+                    <!--button class="item__edit">Editar</button-->
                     <button class="item__remove">Eliminar</button>
                 </div>
             </article>
@@ -269,4 +85,5 @@
         </aside>
     </main>
 </body>
+<script src="Carritoscript.js"></script>
 </html>
