@@ -46,13 +46,53 @@ class EskaerakController
             $this->json(['error' => 'Carrito vacío'], 400);
         }
 
-        $productoIds = array_column($items, 'produktu_id');
-        $total = array_sum(array_column($items, 'prezioa'));
+        $db = (new Conexion())->getConexion();
 
-        if ($this->eskaerakModel->crear($userId, $productoIds, $total)) {
-            $this->json(['success' => true, 'message' => 'Compra realizada correctamente']);
-        } else {
-            $this->json(['error' => 'Error al procesar pedido'], 500);
+        try {
+            $db->beginTransaction();
+
+            // Verificar disponibilidad y estado de todos los artículos
+            foreach ($items as $item) {
+                $pId = $item['produktu_id'];
+                // Usamos el id de producto para el bloqueo exclusivo
+                $sql = "SELECT salgai, onarpen_egoera FROM produktuak WHERE id = :pid FOR UPDATE";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([':pid' => $pId]);
+                $producto = $stmt->fetch();
+
+                if (!$producto || (int)$producto['salgai'] === 0 || $producto['onarpen_egoera'] !== 'onartua') {
+                    // Artículo no disponible o no aprobado: quitar de la cesta y devolver error
+                    $this->saskiaModel->removeItem((int)$item['saskia_id']);
+
+                    if ($db->inTransaction()) {
+                        $db->rollBack();
+                    }
+
+                    $this->json([
+                        'success' => false,
+                        'error' => 'Zure saskiko artikuluren bat dagoeneko saldu da eta kendu egin da.'
+                    ], 409);
+                }
+            }
+
+            // Si llegamos aquí, todos están OK: proceder con la compra
+            $productoIds = array_column($items, 'produktu_id');
+            $total = 0;
+            foreach ($items as $item) {
+                $total += (float)$item['prezioa'];
+            }
+
+            if ($this->eskaerakModel->crear($userId, $productoIds, $total)) {
+                $db->commit();
+                $this->json(['success' => true, 'message' => 'Compra realizada correctamente']);
+            } else {
+                throw new Exception('Error al crear pedido');
+            }
+        } catch (Exception $e) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            $this->json(['error' => 'Error al procesar pedido: ' . $e->getMessage()], 500);
         }
     }
 }

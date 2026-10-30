@@ -199,7 +199,18 @@
         try {
             const res = await fetch('/api/eskaerak/procesar', { method: 'POST' });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error);
+
+            if (res.status === 409) {
+                // Producto vendido: recargar carrito, mostrar error y refrescar badge
+                showToast(data.error, 'error');
+                btn.disabled = false;
+                btn.textContent = 'Tramitar pago';
+                renderCartView();
+                refreshCartBadge();
+                return;
+            }
+
+            if (!res.ok) throw new Error(data.error || 'Error desconocido');
 
             // Éxito: redirección brutalista
             document.body.innerHTML =

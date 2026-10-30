@@ -192,6 +192,16 @@ if (array_key_exists($uri, $routes)) {
         echo json_encode(['error' => 'No autorizado o no encontrado']);
         exit;
     }
+
+    // BLOQUEO DE EDICIÓN: No permitir cargar datos para editar si el artículo ya fue aprobado, rechazado o vendido
+    $onarpenEgoera = $producto['onarpen_egoera'] ?? 'pendentea';
+    if ($onarpenEgoera !== 'pendentea') {
+        header('Content-Type: application/json');
+        http_response_code(403);
+        echo json_encode(['error' => 'Ezin da jaonartutako, baztertutako edo saldutako artikulurik editatu']);
+        exit;
+    }
+
     header('Content-Type: application/json');
     echo json_encode($producto);
     exit;

@@ -12,22 +12,19 @@ class EskaerakModel
     }
 
     /**
-     * Crea un pedido (osatua) por cada producto del carrito.
-     * Marca cada producto como no disponible (salgai = 0).
-     * Vacía el carrito del usuario.
+     * Registra los detalles del pedido y marca productos como vendidos.
+     * ATENCIÓN: No inicia transacciones propias para evitar bloqueos con el controlador.
      *
      * @param int   $erosleId      ID del comprador (usuario logueado)
      * @param array $productoIds   Lista de IDs de productos en el carrito
-     * @param float $totalGlobal   Total de la compra (se guarda en cada eskaera)
+     * @param float $totalGlobal   Total de la compra
      * @return bool
      */
     public function crear(int $erosleId, array $productoIds, float $totalGlobal): bool
     {
         try {
-            $this->db->beginTransaction();
-
             foreach ($productoIds as $pId) {
-                // Precio real del producto (por si hubo cambio)
+                // Precio real del producto
                 $sqlPrecio = "SELECT prezioa FROM produktuak WHERE id = :pid LIMIT 1";
                 $stmtP = $this->db->prepare($sqlPrecio);
                 $stmtP->execute([':pid' => $pId]);
@@ -54,11 +51,10 @@ class EskaerakModel
             $stmtCart = $this->db->prepare($sqlCart);
             $stmtCart->execute([':uid' => $erosleId]);
 
-            $this->db->commit();
             return true;
         } catch (Exception $e) {
-            $this->db->rollBack();
-            return false;
+            // Re-lanzar para que el controlador capture y haga rollback
+            throw $e;
         }
     }
 
@@ -137,10 +133,19 @@ class EskaerakModel
                JOIN produktuak p ON e.produktu_id = p.id
                JOIN erabiltzaileak u ON p.saltzaile_id = u.id
                WHERE e.erosle_id = :erosle_id AND e.egoera = 'osatua'
-               ORDER BY e.data DESC";
+               ORDER BY e.data ASC";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':erosle_id' => $erosleId]);
-        return $stmt->fetchAll() ?: [];
+        $pedidos = $stmt->fetchAll() ?: [];
+
+        // Asignar un contador relativo por usuario
+        $i = 1;
+        foreach ($pedidos as &$pedido) {
+            $pedido['ordena_zenbakia'] = $i++;
+        }
+
+        // Devolvemos ordenado descendente para que el último pedido sea el primero visualmente
+        return array_reverse($pedidos);
     }
 }

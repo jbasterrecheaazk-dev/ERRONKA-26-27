@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const price = document.getElementById('price');
         const priceVal = parseFloat(price.value);
         if (!price.value.trim() || isNaN(priceVal) || priceVal <= 0) {
-            errors.price = 'El precio debe ser un número mayor que 0.';
+            errors.price = 'Prezioak 0 baino handiagoa izan behar du';
         }
 
         // Categoría

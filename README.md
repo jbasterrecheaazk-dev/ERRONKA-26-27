@@ -164,6 +164,51 @@ Todo el carrito funciona sin recargar la página:
 
 ---
 
+## Patch Notes — v2.1 (ERROR 3: Integridad de negocio — Bloqueo edición artículos)
+
+### Problema corregido
+Se permitía editar un producto ofrecido a la plataforma **incluso después** de que:
+- La tienda hubiera aceptado la tasación (`onarpen_egoera = 'onartua'`)
+- La tienda hubiera rechazado el artículo (`onarpen_egoera = 'baztertua'`)
+- El producto hubiera sido vendido (`salgai = FALSE`)
+
+Esto rompía la integridad del flujo B2C: un artículo ya tasado/aprobado/rechazado/vendido no debe ser modificable.
+
+### Solución implementada
+
+#### 1. Bloqueo en el controlador (`controllers/ProductoController.php`)
+En el método `update()` (procesa formulario de edición vía `/mis-articulos?action=create`):
+- Se consulta el estado actual del producto (`onarpen_egoera` y `salgai`) **antes** de cualquier modificación
+- Si `onarpen_egoera !== 'pendentea'` **O** `salgai == FALSE`:
+  - Detiene el proceso inmediatamente
+  - Respuesta AJAX: `403 Forbidden` + JSON `{'error': true, 'messages': {'general': 'Ezin da jaonartutako, baztertutako edo saldutako artikulurik editatu'}}`
+  - Navegación web: redirige a `/perfil` con `flash_error` en sesión
+- Solo permite edición si `onarpen_egoera === 'pendentea'` **Y** `salgai == TRUE`
+
+#### 2. Bloqueo en la API de carga de datos (`index.php` → `/api/producto`)
+En el endpoint que devuelve los datos del producto para editar (fetch desde JavaScript):
+- Misma validación: si el artículo no está en estado `'pendentea'` con `salgai=true`, responde `403 Forbidden`
+- Impide que el JS cargue el formulario con datos de un artículo no editable
+
+#### 3. Control visual en la vista (`views/pages/perfil.php`)
+En la lista "Mis artículos ofrecidos":
+- El botón "Editar" **solo se renderiza** si `onarpen_egoera === 'pendentea'` **Y** `salgai == 1`
+- Para artículos `'onartua'`, `'baztertua'` o `salgai=0`: se muestra "No editable" (texto deshabilitado, sin funcionalidad)
+- Mantiene la UX: el usuario ve el estado y entiende por qué no puede editar
+
+#### 4. Mensajes flash en la vista
+- Añadido renderizado de `flash_error` y `flash_success` al cargar `/perfil`
+- Estilos CSS nuevos: `.flash-message`, `.flash-message--error`, `.flash-message--success` en `public/css/style.css`
+- Estilo para botón deshabilitado: `.card__buy--disabled`
+
+### Archivos modificados
+- `controllers/ProductoController.php` — validación servidor en `update()`
+- `index.php` — validación en endpoint `/api/producto`
+- `views/pages/perfil.php` — lógica de renderizado condicional + mensajes flash
+- `public/css/style.css` — estilos flash messages y botón deshabilitado
+
+---
+
 ## Desarrollo local
 
 ```bash

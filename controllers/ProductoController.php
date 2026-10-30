@@ -91,8 +91,10 @@ class ProductoController
         // Validar campos vacíos
         if (!$izenburua) $errors['izenburua'] = 'El título es obligatorio.';
         if (!$deskribapena) $errors['deskribapena'] = 'La descripción es obligatoria.';
-        if (!$prezioa || !is_numeric($prezioa) || (float)$prezioa <= 0) {
-            $errors['prezioa'] = 'El precio debe ser un número mayor que 0.';
+
+        $prezioaVal = floatval($prezioa);
+        if (!$prezioa || !is_numeric($prezioa) || $prezioaVal <= 0) {
+            $errors['prezioa'] = 'Prezio baliogabea. Prezioak positiboa izan behar du.';
         }
         if (!$kategoria_id) $errors['kategoria_id'] = 'Debes seleccionar una categoría.';
 
@@ -200,6 +202,23 @@ class ProductoController
             exit;
         }
 
+        // BLOQUEO DE EDICIÓN: No permitir editar si el artículo ya fue aprobado, rechazado o vendido
+        // Solo se permite la edición si el artículo se encuentra en estado 'pendentea'
+        $onarpenEgoera = $producto['onarpen_egoera'] ?? 'pendentea';
+
+        if ($onarpenEgoera !== 'pendentea') {
+            $mensajeError = "Ezin da jaonartutako, baztertutako edo saldutako artikulurik editatu";
+            if ($this->isAjax()) {
+                http_response_code(403);
+                header('Content-Type: application/json; charset=utf-8');
+                echo json_encode(['error' => true, 'messages' => ['general' => $mensajeError]]);
+                exit;
+            }
+            $_SESSION['flash_error'] = $mensajeError;
+            header('Location: /perfil');
+            exit;
+        }
+
         // Validación server-side
         $errors = [];
 
@@ -213,8 +232,10 @@ class ProductoController
 
         if (!$izenburua) $errors['izenburua'] = 'El título es obligatorio.';
         if (!$deskribapena) $errors['deskribapena'] = 'La descripción es obligatoria.';
-        if (!$prezioa || !is_numeric($prezioa) || (float)$prezioa <= 0) {
-            $errors['prezioa'] = 'El precio debe ser un número mayor que 0.';
+
+        $prezioaVal = floatval($prezioa);
+        if (!$prezioa || !is_numeric($prezioa) || $prezioaVal <= 0) {
+            $errors['prezioa'] = 'Prezio baliogabea. Prezioak positiboa izan behar du.';
         }
         if (!$kategoria_id) $errors['kategoria_id'] = 'Debes seleccionar una categoría.';
 

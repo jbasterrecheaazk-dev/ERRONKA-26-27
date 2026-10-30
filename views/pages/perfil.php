@@ -25,6 +25,18 @@ $pedidos = $eskaerakModel->lortuEroslearenEskaerak((int)$_SESSION['usuario_id'])
 $saskiaModel = new SaskiaModel();
 $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getContador((int)$_SESSION['usuario_id']) : 0;
 
+// Capturar mensajes flash de error/éxito
+$flashError = '';
+$flashSuccess = '';
+if (isset($_SESSION['flash_error'])) {
+    $flashError = $_SESSION['flash_error'];
+    unset($_SESSION['flash_error']);
+}
+if (isset($_SESSION['flash_success'])) {
+    $flashSuccess = $_SESSION['flash_success'];
+    unset($_SESSION['flash_success']);
+}
+
 // Nota: la carga de datos para edición se hace mediante fetch en JavaScript
 // cuando el usuario hace clic en "Editar" en lugar de cargarlo con PHP al inicio
 ?>
@@ -66,6 +78,32 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
             </div>
         </header>
         <main class="profile">
+            <!-- Mensajes flash (errores/éxito) -->
+            <?php if ($flashError): ?>
+            <div class="flash-message flash-message--error" role="alert">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span><?= htmlspecialchars($flashError) ?></span>
+            </div>
+            <?php endif; ?>
+            <?php if ($flashSuccess): ?>
+            <div class="flash-message flash-message--success" role="alert">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span><?php
+                    switch ($flashSuccess) {
+                        case 'producto_creado': echo 'Artículo enviado correctamente para su tasación.'; break;
+                        case 'actualizado': echo 'Artículo actualizado correctamente.'; break;
+                        default: echo 'Operación completada correctamente.';
+                    }
+                ?></span>
+            </div>
+            <?php endif; ?>
+
             <!-- Sidebar -->
             <aside class="sidebar">
                 <h2 class="sidebar__title">Mi perfil</h2>
@@ -108,7 +146,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                             <article class="order">
                                 <div class="order__header">
                                     <div>
-                                        <div class="order__id">Pedido #<?= htmlspecialchars($pedido['id']) ?></div>
+                                        <div class="order__id">Pedido #<?= htmlspecialchars($pedido['ordena_zenbakia'] ?? $pedido['id']) ?></div>
                                         <div><?= htmlspecialchars(date('d/m/Y H:i', strtotime($pedido['data']))) ?></div>
                                     </div>
                                     <div class="order__total"><?= number_format($pedido['totala'], 2) ?> €</div>
@@ -174,7 +212,14 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                                         }
                                         ?>
                                     </span>
-                                    <a href="javascript:void(0)" class="card__buy edit-btn" data-product-id="<?= (int)$art['id'] ?>" aria-label="Editar artículo">Editar</a>
+                                    <?php
+                                    // Mostrar botón Editar de forma exclusiva para aquellos productos que sigan en estado 'pendentea'
+                                    $puedeEditar = ($art['onarpen_egoera'] ?? '') === 'pendentea';
+                                    if ($puedeEditar): ?>
+                                        <a href="javascript:void(0)" class="card__buy edit-btn" data-product-id="<?= (int)$art['id'] ?>" aria-label="Editar artículo">Editar</a>
+                                    <?php else: ?>
+                                        <span class="card__buy card__buy--disabled" aria-label="No editable">No editable</span>
+                                    <?php endif; ?>
                                 </div>
                             </article>
                             <?php endforeach; ?>
@@ -212,7 +257,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                             </div>
                             <div class="form__group">
                                 <label class="form__label" for="price">Precio de venta esperado (€) <span class="required">*</span></label>
-                                <input class="input" id="price" type="number" step="0.01" name="prezioa" required>
+                                <input class="input" id="price" type="number" step="0.01" min="0.01" name="prezioa" required>
                             </div>
                         </div>
                         <!-- Campos condicionales por categoría -->
