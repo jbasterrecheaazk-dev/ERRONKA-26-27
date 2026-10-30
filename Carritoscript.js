@@ -30,8 +30,8 @@ fetch ('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html', {
     })
 });
 
-fetch({
-    
+fetch('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html', {
+    method: 'DELETE'
 });
 
 const item__remove = document.querySelectorAll('item__remove');
