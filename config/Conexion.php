@@ -19,19 +19,20 @@ class Conexion
     private string $db   = 'SoinuTruk';  // Nombre de la base de datos
     private string $user = 'root';       // Usuario de MySQL
     private string $pass = '';           // Contraseña de MySQL
-    private ?PDO $pdo = null;            // Aquí guardaremos la conexión una vez creada
+    private static ?PDO $pdo = null;            // Aquí guardaremos la conexión de forma estática (Singleton)
 
     /*
      * getConexion() crea y devuelve la conexión a la base de datos
      *
      * Este método usa el patrón Singleton: si la conexión ya existe,
-     * la devuelve tal cual en lugar de crear otra. Así ahorramos recursos.
+     * la devuelve tal cual en lugar de crear otra. Así ahorramos recursos
+     * y garantizamos que las transacciones funcionen en toda la aplicación.
      */
     public function getConexion(): PDO
     {
         // Si ya hay una conexión activa, la reutilizamos
-        if ($this->pdo instanceof PDO) {
-            return $this->pdo;
+        if (self::$pdo instanceof PDO) {
+            return self::$pdo;
         }
 
         // DSN = Data Source Name. Es la cadena que describe cómo conectarse
@@ -49,7 +50,7 @@ class Conexion
         ];
 
         // Crea la conexión real a la base de datos
-        $this->pdo = new PDO($dsn, $this->user, $this->pass, $options);
-        return $this->pdo;
+        self::$pdo = new PDO($dsn, $this->user, $this->pass, $options);
+        return self::$pdo;
     }
 }
