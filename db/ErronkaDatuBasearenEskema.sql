@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS SoinuTruk CHARACTER SET utf8mb4 COLLATE utf8mb4_un
 USE SoinuTruk;
 
 -- 1. Taula: Erabiltzaileak (Usuarios: pueden ser compradores y vendedores)
-CREATE TABLE erabiltzaileak (
+CREATE TABLE IF NOT EXISTS erabiltzaileak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izena VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
@@ -13,7 +13,7 @@ CREATE TABLE erabiltzaileak (
 );
 
 -- 2. Taula: Kategoriak (Categorías: Biniloak, CDak, Kasetak, Merchandising...)
-CREATE TABLE kategoriak (
+CREATE TABLE IF NOT EXISTS kategoriak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izena VARCHAR(50) NOT NULL UNIQUE
 );
@@ -29,8 +29,7 @@ INSERT INTO kategoriak (izena) VALUES
 ('Bestekoa');
 
 -- 3. Taula: Produktuak (Artículos a la venta)
-DROP TABLE IF EXISTS produktuak;
-CREATE TABLE produktuak (
+CREATE TABLE IF NOT EXISTS produktuak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izenburua VARCHAR(150) NOT NULL,
     deskribapena TEXT NOT NULL,
@@ -48,8 +47,7 @@ CREATE TABLE produktuak (
 );
 
 -- 4. Taula: Eskaerak (Pedidos/Transacciones)
-DROP TABLE IF EXISTS eskaera;
-CREATE TABLE eskaera (
+CREATE TABLE IF NOT EXISTS eskaera (
     id INT AUTO_INCREMENT PRIMARY KEY,
     erosle_id INT NOT NULL,
     produktu_id INT NOT NULL,
@@ -60,8 +58,7 @@ CREATE TABLE eskaera (
 );
 
 -- 5. Taula: Carrito (Items en el carrito de compra temporal)
-DROP TABLE IF EXISTS carrito;
-CREATE TABLE carrito (
+CREATE TABLE IF NOT EXISTS carrito (
     id INT AUTO_INCREMENT PRIMARY KEY,
     erabilitze_id INT NOT NULL,
     produktu_id INT NOT NULL,
