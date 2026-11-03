@@ -19,8 +19,8 @@ CREATE TABLE erabiltzaileak (
     sortze_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- 2. Taula: Kategoriak (Categorías: Biniloak, CDak, Kasetak, Merchandising...)
-CREATE TABLE IF NOT EXISTS kategoriak (
+-- 2. Taula: Kategoriak (Categorías de productos)
+CREATE TABLE kategoriak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izena VARCHAR(50) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
@@ -36,7 +36,7 @@ INSERT INTO kategoriak (izena) VALUES
 ('Bestelakoak');
 
 -- 3. Taula: Produktuak (Artículos a la venta)
-CREATE TABLE IF NOT EXISTS produktuak (
+CREATE TABLE produktuak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     izenburua VARCHAR(150) NOT NULL,
     deskribapena TEXT NOT NULL,
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS produktuak (
     FOREIGN KEY (kategoria_id) REFERENCES kategoriak(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 4. Taula: Eskaerak (Pedidos/Transacciones)
-CREATE TABLE IF NOT EXISTS eskaera (
+-- 4. Taula: Eskaerak (Pedidos/Transacciones de compra)
+CREATE TABLE eskaerak (
     id INT AUTO_INCREMENT PRIMARY KEY,
     erosle_id INT NOT NULL,
     produktu_id INT NULL,
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS eskaera (
     FOREIGN KEY (produktu_id) REFERENCES produktuak(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 5. Taula: Carrito (Items en el carrito de compra temporal)
-CREATE TABLE IF NOT EXISTS carrito (
+-- 5. Taula: Saskia (Carrito de compra temporal)
+CREATE TABLE saskia (
     id INT AUTO_INCREMENT PRIMARY KEY,
     erabiltzaile_id INT NOT NULL,
     produktu_id INT NOT NULL,
