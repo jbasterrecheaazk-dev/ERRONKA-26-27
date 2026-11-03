@@ -293,4 +293,20 @@ class ProductoModel
             ':id'     => $produktu_id,
         ]);
     }
+
+    /*
+     * ezabatuProduktua()
+     * Elimina un producto de la tabla produktuak por su ID.
+     * La integridad referencial se mantiene gracias a los ON DELETE CASCADE/SET NULL
+     * configurados en saskia (CASCADE) y eskaerak (SET NULL).
+     *
+     * @param int $produktu_id ID del producto a eliminar
+     * @return bool true si la eliminación fue exitosa, false en caso contrario
+     */
+    public function ezabatuProduktua(int $produktu_id): bool
+    {
+        $sql = "DELETE FROM produktuak WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([':id' => $produktu_id]);
+    }
 }

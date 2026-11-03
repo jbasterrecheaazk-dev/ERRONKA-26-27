@@ -1,221 +1,243 @@
-# SoinuTruk — PHP MVC Marketplace
+# SoinuTruk — Plataforma B2C de Compra/Venta de Música Física
 
-**Dispositivo Web de Entrada de Datos (DWEC)** — PHP puro + JavaScript vanilla ES6+ + MySQL + PDO
-
----
-
-## Visión general
-
-Aplicación **SoinuTruk** es un marketplace C2C de música física (vinilos, CD, casetes) desarrollado con el patrón PHP MVC. Todo el flujo cliente (carrito, favoritos, búsqueda, filtros) está impulsado por **JavaScript vanilla** sin jQuery ni frameworks, usando `fetch()` y la API `PDO` con sentencias preparadas para la seguridad.
+**SoinuTruk** es una plataforma de compraventa de segunda mano de música física (vinilos, CD, casetes) con estética brutalista. Implementa un flujo B2C completo donde los usuarios ofrecen artículos para tasación, el administrador modera y aprueba, y los compradores adquieren productos únicos. Todo el flujo cliente funciona mediante JavaScript vanilla sin recargar páginas, usando `fetch()` y sentencias preparadas PDO para seguridad.
 
 ---
 
-## Arquitectura del proyecto
+## 🚀 Concepto y Propuesta de Valor
+- **Tasación centralizada**: Los usuarios ofrecen artículos desde su perfil, el equipo de SoinuTruk revisa y aprueba o rechaza cada producto
+- **Catálogo curado**: Solo artículos aprobados aparecen públicamente, garantizando calidad y autenticidad
+- **Transacciones seguras**: Compraventa con integridad referencial, bloqueo de edición de artículos ya aprobados/vendidos, y gestión de stock única
+- **Interfaz brutalista**: Diseño oscuro y geométrico con alto contraste, tipografía clara y feedback visual inmediato
 
+---
+
+## 🛠️ Tecnología
+
+| Capa | Tecnología | Descripción |
+|------|------------|-------------|
+| **Arquitectura** | PHP MVC puro (Front Controller en `index.php`) | Rutas centralizadas, separación clara de responsabilidades |
+| **Base de Datos** | MySQL + PDO | Conexión segura con prepared statements, soporte para transacciones |
+| **Frontend** | HTML5 + CSS3 (BEM naming) | Estilos BEM, diseño brutalista, responsive, dark theme |
+| **JavaScript** | Vanilla ES6+ | Módulos IIFE, delegación de eventos, fetch API, localStorage |
+| **Gestión de Estado** | Session PHP + localStorage | Sesiones para autenticación, localStorage para favoritos |
+
+---
+
+## 📋 Características Principales
+
+### 1. Gestión de Usuarios
+- Registro e inicio de sesión con validación dual (JS + PHP)
+- Roles: `user` (cliente) y `admin` (moderación)
+- Perfil de usuario con historial de pedidos y artículos ofrecidos
+
+### 2. Flujo de Tasación B2C
+- **Ofrecer artículo**: Formulario en `/perfil` → crea producto con `onarpen_egoera='pendentea'` y `salgai=0`
+- **Moderación**: Panel `/admin` muestra artículos pendientes con botón "Aprobar" (verde) o "Rechazar" (rojo)
+- **Publicación**: Artículos aprobados aparecen en catálogo público con estado visual "Aprobado"
+- **Eliminación**: Admin puede eliminar productos aprobados desde el panel sin recargar página
+
+### 3. Cesta y Proceso de Pago
+- **Carrito único**: `/api/saskia` CRUD (añadir, eliminar) sin recargar página
+- **Transacciones**: `beginTransaction()` → `commit()`/`rollBack()` para evitar compras simultáneas
+- **Checkout B2C**: `POST /api/eskaerak/procesar` crea pedidos, marca productos vendidos, vacía carrito
+- **Confirmación brutalista**: Pantalla centrada con icono check, enlace a `/mis-compras`
+
+### 4. Panel de Administración (`/admin`)
+- **KPIs**: Total ventas, pedidos completados, usuarios registrados, productos activos
+- **Solicitudes pendientes**: Lista con miniaturas, botón de acciones
+- **Productos activos**: Tabla con botón "Eliminar" (rojo brutalista)
+- **Actividad reciente**: Últimos pedidos completados
+- **Validación estricta**: Solo usuarios con `$_SESSION['usuario_rol'] === 'admin'` acceden
+
+### 5. Seguridad y Validación
+- **Doble capa**: Validación JS en formulario + validación PHP en controlador
+- **Precios positivos**: Validación numérica > 0 en cliente y servidor
+- **Protección contra edición**: Artículos aprobados, rechazados o vendidos no se pueden editar
+- **XSS mitigado**: `htmlspecialchars()` en toda salida al HTML
+- **SQL Injection prevenida**: PDO prepared statements en todas las consultas
+
+---
+
+## 🗂️ Estructura y Base de Datos
+
+### Tablas Clave
+
+| Tabla | Propósito | Columnas Clave |
+|-------|-----------|----------------|
+| `erabiltzaileak` | Usuarios | `id`, `izena`, `email`, `rol`, `sortze_data` |
+| `kategoriak` | Categorías | `id`, `izena` |
+| `produktuak` | Artículos | `id`, `izenburua`, `prezioa`, `irudia`, `saltzaile_id`, `kategoria_id`, `onarpen_egoera` ENUM(`pendentea`,`onartua`,`baztertua`), `salgai` (0=pendiente, 1=activo) |
+| `eskaerak` | Pedidos | `id`, `produktu_id`, `erosle_id`, `egoera` ENUM(`pendentea`,`ordaindua`,`bidalia`,`osatua`,`ezeztatua`), `totala`, `data` |
+| `saskia` | Carrito | `id`, `erabiltzaile_id`, `produktu_id`, `kantitatea`, `sortze_data` |
+
+### Columna `onarpen_egoera`
+- `pendentea`: Artículo ofrecido, esperando tasación
+- `onartua`: Aprobado y visible en catálogo
+- `baztertua`: Rechazado, oculto del catálogo
+
+---
+
+## 📦 Instalación Local
+
+### Requisitos Previos
+- PHP 8.1+
+- MySQL 8.0+ (o MariaDB compatible)
+- Servidor web (Apache/Nginx) o PHP CLI para desarrollo
+- Composer (para autoloader)
+
+### 1. Configuración PHP
+Edita `php.ini` (o `php-cli.ini` para línea de comandos):
+```ini
+extension=pdo_mysql
+extension_dir = "ext"
+memory_limit = 256M
+upload_max_filesize = 10M
+post_max_size = 10M
+max_execution_time = 300
 ```
-/controllers/    → controladores REST JSON
-/models/         → clases PDO (Productos, Categorías, Usuarios, Saskia/Carrito)
-/views/pages/    → vistas PHP (Front Controller: index.php único punto de entrada)
-/public/js/      → módulos JS vanilla ES6+ (IIFE, delegación eventos)
-/public/css/     → estilos BEM + brutalist design
-/db/             → esquema SQL con tablas renombradas
-/config/         → configuración de BD (Conexión PDO)
-```
 
----
-
-## Estructura de tablas (tras refactor)
-
-| Tabla antigua | Nueva tabla | Comentario |
-|---|---|---|
-| `carrito` | `saskia` | Cambio de nombre total |
-| `eskaera` | `eskaerak` | Nuevo campo `egoera` ENUM |
-| column `usuaritza_id` | `erabiltzaile_id` | Renombrada |
-
-**Esquema (`db/ErronkaDatuBasearenEskema.sql`):**
-
-```sql
--- Tabla saskia (antes carrito): id, erabiltzaile_id, produktu_id, kantitatea, sortze_data
--- Tabla eskaerak (antes eskaera): id, egoera ENUM('pendentea','ordaindua','bidalia','osatua','ezeztatua'), ...
--- Tabla produktuak: id, izenburua, deskribapena, prezioa, irudia, saltzaile_id, kategoria_id,
---   artista, urtea, salgai, onarpen_egoera ENUM('pendentea','onartua','baztertua'), sortze_data
--- Tables: erabiltzaileak, kategoriak, produktuak, eskaerak, saskia
-```
-
----
-
-## Vistas (routes desde `index.php` / Front Controller)
-
-| Ruta | Vista | Privada? |
-|---|---|---|
-| `/` / `/index` | `views/pages/index.php` | No |
-| `/login` | `views/pages/login.php` | No |
-| `/carrito` / `/saskia` | `views/pages/carrito.php` | S (necesita `$_SESSION['usuario_id']`) |
-| `/perfil` / `/mis-articulos` | `views/pages/perfil.php` | S |
-| `/admin` | `views/pages/admin.php` | S (rol admin) |
-| `/mis-compras` | `views/pages/mis-compras.php` | S |
-| `/producto?id=X` | `views/pages/producto.php` | No (datos desde BD) |
-| `/logout` | `AuthController.php?action=logout` | — |
-
----
-
-## Módulos JavaScript
-
-| Archivo | Función |
-|---|---|
-| `public/js/favoritos.js` | Favoritos en localStorage (`window.SoinutrukFavorites`) |
-| `public/js/saskia.js` | **DWEC carrito completo**: add/remove/update via `fetch()`, renderizado dinámico, contador/header, delegación eventos |
-| `public/js/buscador.js` | Búsqueda y filtrado en catálogo, API pública `window.SoinutrukSearch` |
-| `public/js/perfil.js` | Panel de perfil, gestión de artículos propios |
-
----
-
-## Controladores (JSON API)
-
-### Carrito (`/api/saskia/`)
-
-| Endpoint | Método | Acción |
-|---|---|---|
-| `/api/saskia` | GET | `index` → devuelve todos los items del carrito con subtotal |
-| `/api/saskia/gehitu` | POST | Añade un producto a la cesta (`produktu_id`) |
-| `/api/saskia/kendu` | POST | Elimina un item (`saskia_id` o `produktu_id`) |
-
-### Pedidos (`/api/eskaerak/`)
-
-| Endpoint | Método | Acción |
-|---|---|---|
-| `/api/eskaerak/procesar` | POST | Procesa el checkout B2C (crea pedidos, marca productos vendidos, vacía carrito) |
-
-### Administración (`/api/admin/`)
-
-| Endpoint | Método | Acción |
-|---|---|---|
-| `/api/admin/aprobar` | POST | Aprueba un producto pendiente (`id`): `onarpen_egoera='onartua'`, `salgai=true` |
-| `/api/admin/deshabilitar` | POST | Rechaza un producto (`id`): `onarpen_egoera='baztertua'`, `salgai=false` |
-
-**Autenticación:** Cada endpoint comprueba `$_SESSION['usuario_id']`. Si no hay sesión → 401 JSON.
-Endpoints `/api/admin/*` requieren además `$_SESSION['rol'] === 'admin'`.
-
----
-
-## DWEC (Dispositivo Web de Entrada de Datos) — Carrito
-
-Todo el carrito funciona sin recargar la página:
-
-1. **Botón "Añadir al Carrito"** en `index.php` y `producto.php` → intercepta clic → `POST /api/saskia/gehitu` → notificación instantánea → actualiza contador header
-2. **Vista `/carrito`** (o `/saskia`) → al cargar, hace `fetch('/api/saskia')` y renderiza la tabla de items con botón eliminar (sin controles de cantidad: segunda mano = 1 unidad)
-3. **Delegación de eventos** en JS: botón `Eliminar` → `POST /api/saskia/kendu` → recalcula totales y actualiza badge header
-4. **Checkout B2C**: botón "Tramitar pago" → `POST /api/eskaerak/procesar` → crea pedidos con `egoera='osatua'`, marca `produktuak.salgai=0`, vacía `saskia` → muestra confirmación brutalista con enlace a `/mis-compras`
-5. **Notificaciones brutalistas** (`saskia-toast`) tipo toast fijo bottom-right
-6. **Badge global** en el header → siempre sincronizado con la BD vía `refreshCartBadge()`
-
----
-
-## Seguridad (regla inquebrantable)
-
-- **NUNCA** se ejecutan comandos `git add` / `git commit` / `git push` localmente
-- Todas las consultas SQL usan **PDO prepared statements** (`:param`)
-- Endpoints JSON devuelven 401 si `$_SESSION['usuario_id']` no existe
-- `htmlspecialchars()` en toda salida al HTML
-- Subida de imágenes: validación de extensión + directorio con permisos 0755
-- `die()` y `var_dump()` eliminados completamente
-
----
-
-## Pendientes / patch notes pendientes
-
-- Confirmar nombres de campos `erabiltzaile_id` vs `usuaritza_id` en migración antigua → nueva
-- Validar si `eskaerak.egoera` necesita tratamiento visual específico
-- Revisar la vista de `/saskia` en móvil: última actualización 2026-10-29
-
-## Patch Notes — v2.0 (Modelo B2C / SoinuTruk compra-vende)
-
-### Base de datos
-- Nueva columna `onarpen_egoera` en `produktuak`: ENUM('pendentea', 'onartua', 'baztertua') DEFAULT 'onartua'
-- Permite diferenciar productos pendientes de tasación/aprobación de los ya publicados
-
-### Flujo B2C (SoinuTruk compra y revende)
-1. **Usuario ofrece artículo** → formulario en panel "Ofrecer artículo a SoinuTruk" en `/perfil`
-   - Crea producto con `salgai=0`, `onarpen_egoera='pendentea'`
-   - Usuario ve "Solicitud enviada" en "Mis artículos"
-2. **Admin revisa en `/admin`** → ve lista de pendientes (`lortuPendenteak()`)
-   - **Aprueba**: `onarpen_egoera='onartua'`, `salgai=1` → producto visible en catálogo público
-   - **Rechaza**: `onarpen_egoera='baztertua'`, `salgai=0` → producto oculto
-3. **Comprador compra** → checkout `/api/eskaerak/procesar`
-   - Crea `eskaerak` con `egoera='osatua'`
-   - Marca `produktuak.salgai=0`
-   - Vacía `saskia` del comprador
-
-### API nuevos endpoints
-- `POST /api/eskaerak/procesar` — Checkout B2C
-- `POST /api/admin/aprobar` / `deshabilitar` — Gestión AJAX de aprobaciones
-- `GET /admin` — Panel admin con listas: pendientes, todos los productos, pedidos recientes
-
-### Modelo `ProductoModel` nuevos métodos
-- `lortuPendenteak()` — Lista productos con `onarpen_egoera='pendentea'` (para admin)
-- `eguneratuOnarpenEgoera($id, $egoera, $salgai)` — Cambia estado aprobación + disponibilidad
-- Consultas públicas (`obtenerTodos`, `obtenerPorIds`, `obtenerFiltrados`) filtran por `salgai=1 AND onarpen_egoera='onartua'`
-
-### Vistas actualizadas
-- `/perfil` → panel "Ofrecer artículo a SoinuTruk" (antes "Publicar artículo en venta")
-- `/vender` → formulario dedicado para solicitud de tasación
-- `/admin` → panel completo de gestión
-- `/carrito` → sin controles de cantidad, checkout B2C
-
----
-
-## Patch Notes — v2.1 (ERROR 3: Integridad de negocio — Bloqueo edición artículos)
-
-### Problema corregido
-Se permitía editar un producto ofrecido a la plataforma **incluso después** de que:
-- La tienda hubiera aceptado la tasación (`onarpen_egoera = 'onartua'`)
-- La tienda hubiera rechazado el artículo (`onarpen_egoera = 'baztertua'`)
-- El producto hubiera sido vendido (`salgai = FALSE`)
-
-Esto rompía la integridad del flujo B2C: un artículo ya tasado/aprobado/rechazado/vendido no debe ser modificable.
-
-### Solución implementada
-
-#### 1. Bloqueo en el controlador (`controllers/ProductoController.php`)
-En el método `update()` (procesa formulario de edición vía `/mis-articulos?action=create`):
-- Se consulta el estado actual del producto (`onarpen_egoera` y `salgai`) **antes** de cualquier modificación
-- Si `onarpen_egoera !== 'pendentea'` **O** `salgai == FALSE`:
-  - Detiene el proceso inmediatamente
-  - Respuesta AJAX: `403 Forbidden` + JSON `{'error': true, 'messages': {'general': 'Ezin da jaonartutako, baztertutako edo saldutako artikulurik editatu'}}`
-  - Navegación web: redirige a `/perfil` con `flash_error` en sesión
-- Solo permite edición si `onarpen_egoera === 'pendentea'` **Y** `salgai == TRUE`
-
-#### 2. Bloqueo en la API de carga de datos (`index.php` → `/api/producto`)
-En el endpoint que devuelve los datos del producto para editar (fetch desde JavaScript):
-- Misma validación: si el artículo no está en estado `'pendentea'` con `salgai=true`, responde `403 Forbidden`
-- Impide que el JS cargue el formulario con datos de un artículo no editable
-
-#### 3. Control visual en la vista (`views/pages/perfil.php`)
-En la lista "Mis artículos ofrecidos":
-- El botón "Editar" **solo se renderiza** si `onarpen_egoera === 'pendentea'` **Y** `salgai == 1`
-- Para artículos `'onartua'`, `'baztertua'` o `salgai=0`: se muestra "No editable" (texto deshabilitado, sin funcionalidad)
-- Mantiene la UX: el usuario ve el estado y entiende por qué no puede editar
-
-#### 4. Mensajes flash en la vista
-- Añadido renderizado de `flash_error` y `flash_success` al cargar `/perfil`
-- Estilos CSS nuevos: `.flash-message`, `.flash-message--error`, `.flash-message--success` en `public/css/style.css`
-- Estilo para botón deshabilitado: `.card__buy--disabled`
-
-### Archivos modificados
-- `controllers/ProductoController.php` — validación servidor en `update()`
-- `index.php` — validación en endpoint `/api/producto`
-- `views/pages/perfil.php` — lógica de renderizado condicional + mensajes flash
-- `public/css/style.css` — estilos flash messages y botón deshabilitado
-
----
-
-## Desarrollo local
-
+### 2. Base de Datos
+Importa el esquema SQL:
 ```bash
-# Servidor PHP integrado
-php -S localhost:8000 -t .
-
-# La app levanta en http://localhost:8000
-# Acceder /login para probar sesión
-# Acceder /saskia con usuario logueado para ver el carrito DWEC
+mysql -u usuario -p nombre_base_de_datos < db\ErronkaDatuBasearenEskema.sql
 ```
+
+### 3. Configuración de Conexión
+Edita `config/Conexion.php` con tus credenciales MySQL.
+
+### 4. Servidor Local
+```bash
+php -S localhost:8000 -t . index.php
+```
+
+Visita `http://localhost:8000` en tu navegador.
+
+---
+
+## 🔧 Guía de Desarrollo
+
+### Estructura de Archivos
+```
+/controllers/    → Controladores REST JSON
+/models/         → Clases Modelo PDO (Producto, Usuario, Carrito, etc.)
+/views/pages/    → Vistas PHP (Front Controller: index.php único punto de entrada)
+/public/js/      → Módulos vanilla ES6+ (IIFE, delegación eventos)
+/public/css/     → Estilos BEM + brutalist design
+/db/             → Esquema SQL
+/config/         → Conexión PDO
+```
+
+### Rutas y Endpoints
+- **Frontend**: Todas las rutas pasan por `index.php` (Front Controller)
+- **API JSON**: `/api/...` — solo respuestas JSON, protegidas por sesión
+- **Admin**: `/admin` — requiere rol admin
+
+### Desarrollo de Características
+1. **Nuevo endpoint**: Crea método en `AdminController.php` o `ProductoController.php`
+2. **Nueva vista**: Añade archivo en `views/pages/` y registra ruta en `index.php`
+3. **Nuevo JS**: Añade módulo en `public/js/` y vincula en plantilla
+4. **Estilos**: Añade CSS en `public/css/style.css` usando BEM (`.component__element--modifier`)
+
+---
+
+## 📖 Documentación API
+
+Todos los endpoints JSON devuelven objetos con las siguientes estructuras:
+
+### Éxito
+```json
+{
+  "success": true,
+  "message": "Operación completada",
+  "data": {...}
+}
+```
+
+### Error
+```json
+{
+  "success": false,
+  "error": "Mensaje de error",
+  "messages": {"campo": "error específico"}
+}
+```
+
+### Códigos de Estado HTTP
+- `200 OK` — operación exitosa
+- `400 Bad Request` — datos inválidos o faltantes
+- `401 Unauthorized` — sesión no iniciada
+- `403 Forbidden` — no es administrador (para endpoints admin)
+- `405 Method Not Allowed` — método HTTP incorrecto
+- `500 Internal Server Error` — error en servidor
+
+---
+
+## 🎨 Diseño y UX
+
+- **Paleta**: Fondo oscuro (`#121212`), texto claro (`#F5F5F5`), acentos rojos (`#F44336`)
+- **Tipografía**: Sistema font-stack, tamaños escalonados (`rem`)
+- **Interacción**: Hover states con `filter: brightness(0.9)`, transiciones suaves
+- **Feedback**: Toast brutalista bottom-right, spinner de carga, disabled states
+- **Accesibilidad**: ARIA labels, semantic HTML, contraste mínimo 4.5:1
+
+---
+
+## 📈 Métricas y KPIs
+
+Panel admin muestra:
+- Total Ventas Acumuladas (suma de `eskaerak.totala`)
+- Pedidos Completados (count de `eskaerak` con `egoera='osatua'`)
+- Usuarios Registrados (count de `erabiltzaileak`)
+- Productos Activos (count de `produktuak` con `salgai=1` y `onarpen_egoera='onartua'`)
+
+---
+
+## 🐛 Problemas Conocidos y Soluciones
+
+| Issue | Solución |
+|-------|----------|
+| Edición de artículos aprobados/rechazados | Bloqueo en controlador (`requireAdmin`) y JS (`admin-btn--delete` solo para aprobados) |
+| Carrito muestra cantidad > 1 | Segunda mano = 1 unidad, validación en cliente y servidor (`kantitatea` siempre 1) |
+| Navegación por hash en reload | `handleHash()` ahora usa `DOMContentLoaded` en lugar de `requestAnimationFrame` |
+
+---
+
+## 📝 Patch Notes — Historial de Cambios
+
+### v2.0 (B2C Marketplace)
+- Implementado flujo de tasación B2C
+- Añadido panel de administración con moderación
+- Nuevo esquema con columna `onarpen_egoera`
+- Endpoints API `/api/admin/aprobar`, `/api/admin/deshabilitar`
+
+### v2.1 (Integridad de Negocio)
+- Bloqueo total de edición de artículos aprobados, rechazados o vendidos
+- Validación en controlador y API de carga de datos
+- Botón "Editar" solo visible para artículos pendientes
+- Mejoras en mensajes de error y feedback visual
+
+### v2.2 (Carrito B2C)
+- Implementado carrito completo con `fetch()`
+- Transacciones PDO para integridad de stock
+- Confirmación brutalista del checkout
+- Actualización del contador global del header
+
+---
+
+## 📋 Contribuir
+
+- **Reportar bugs**: Abrir issue con detalles de reproducción
+- **Proponer características**: Describir problema/usecase en issue
+- **Pull requests**: Seguir estilo de commits (`feat:`, `fix:`, `docs:`) y pasar tests
+- **Código**: Seguir convenciones de estilo del proyecto (BEM, PSR-12)
+
+---
+
+## 📜 Licencia
+
+Proyecto bajo licencia MIT. Ver archivo `LICENSE` en la raíz del repositorio.
+
+---
+
+**SoinuTruk** es una plataforma de la comunidad musical para comprar y vender equipamiento de segunda mano con confianza y curación profesional.

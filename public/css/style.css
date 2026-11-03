@@ -231,6 +231,30 @@ a {
     filter: brightness(0.9);
 }
 
+.btn--danger {
+    background: #4a1212;
+    color: #ff6b6b;
+    border-color: #7a3a3a;
+}
+
+.btn--danger:hover {
+    background: #6a1a1a;
+    color: #ff8b8b;
+    border-color: #a04040;
+}
+
+.botoia--arrisku {
+    background: #4a1212;
+    color: #ff6b6b;
+    border-color: #7a3a3a;
+}
+
+.botoia--arrisku:hover {
+    background: #6a1a1a;
+    color: #ff8b8b;
+    border-color: #a04040;
+}
+
 .btn--ghost {
     background: #151515;
     color: var(--text);

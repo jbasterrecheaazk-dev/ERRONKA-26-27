@@ -36,9 +36,9 @@ class AdminController
         if (!isset($_SESSION['usuario_id']) || ($_SESSION['usuario_rol'] ?? '') !== 'admin') {
             // Si es petición AJAX/API, devolver JSON 403
             if (strpos($_SERVER['REQUEST_URI'] ?? '', '/api/') !== false) {
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
                 http_response_code(403);
-                echo json_encode(['error' => 'Acceso denegado: se requiere rol de administrador']);
+                echo json_encode(['success' => false, 'error' => 'Baimenik gabe']);
                 exit;
             }
             // Si es navegación web, redirigir a inicio con 403
@@ -58,13 +58,16 @@ class AdminController
         // 1. Solicitudes pendientes (productos con onarpen_egoera = 'pendentea')
         $pendientes = $this->productoModel->lortuPendenteak();
 
-        // 2. Estadísticas globales para el dashboard
+        // 2. Productos aceptados/activos (onarpen_egoera = 'onartua')
+        $aprobados = $this->productoModel->obtenerTodos();
+
+        // 3. Estadísticas globales para el dashboard
         $estadisticas = $this->eskaerakModel->lortuEstatistikoak();
 
-        // 3. Últimos pedidos para actividad reciente
+        // 4. Últimos pedidos para actividad reciente
         $azkenEskaerak = $this->eskaerakModel->lortuAzkenEskaerak(5);
 
-        // 4. Contador de pendientes para badge
+        // 5. Contador de pendientes para badge
         $contadorPendientes = count($pendientes);
 
         require_once __DIR__ . '/../views/pages/admin.php';
@@ -162,6 +165,55 @@ class AdminController
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Error al rechazar el producto']);
+        }
+        exit;
+    }
+
+    // ------------------------------------------------------------------
+    // POST /api/admin/ezabatu - Eliminar producto aprobado (AJAX)
+    // ------------------------------------------------------------------
+    public function ezabatu(): void
+    {
+        $this->requireAdmin();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Método no permitido']);
+            exit;
+        }
+
+        $input = json_decode(file_get_contents('php://input'), true);
+        $id = (int) ($input['id'] ?? 0);
+
+        if ($id <= 0) {
+            header('Content-Type: application/json');
+            http_response_code(400);
+            echo json_encode(['error' => 'ID inválido']);
+            exit;
+        }
+
+        // Solo se pueden eliminar productos ya aprobados
+        $sqlCheck = "SELECT onarpen_egoera, izenburua FROM produktuak WHERE id = :id LIMIT 1";
+        $stmt = $this->db->prepare($sqlCheck);
+        $stmt->execute([':id' => $id]);
+        $producto = $stmt->fetch();
+
+        if (!$producto || $producto['onarpen_egoera'] !== 'onartua') {
+            header('Content-Type: application/json');
+            http_response_code(400);
+            echo json_encode(['error' => 'El producto no existe o no está aprobado']);
+            exit;
+        }
+
+        $ok = $this->productoModel->ezabatuProduktua($id);
+
+        header('Content-Type: application/json');
+        if ($ok) {
+            echo json_encode(['success' => true, 'message' => 'Producto eliminado correctamente']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al eliminar el producto']);
         }
         exit;
     }

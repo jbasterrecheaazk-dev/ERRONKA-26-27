@@ -147,6 +147,54 @@
                     <?php endif; ?>
                 </section>
 
+                <!-- Productos Aceptados / Activos en Catálogo -->
+                <section class="admin__section" aria-label="Productos activos en el catálogo">
+                    <div class="admin__section-header">
+                        <h2 class="admin__section-title">Productos Activos en Catálogo</h2>
+                        <span class="admin__badge" id="active-products-count"><?= count($aprobados ?? []) ?></span>
+                    </div>
+
+                    <?php if (empty($aprobados)): ?>
+                        <div class="admin__empty">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <h3>No hay productos activos</h3>
+                            <p>Los productos aprobados aparecerán aquí para su gestión.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="admin__pending-grid" id="approved-grid">
+                            <?php foreach ($aprobados as $prod): ?>
+                                <article class="pending-card approved-card" data-product-id="<?= (int)$prod['id'] ?>">
+                                    <div class="pending-card__media">
+                                        <?php if (!empty($prod['irudia'])): ?>
+                                            <img src="/<?= htmlspecialchars($prod['irudia']) ?>" alt="<?= htmlspecialchars($prod['izenburua']) ?>" loading="lazy">
+                                        <?php else: ?>
+                                            <div class="pending-card__media--empty">Sin imagen</div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="pending-card__body">
+                                        <h3 class="pending-card__title"><?= htmlspecialchars($prod['izenburua']) ?></h3>
+                                        <div class="pending-card__meta">
+                                            <span class="pending-card__category"><?= htmlspecialchars($prod['categoria_nombre'] ?? 'Sin categoría') ?></span>
+                                            <span class="pending-card__price"><?= number_format($prod['prezioa'], 2) ?> €</span>
+                                        </div>
+                                        <?php if (!empty($prod['artista'])): ?>
+                                            <div class="pending-card__date">Artista: <?= htmlspecialchars($prod['artista']) ?></div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="pending-card__actions">
+                                        <button class="btn btn--danger botoia--arrisku admin-btn--delete" data-id="<?= (int)$prod['id'] ?>">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                            Ezabatu
+                                        </button>
+                                    </div>
+                                </article>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </section>
+
                 <!-- Actividad Reciente -->
                 <section class="admin__section" aria-label="Actividad reciente de ventas">
                     <h2 class="admin__section-title">Actividad Reciente de Ventas</h2>

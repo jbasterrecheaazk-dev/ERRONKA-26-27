@@ -119,6 +119,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Eliminar producto aprobado (botones .admin-btn--delete) ---
+    const approvedGrid = document.getElementById('approved-grid');
+    const approvedCount = document.getElementById('active-products-count');
+
+    async function handleDelete(button) {
+        const card = button.closest('.approved-card');
+        if (!card) return;
+
+        const productId = card.dataset.productId;
+        if (!productId) return;
+
+        // Confirmación brutalista: el usuario debe confirmar la eliminación permanente
+        const title = card.querySelector('.pending-card__title')?.textContent?.trim() || '';
+        const confirmMsg = 'Ziur zaude artikulu hau betiko ezabatu nahi duzula?'
+            + (title ? '\n\n"' + title + '"' : '');
+        if (!confirm(confirmMsg)) return;
+
+        button.disabled = true;
+        button.innerHTML = `<span class="spinner"></span> Ezabatzen...`;
+
+        try {
+            const res = await fetch('/api/admin/ezabatu', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: parseInt(productId, 10) })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok || !data.success) {
+                throw new Error(data.error || 'Error al eliminar');
+            }
+
+            showToast(data.message, 'success');
+            await animateRemoval(card);
+
+            // Actualizar el counter de productos activos
+            if (approvedCount) {
+                const current = parseInt(approvedCount.textContent, 10) || 0;
+                approvedCount.textContent = Math.max(0, current - 1);
+            }
+
+            // Si no quedan productos, mostrar estado vacío
+            if (approvedGrid && approvedGrid.children.length === 0) {
+                approvedGrid.innerHTML = `
+                    <div class="admin__empty">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <h3>No hay productos activos</h3>
+                        <p>Los productos aprobados aparecerán aquí para su gestión.</p>
+                    </div>
+                `;
+            }
+        } catch (err) {
+            button.disabled = false;
+            button.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg> Ezabatu`;
+            showToast('Error: ' + err.message, 'error');
+        }
+    }
+
+    if (approvedGrid) {
+        approvedGrid.addEventListener('click', (e) => {
+            const deleteBtn = e.target.closest('.admin-btn--delete');
+            if (deleteBtn) {
+                e.preventDefault();
+                handleDelete(deleteBtn);
+            }
+        });
+    }
+
     // --- Spinner CSS inline para estados de carga ---
     const style = document.createElement('style');
     style.textContent = `
@@ -135,7 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         .admin-btn--approve:disabled,
-        .admin-btn--reject:disabled {
+        .admin-btn--reject:disabled,
+        .admin-btn--delete:disabled {
             opacity: 0.7;
             cursor: not-allowed;
         }
