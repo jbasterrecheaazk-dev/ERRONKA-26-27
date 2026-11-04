@@ -34,13 +34,13 @@ fetch('file:///C:/Users/j_basterrecheaazk/Desktop/Erronka/carrito.html', {
     method: 'DELETE'
 });
 
-const cart__items = document.querySelectorAll('cart__items');
-const item__remove = document.querySelectorAll('item__remove');
-const carritoBtn = document.querySelectorAll('header__icon-btn');
-const item__content = document.querySelectorAll('item__content');
-const close = document.querySelectorAll('header__brand');
-const erosi = document.querySelectorAll('btn btn--primary');
-const guztira = document.querySelectorAll('summary__total');
+const cart__items = document.querySelectorAll('.cart__items');
+const item__remove = document.querySelectorAll('.item__remove');
+const carritoBtn = document.querySelector('.header__icon-btn');
+const item__content = document.querySelectorAll('.item__content');
+const close = document.querySelector('.header__brand');
+const erosi = document.querySelector('.btn.btn--primary');
+const guztira = document.querySelectorAll('.summary__total');
 function erakutsiLista() {
     cart__items.innerHTML = '';
     let result = 0;
