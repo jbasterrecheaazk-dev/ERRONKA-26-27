@@ -35,9 +35,6 @@ $error   = $_GET['error'] ?? '';
                 <input class="input" id="password-login" type="password" name="pasahitza" required>
             </div>
             <button class="btn btn--primary" type="submit">Entrar</button>
-            <div class="form__footer">
-                ¿Olvidaste tu contraseña? <a class="link" href="#">Recuperar</a>
-            </div>
         </form>
 
         <!-- Formulario Registro -->
@@ -55,10 +52,7 @@ $error   = $_GET['error'] ?? '';
                 <input class="input" id="username" type="text" name="izena" required>
             </div>
             <button class="btn btn--primary" type="submit">Crear cuenta</button>
-            <div class="form__footer">
-                Al registrarte aceptas nuestros <a class="link" href="#">Términos</a>
-            </div>
-        </form>
+            </form>
     </main>
 
     <script>
