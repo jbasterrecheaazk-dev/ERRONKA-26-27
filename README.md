@@ -203,28 +203,6 @@ Panel admin muestra:
 
 ---
 
-## 📝 Patch Notes — Historial de Cambios
-
-### v2.0 (B2C Marketplace)
-- Implementado flujo de tasación B2C
-- Añadido panel de administración con moderación
-- Nuevo esquema con columna `onarpen_egoera`
-- Endpoints API `/api/admin/aprobar`, `/api/admin/deshabilitar`
-
-### v2.1 (Integridad de Negocio)
-- Bloqueo total de edición de artículos aprobados, rechazados o vendidos
-- Validación en controlador y API de carga de datos
-- Botón "Editar" solo visible para artículos pendientes
-- Mejoras en mensajes de error y feedback visual
-
-### v2.2 (Carrito B2C)
-- Implementado carrito completo con `fetch()`
-- Transacciones PDO para integridad de stock
-- Confirmación brutalista del checkout
-- Actualización del contador global del header
-
----
-
 ## 📋 Contribuir
 
 - **Reportar bugs**: Abrir issue con detalles de reproducción
