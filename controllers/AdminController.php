@@ -233,7 +233,7 @@ class AdminController
      * Flujo:
      * 1. Verifica rol de administrador
      * 2. Verifica que el producto existe y está aprobado (onartua)
-     * 3. Ejecuta DELETE en la tabla productoak
+     * 3. Ejecuta DELETE en la tabla produktuak
      *
      * @return void Respuesta JSON siempre termina la ejecución
      */

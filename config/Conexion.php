@@ -32,11 +32,11 @@ class Conexion
      * Constructor privado: previene la instanciación directa.
      * Usa valores de entorno con fallback a localhost.
      */
-    private function __construct()
+    public function __construct()
     {
         // Leer credenciales desde variables de entorno o usar valores por defecto
         $host = $_ENV['DB_HOST'] ?? 'localhost';
-        $dbname = $_ENV['DB_NAME'] ?? 'soinutruk_db';
+        $dbname = $_ENV['DB_NAME'] ?? 'SoinuTruk';
         $user = $_ENV['DB_USER'] ?? 'root';
         $pass = $_ENV['DB_PASS'] ?? '';
 

@@ -47,7 +47,7 @@ class ProductoModel
      */
     public function crear(array $datos): bool
     {
-        $sql = "INSERT INTO productoak
+        $sql = "INSERT INTO produktuak
                 ( izenburua, deskribapena, prezioa, kategoria_id, saltzaile_id,
                   artista, urtea, irudia, salgai, onarpen_egoera )
                 VALUES (
@@ -81,7 +81,7 @@ class ProductoModel
         // LEFT JOIN con kategoriak para obtener el nombre de la categoría
         // WHERE filtra solo productos visibles y aprobados
         $sql = "SELECT p.*, k.izena as categoria_nombre
-                FROM productoak p
+                FROM produktuak p
                 LEFT JOIN kategoriak k ON p.kategoria_id = k.id
                 WHERE p.salgai = 1 AND p.onarpen_egoera = 'onartua'
                 ORDER BY p.sortze_data DESC"; // Más recientes primero
@@ -104,7 +104,7 @@ class ProductoModel
                        u.izena AS vendedor_nombre,
                        u.email AS vendedor_email,
                        k.izena AS categoria_nombre
-                FROM productoak p
+                FROM produktuak p
                 LEFT JOIN erabiltzaileak u ON p.saltzaile_id = u.id
                 LEFT JOIN kategoriak k        ON p.kategoria_id = k.id
                 WHERE p.id = :id
@@ -143,7 +143,7 @@ class ProductoModel
                        u.izena AS vendedor_nombre,
                        u.email AS vendedor_email,
                        k.izena AS categoria_nombre
-                FROM productoak p
+                FROM produktuak p
                 LEFT JOIN erabiltzaileak u ON p.saltzaile_id = u.id
                 LEFT JOIN kategoriak k        ON p.kategoria_id = k.id
                 WHERE p.id IN ($inClause)
@@ -165,7 +165,7 @@ class ProductoModel
      */
     public function actualizar(int $id, array $datos): bool
     {
-        $sql = "UPDATE productoak SET
+        $sql = "UPDATE produktuak SET
                     izenburua    = :izenburua,
                     deskribapena = :deskribapena,
                     prezioa      = :prezioa,
@@ -197,7 +197,7 @@ class ProductoModel
      */
     public function getPorVendedor(int $saltzaile_id): array
     {
-        $sql = "SELECT * FROM productoak WHERE saltzaile_id = :saltzaile_id ORDER BY sortze_data DESC";
+        $sql = "SELECT * FROM produktuak WHERE saltzaile_id = :saltzaile_id ORDER BY sortze_data DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':saltzaile_id' => $saltzaile_id]);
         return $stmt->fetchAll();
@@ -218,7 +218,7 @@ class ProductoModel
     public function obtenerFiltrados(string $q = '', int $kategoriaId = 0, int $page = 1, int $limit = 20): array
     {
         $sql = "SELECT p.*, k.izena as categoria_nombre
-                FROM productoak p
+                FROM produktuak p
                 LEFT JOIN kategoriak k ON p.kategoria_id = k.id
                 WHERE p.salgai = 1 AND p.onarpen_egoera = 'onartua'";
 
@@ -248,7 +248,7 @@ class ProductoModel
         $productos = $stmt->fetchAll();
 
         // Consulta de conteo para metadatos de paginación (misma lógica de filtros)
-        $countSql = "SELECT COUNT(*) as total FROM productoak p
+        $countSql = "SELECT COUNT(*) as total FROM produktuak p
                       LEFT JOIN kategoriak k ON p.kategoria_id = k.id
                       WHERE p.salgai = 1 AND p.onarpen_egoera = 'onartua'";
 
@@ -293,7 +293,7 @@ class ProductoModel
                        u.izena   as solicitante_nombre,
                        u.email   as solicitante_email,
                        k.izena   as categoria_nombre
-                FROM productoak p
+                FROM produktuak p
                 JOIN erabiltzaileak u ON p.saltzaile_id = u.id
                 LEFT JOIN kategoriak k ON p.kategoria_id = k.id
                 WHERE p.onarpen_egoera = 'pendentea'
@@ -317,7 +317,7 @@ class ProductoModel
      */
     public function eguneratuOnarpenEgoera(int $produktu_id, string $egoera, bool $salgai): bool
     {
-        $sql = "UPDATE productoak
+        $sql = "UPDATE produktuak
                 SET onarpen_egoera = :egoera,
                     salgai = :salgai
                 WHERE id = :id";
@@ -340,7 +340,7 @@ class ProductoModel
      */
     public function ezabatuProduktua(int $produktu_id): bool
     {
-        $sql = "DELETE FROM productoak WHERE id = :id";
+        $sql = "DELETE FROM produktuak WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([':id' => $produktu_id]);
     }

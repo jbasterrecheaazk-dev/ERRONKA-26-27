@@ -56,7 +56,7 @@ class EskaerakModel
         try {
             foreach ($productoIds as $pId) {
                 // Obtener precio real del producto (no confiar en el precio del carrito)
-                $sqlPrecio = "SELECT prezioa FROM productoak WHERE id = :pid LIMIT 1";
+                $sqlPrecio = "SELECT prezioa FROM produktuak WHERE id = :pid LIMIT 1";
                 $stmtP = $this->db->prepare($sqlPrecio);
                 $stmtP->execute([':pid' => $pId]);
                 $precio = (float) $stmtP->fetchColumn();
@@ -72,7 +72,7 @@ class EskaerakModel
                 ]);
 
                 // Marcar producto como vendido (no disponible para otros)
-                $sqlProd = "UPDATE productoak SET salgai = 0 WHERE id = :pid";
+                $sqlProd = "UPDATE produktuak SET salgai = 0 WHERE id = :pid";
                 $stmtProd = $this->db->prepare($sqlProd);
                 $stmtProd->execute([':pid' => $pId]);
             }
@@ -118,7 +118,7 @@ class EskaerakModel
 
         // Productos activos en catálogo
         $sqlProd = "SELECT COUNT(*) as productos_activos
-                    FROM productoak
+                    FROM produktuak
                     WHERE salgai = 1 AND onarpen_egoera = 'onartua'";
         $stmtP = $this->db->query($sqlProd);
         $prod = $stmtP->fetch();
@@ -140,10 +140,10 @@ class EskaerakModel
      */
     public function lortuAzkenEskaerak(int $muga = 5): array
     {
-        // JOIN con productoak y erabiltzaileak para datos completos
+        // JOIN con produktuak y erabiltzaileak para datos completos
         $sql = "SELECT e.*, p.izenburua as producto_izenburua, u.izena as erosle_nombre, u.email as erosle_email
                 FROM eskaerak e
-                JOIN productoak p ON e.produktu_id = p.id
+                JOIN produktuak p ON e.produktu_id = p.id
                 JOIN erabiltzaileak u ON e.erosle_id = u.id
                 WHERE e.egoera = 'osatua'
                 ORDER BY e.data DESC
@@ -161,11 +161,11 @@ class EskaerakModel
      */
     public function lortuEroslearenEskaerak(int $erosleId): array
     {
-        // JOIN con productoak (datos del producto) y erabiltzaileak (vendedor)
+        // JOIN con produktuak (datos del producto) y erabiltzaileak (vendedor)
         $sql = "SELECT e.*, p.izenburua as producto_izenburua, u.izena as saltzaile_nombre,
                     p.artista, p.urtea, p.prezioa as producto_prezioa
                FROM eskaerak e
-               JOIN productoak p ON e.produktu_id = p.id
+               JOIN produktuak p ON e.produktu_id = p.id
                JOIN erabiltzaileak u ON p.saltzaile_id = u.id
                WHERE e.erosle_id = :erosle_id AND e.egoera = 'osatua'
                ORDER BY e.data ASC";

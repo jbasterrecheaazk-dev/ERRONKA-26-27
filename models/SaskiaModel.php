@@ -49,7 +49,7 @@ class SaskiaModel
 
     /**
      * Obtener todos los productos de la cesta del usuario con sus detalles.
-     * Usa INNER JOIN con la tabla "productoak" para obtener título, precio e imagen.
+     * Usa INNER JOIN con la tabla "produktuak" para obtener título, precio e imagen.
      *
      * @param int $userId ID del usuario propietario de la cesta
      * @return array Lista de items con datos del producto
@@ -65,7 +65,7 @@ class SaskiaModel
                 p.prezioa,
                 p.irudia
             FROM saskia c
-            INNER JOIN productoak p ON c.produktu_id = p.id
+            INNER JOIN produktuak p ON c.produktu_id = p.id
             WHERE c.erabiltzaile_id = :user_id
             ORDER BY c.sortze_data DESC
         ";
