@@ -1,26 +1,46 @@
 <?php
-/*
+/**
  * CONTROLLERS/PRODUCTOCONTROLLER.PHP
  *
- * Controlador para gestionar la creación y actualización de
- * productos/artículos en venta desde el panel de perfil.
+ * Controlador para la creación y actualización de productos/artículos
+ * desde el panel de perfil del usuario.
+ *
+ * Características:
+ * - Soporta tanto peticiones AJAX (JSON) como navegación tradicional (redirecciones)
+ * - Maneja subida de archivos (imágenes) con validación de tipo
+ * - Al crear: productos van a estado 'pendentea' (esperando aprobación del admin)
+ * - Al actualizar: solo permite editar productos en estado 'pendentea'
+ * - Flash messages en sesión para feedback al usuario
+ *
+ * Endpoints utilizados:
+ * - POST /perfil?action=create → crear o actualizar producto
  */
 
 require_once __DIR__ . '/../config/Conexion.php';
 require_once __DIR__ . '/../models/ProductoModel.php';
 
+/**
+ * Clase que gestiona las operaciones CRUD de productos para los vendedores.
+ * Solo permite edición de productos pendientes (no aprobados ni vendidos).
+ */
 class ProductoController
 {
+    /** @var ProductoModel Modelo de productos */
     private ProductoModel $model;
 
+    /**
+     * Constructor: inicializa el modelo de productos.
+     */
     public function __construct()
     {
         $this->model = new ProductoModel();
     }
 
-    /*
-     * isAjax()
+    /**
      * Determina si la petición proviene de JavaScript (fetch/XHR).
+     * Se verifica mediante el header HTTP_X_REQUESTED_WITH.
+     *
+     * @return bool True si es una petición AJAX
      */
     private function isAjax(): bool
     {
@@ -28,12 +48,17 @@ class ProductoController
                strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 
-    /*
-     * create()
-     * Procesa el formulario de venta o edición:
-     * - Si viene edit_id, actualiza el producto existente.
-     * - Si no viene, crea un nuevo producto.
-     * - Si la petición es AJAX, responde con JSON en lugar de redirigir.
+    /**
+     * Punto de entrada principal: procesa creación o actualización.
+     *
+     * Si $_POST contiene edit_id → llama a update()
+     * Si no → llama a store()
+     *
+     * Siempre verifica que:
+     * - La petición sea POST
+     * - El usuario esté autenticado
+     *
+     * @return void
      */
     public function create(): void
     {
@@ -69,6 +94,23 @@ class ProductoController
         }
     }
 
+    /**
+     * Crea un nuevo producto en la base de datos.
+     *
+     * Flujo:
+     * 1. Recoge datos del formulario y los valida
+     * 2. Procesa la imagen subida (validación de extensión JPG/PNG/WEBP)
+     * 3. Inserta con salgai=0 y onarpen_egoera='pendentea'
+     * 4. Responde con JSON (ajax) o redirige (navegación)
+     *
+     * Validaciones realizadas:
+     * - Título, descripción y precio obligatorios
+     * - Precio debe ser numérico y positivo
+     * - Categoría obligatoria
+     * - Imagen obligatoria con extensión permitida
+     *
+     * @return void
+     */
     private function store(): void
     {
         $uploadDir = __DIR__ . '/../public/uploads/';
@@ -182,6 +224,19 @@ class ProductoController
         exit;
     }
 
+    /**
+     * Actualiza los datos de un producto existente.
+     *
+     * Restricciones de edición:
+     * - Solo el dueño del producto puede editarlo (verificación saltzaile_id)
+     * - Solo se permiten editar productos en estado 'pendentea'
+     *   (no se puede editar un producto aprobado, rechazado o vendido)
+     *
+     * La imagen es opcional: si no se envía nueva, se conserva la anterior.
+     *
+     * @param int $editId ID del producto a actualizar
+     * @return void
+     */
     private function update(int $editId): void
     {
         $uploadDir = __DIR__ . '/../public/uploads/';

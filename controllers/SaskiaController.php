@@ -1,18 +1,34 @@
 <?php
-/*
+/**
  * CONTROLLERS/SASKIACONTROLLER.PHP
  *
- * Controlador REST en formato JSON para gestionar la cesta de compra
- * mediante AJAX/Fetch API (DWEC). Todas las respuestas son JSON puro.
+ * Controlador REST para gestionar la cesta de compra (saskia) mediante API JSON.
+ * Todas las respuestas son JSON puro, pensado para consumo por fetch API desde JS.
+ *
+ * Endpoints disponibles:
+ * - GET  /api/saskia          → listar items del carrito con subtotal
+ * - POST /api/saskia/gehitu   → añadir producto al carrito (si no está duplicado)
+ * - POST /api/saskia/kendu    → eliminar producto del carrito
+ *
+ * Nota de negocio: mercado C2C de segunda mano → un producto solo puede existir
+ * una vez en la cesta de un usuario (no hay cantidades > 1 para el mismo producto).
  */
 
 require_once __DIR__ . '/../config/Conexion.php';
 require_once __DIR__ . '/../models/SaskiaModel.php';
 
+/**
+ * Clase que orquesta las operaciones de la cesta de compra.
+ * Todas sus respuestas son JSON con códigos de estado HTTP apropiados.
+ */
 class SaskiaController
 {
+    /** @var SaskiaModel Modelo de la cesta de compra */
     private SaskiaModel $model;
 
+    /**
+     * Constructor: inicializa el modelo de cesta.
+     */
     public function __construct()
     {
         $this->model = new SaskiaModel();
@@ -24,6 +40,10 @@ class SaskiaController
 
     /**
      * Limpia cualquier salida previa y envuelve la respuesta JSON.
+     *
+     * @param array $data Array con los datos a devolver
+     * @param int $status Código HTTP de respuesta (por defecto 200 OK)
+     * @return void
      */
     private function json(array $data, int $status = 200): void
     {
@@ -37,7 +57,10 @@ class SaskiaController
     }
 
     /**
-     * Exige que el usuario esté autenticado; si no, devuelve 401.
+     * Verifica que el usuario esté autenticado y devuelve su ID.
+     * Si no hay sesión activa, responde con JSON 401 Unauthorized.
+     *
+     * @return int ID del usuario autenticado
      */
     private function requireAuth(): int
     {
@@ -51,6 +74,18 @@ class SaskiaController
     // GET /api/saskia
     // ------------------------------------------------------------------
 
+    /**
+     * Lista todos los items de la cesta del usuario con su subtotal.
+     *
+     * Respuesta JSON:
+     * {
+     *   "items": [...],        // array de productos con datos completos
+     *   "total": "XX.XX",      // subtotal formateado con 2 decimales
+     *   "count": N             // número de items distintos
+     * }
+     *
+     * @return void
+     */
     public function index(): void
     {
         $userId = $this->requireAuth();
@@ -73,6 +108,14 @@ class SaskiaController
     // POST /api/saskia/gehitu
     // ------------------------------------------------------------------
 
+    /**
+     * Añade un producto a la cesta del usuario.
+     * Si el producto ya está en la cesta, devuelve error 400 en lugar de duplicar.
+     *
+     * Payload esperado: producto_id (entero) en body de la petición
+     *
+     * @return void
+     */
     public function gehitu(): void
     {
         $userId = $this->requireAuth();
@@ -104,6 +147,14 @@ class SaskiaController
     // POST /api/saskia/kendu
     // ------------------------------------------------------------------
 
+    /**
+     * Elimina un item de la cesta.
+     * Aceps dos formas de identificar el item a eliminar:
+     * - saskia_id: ID directo del registro en la tabla saskia
+     * - producto_id: ID del producto (busca la fila correspondiente del usuario)
+     *
+     * @return void
+     */
     public function kendu(): void
     {
         $userId = $this->requireAuth();

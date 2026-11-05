@@ -1,10 +1,21 @@
 <?php
-/*
+/**
  * CONTROLLERS/ADMINCONTROLLER.PHP
  *
- * Panel de administración: gestión de solicitudes de tasación,
- * aprobación/publicación de productos y estadísticas del marketplace.
+ * Panel de administración para la gestión del marketplace.
  * Solo accesible por usuarios con rol = 'admin'.
+ *
+ * Funcionalidades:
+ * - Dashboard principal con estadísticas y productos pendientes
+ * - Aprobar productos pendientes (onarpen_egoera → 'onartua', salgai → 1)
+ * - Rechazar productos pendientes (onarpen_egoera → 'baztertua', salgai → 0)
+ * - Eliminar productos aprobados del catálogo
+ *
+ * Respuestas:
+ * - GET /admin → devuelve la vista admin.php
+ * - POST /api/admin/onartu → JSON de aprobación
+ * - POST /api/admin/baztertu → JSON de rechazo
+ * - POST /api/admin/ezabatu → JSON de eliminación
  */
 
 require_once __DIR__ . '/../config/Conexion.php';
@@ -12,13 +23,24 @@ require_once __DIR__ . '/../models/ProductoModel.php';
 require_once __DIR__ . '/../models/EskaerakModel.php';
 require_once __DIR__ . '/../models/ErabiltzaileaModel.php';
 
+/**
+ * Clase que administra las operaciones del panel de control.
+ * Verifica permisos de administrador antes de ejecutar cualquier acción.
+ */
 class AdminController
 {
+    /** @var PDO Conexión a la base de datos */
     private PDO $db;
+    /** @var ProductoModel Modelo de productos */
     private ProductoModel $productoModel;
+    /** @var EskaerakModel Modelo de pedidos */
     private EskaerakModel $eskaerakModel;
+    /** @var ErabiltzaileaModel Modelo de usuarios */
     private ErabiltzaileaModel $erabiltzaileaModel;
 
+    /**
+     * Constructor: inicializa las dependencias del controlador.
+     */
     public function __construct()
     {
         $this->db = (new \Conexion())->getConexion();
@@ -27,9 +49,14 @@ class AdminController
         $this->erabiltzaileaModel = new ErabiltzaileaModel();
     }
 
-    // ------------------------------------------------------------------
-    // Security: strict admin verification
-    // ------------------------------------------------------------------
+    /**
+     * Verifica que el usuario actual tenga rol de administrador.
+     *
+     * Si la petición es AJAX (/api/), responde con JSON 403.
+     * Si es navegación web, redirige a la página principal con 403.
+     *
+     * @throws never Esta función nunca retorna; siempre llama a exit().
+     */
     private function requireAdmin(): void
     {
         // session_start() ya se llama en index.php (front controller)
@@ -48,9 +75,17 @@ class AdminController
         }
     }
 
-    // ------------------------------------------------------------------
-    // GET /admin - Panel principal de administración
-    // ------------------------------------------------------------------
+    /**
+     * Muestra el panel de administración principal.
+     *
+     * Carga:
+     * 1. Productos pendientes de aprobación (lortuPendenteak)
+     * 2. Productos aprobados y activos (obtenerTodos)
+     * 3. Estadísticas globales del marketplace
+     * 4. Últimos 5 pedidos realizados
+     *
+     * @return void Renderiza la vista admin.php
+     */
     public function index(): void
     {
         $this->requireAdmin();
@@ -73,9 +108,19 @@ class AdminController
         require_once __DIR__ . '/../views/pages/admin.php';
     }
 
-    // ------------------------------------------------------------------
-    // POST /api/admin/onartu - Aprobar producto (AJAX)
-    // ------------------------------------------------------------------
+    /**
+     * Aprueba un producto pendiente y lo publica en el catálogo.
+     *
+     * Endpoint: POST /api/admin/onartu
+     * Payload JSON: { "id": <producto_id> }
+     *
+     * Flujo:
+     * 1. Verifica rol de administrador
+     * 2. Verifica que el producto existe y está pendiente (pendentea)
+     * 3. Actualiza onarpen_egoera a 'onartua' y salgai a 1
+     *
+     * @return void Respuesta JSON siempre termina la ejecución
+     */
     public function onartu(): void
     {
         $this->requireAdmin();
@@ -121,9 +166,19 @@ class AdminController
         exit;
     }
 
-    // ------------------------------------------------------------------
-    // POST /api/admin/baztertu - Rechazar producto (AJAX)
-    // ------------------------------------------------------------------
+    /**
+     * Rechaza un producto pendiente y lo marca como no disponible.
+     *
+     * Endpoint: POST /api/admin/baztertu
+     * Payload JSON: { "id": <producto_id> }
+     *
+     * Flujo:
+     * 1. Verifica rol de administrador
+     * 2. Verifica que el producto existe y está pendiente (pendentea)
+     * 3. Actualiza onarpen_egoera a 'baztertua' y salgai a 0
+     *
+     * @return void Respuesta JSON siempre termina la ejecución
+     */
     public function baztertu(): void
     {
         $this->requireAdmin();
@@ -169,9 +224,19 @@ class AdminController
         exit;
     }
 
-    // ------------------------------------------------------------------
-    // POST /api/admin/ezabatu - Eliminar producto aprobado (AJAX)
-    // ------------------------------------------------------------------
+    /**
+     * Elimina permanentemente un producto aprobado del catálogo.
+     *
+     * Endpoint: POST /api/admin/ezabatu
+     * Payload JSON: { "id": <producto_id> }
+     *
+     * Flujo:
+     * 1. Verifica rol de administrador
+     * 2. Verifica que el producto existe y está aprobado (onartua)
+     * 3. Ejecuta DELETE en la tabla productoak
+     *
+     * @return void Respuesta JSON siempre termina la ejecución
+     */
     public function ezabatu(): void
     {
         $this->requireAdmin();

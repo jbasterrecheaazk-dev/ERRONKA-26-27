@@ -1,8 +1,19 @@
 <?php
+/**
+ * VIEWS/PAGES/PRODUCTO.PHP
+ *
+ * Vista de detalle de un producto individual (ficha del artículo).
+ * El dato $producto es cargado por el Front Controller (index.php)
+ * antes de incluir esta vista.
+ *
+ * Muestra: imagen, título, artista, año, categoría, precio,
+ * descripción y botones de acción (añadir al carrito, favoritos).
+ */
 // Vista de detalle de un producto individual (ficha del artículo)
 // $producto viene cargado desde el Front Controller (index.php)
 require_once __DIR__ . '/../../models/SaskiaModel.php';
 $saskiaModel = new SaskiaModel();
+// Contador del carrito para mostrar badge en el header
 $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getContador((int)$_SESSION['usuario_id']) : 0;
 ?>
 <!DOCTYPE html>
@@ -10,12 +21,13 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título dinámico con el nombre del producto -->
     <title>SoinuTruk — <?= htmlspecialchars($producto['izenburua']) ?></title>
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 <body>
     <div class="page">
-        <!-- HEADER -->
+        <!-- HEADER: navegación global (idéntico a index.php) -->
         <header class="header">
             <div class="container header__inner">
                 <a href="/" class="header__brand">
@@ -23,19 +35,22 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                     <div class="header__logo">Soinu<span>Truk</span></div>
                 </a>
                 <div class="header__actions">
+                    <!-- Botón Admin: solo visible para usuarios con rol 'admin' -->
                     <?php if (isset($_SESSION['usuario_id']) && (($_SESSION['usuario_rol'] ?? '') === 'admin')): ?>
                         <a href="/admin" class="header__btn header__btn--admin" aria-label="Panel de administración">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg>
                             <span>Admin</span>
                         </a>
                     <?php endif; ?>
+                    <!-- Botón Carrito: muestra badge con cantidad de items -->
                     <a href="/carrito" class="header__icon-btn" aria-label="Carrito">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         <?php if ($num_productos_carrito > 0): ?>
                         <span class="badge"><?= $num_productos_carrito ?></span>
                         <?php endif; ?>
                     </a>
-                    <?php if (isset($_SESSION['usuario_id'])): ?>
+                    <!-- Botón Perfil o Login según estado de sesión -->
+                    <?php if (isset($_SESSION['usuario_id'])): -->
                     <a href="/perfil" class="header__icon-btn" aria-label="Perfil">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </a>
@@ -49,8 +64,9 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
         </header>
 
         <main class="main container">
-            <!-- DETALLE DEL PRODUCTO -->
+            <!-- DETALLE DEL PRODUCTO: layout de dos columnas -->
             <section class="product-detail">
+                <!-- Columna izquierda: imagen del producto -->
                 <div class="product-detail__media">
                     <?php if (!empty($producto['irudia'])): ?>
                         <img src="/<?= htmlspecialchars($producto['irudia']) ?>" alt="<?= htmlspecialchars($producto['izenburua']) ?>" loading="lazy">
@@ -59,9 +75,11 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                     <?php endif; ?>
                 </div>
 
+                <!-- Columna derecha: información y acciones -->
                 <div class="product-detail__info">
                     <div class="product-detail__header">
                         <h1 class="product-detail__title"><?= htmlspecialchars($producto['izenburua']) ?></h1>
+                        <!-- Botón favoritos: gestionado por favoritos.js -->
                         <button class="btn-favorite" data-product-id="<?= (int)$producto['id'] ?>" aria-label="Añadir a favoritos">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -69,6 +87,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                         </button>
                     </div>
 
+                    <!-- Metadatos: artista, año, categoría -->
                     <div class="product-detail__meta">
                         <?php if (!empty($producto['artista'])): ?>
                             <span><?= htmlspecialchars($producto['artista']) ?></span>
@@ -81,14 +100,16 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                         <?php endif; ?>
                     </div>
 
+                    <!-- Precio formateado con 2 decimales -->
                     <div class="product-detail__price"><?= number_format($producto['prezioa'], 2) ?> €</div>
 
-
+                    <!-- Descripción formateada (nl2br para saltos de línea) -->
                     <div class="product-detail__description">
                         <h2>Descripción</h2>
                         <p><?= nl2br(htmlspecialchars($producto['deskribapena'])) ?></p>
                     </div>
 
+                    <!-- Botón añadir al carrito: gestionado por saskia.js -->
                     <div class="product-detail__actions">
                         <button class="btn-cart btn-cart--lg" data-product-id="<?= (int)$producto['id'] ?>" aria-label="Añadir al carrito">
                             Añadir al Carrito
@@ -105,6 +126,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
             </div>
         </footer>
     </div>
+    <!-- Scripts: favoritos (localStorage) y carrito (fetch API) -->
     <script src="/public/js/favoritos.js"></script>
     <script src="/public/js/saskia.js"></script>
 </body>

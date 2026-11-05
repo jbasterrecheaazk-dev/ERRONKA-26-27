@@ -1,11 +1,23 @@
 // Admin panel — gestión de solicitudes de tasación
 // Maneja aprobaciones/rechazos via fetch() y actualización del DOM en tiempo real
+//
+// Endpoints consumidos:
+//   POST /api/admin/onartu   → Aprobar producto (cambia onarpen_egoera a 'onartua')
+//   POST /api/admin/baztertu → Rechazar producto (cambia onarpen_egoera a 'baztertua')
+//   POST /api/admin/ezabatu  → Eliminar producto permanentemente
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Estado y utilidades ---
     const pendingGrid = document.getElementById('pending-grid');
     const pendingCount = document.getElementById('pending-count');
 
+    /**
+     * Mostrar notificación toast en el panel admin
+     * Reutiliza el patrón de toast brutalista del proyecto
+     *
+     * @param {string} message - Mensaje a mostrar
+     * @param {string} type - 'info' | 'success' | 'error'
+     */
     function showToast(message, type = 'info') {
         // Reutiliza el patrón de toast brutalista del proyecto
         let container = document.querySelector('.saskia-toast-container');
@@ -26,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3500);
     }
 
+    /**
+     * Animar eliminación de un elemento (fade out + slide)
+     * Retorna una Promise que se resuelve cuando termina la animación
+     *
+     * @param {HTMLElement} element - Elemento a animar
+     * @returns {Promise<void>}
+     */
     function animateRemoval(element) {
         return new Promise(resolve => {
             element.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
@@ -38,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+     * Actualizar contador visual de productos pendientes
+     * Anima el cambio con un scale sutil
+     *
+     * @param {number} delta - Cambio a aplicar (+1 o -1)
+     */
     function updatePendingCount(delta) {
         if (pendingCount) {
             const current = parseInt(pendingCount.textContent, 10) || 0;
@@ -50,6 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Manejador de botones Aprobar/Rechazar ---
+    /**
+     * Procesar una acción de aprobación o rechazo sobre un producto pendiente
+     * Envía petición POST al endpoint correspondiente y actualiza el DOM
+     *
+     * @param {HTMLButtonElement} button - Botón clickeado
+     * @param {string} action - 'onartu' (aprobar) | 'baztertu' (rechazar)
+     */
     async function handleAction(button, action) {
         const card = button.closest('.pending-card');
         if (!card) return;
@@ -57,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const productId = card.dataset.productId;
         if (!productId) return;
 
-        // Deshabilitar botones durante la petición
+        // Deshabilitar botones durante la petición (evita doble-click)
         const buttons = card.querySelectorAll('button');
         buttons.forEach(b => b.disabled = true);
         button.innerHTML = `<span class="spinner"></span> ${action === 'onartu' ? 'Aprobando...' : 'Rechazando...'}`;
@@ -104,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Delegación de eventos en el grid de pendientes ---
+    // Los botones se generan dinámicamente por PHP, así que usamos delegación
     if (pendingGrid) {
         pendingGrid.addEventListener('click', (e) => {
             const approveBtn = e.target.closest('.admin-btn--approve');
@@ -123,6 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const approvedGrid = document.getElementById('approved-grid');
     const approvedCount = document.getElementById('active-products-count');
 
+    /**
+     * Eliminar un producto aprobado permanentemente
+     * Pide confirmación al usuario antes de proceder
+     *
+     * @param {HTMLButtonElement} button - Botón de eliminar
+     */
     async function handleDelete(button) {
         const card = button.closest('.approved-card');
         if (!card) return;
@@ -191,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Spinner CSS inline para estados de carga ---
+    // Inyecta estilos CSS dinámicamente para el spinner de carga
     const style = document.createElement('style');
     style.textContent = `
         .spinner {

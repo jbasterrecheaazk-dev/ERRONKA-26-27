@@ -1,16 +1,15 @@
 <?php
-/*
+/**
  * CONTROLLERS/AUTHCONTROLLER.PHP
  *
- * En el patrón MVC, el Controlador es el intermediario.
- * Recibe las peticiones del usuario, pide datos al Modelo y decide qué mostrar.
+ * Controlador de autenticación: registro, login y logout de usuarios.
+ * Opera como punto final para los formularios de la vista login.php.
  *
- * Imagina un restaurante:
- * - El usuario es el cliente
- * - El Controlador es el camarero
- * - El Modelo es la cocina que prepara la comida
- *
- * Aquí gestionamos el registro, login y logout de usuarios.
+ * Notas importantes:
+ * - Contiene su propia llamada a session_start() en línea 19 (considerada redundante
+ *   ya que index.php también la invoca; se mantiene por compatibilidad).
+ * - Usa el patrón "mini-router" con query string (?action=) para enrutar peticiones.
+ * - Todas las respuestas terminan con exit para evitar procesamiento adicional.
  */
 
 // session_start() inicia o recupera la sesión del usuario
@@ -20,6 +19,10 @@ session_start();
 
 require_once __DIR__ . '/../models/ErabiltzaileaModel.php';
 
+/**
+ * Clase que maneja todas las operaciones de autenticación del sistema.
+ * Utiliza el patrón Controller del MVC para orquestar el modelo de usuarios.
+ */
 class AuthController
 {
     // El controlador necesita un modelo para acceder a los datos
@@ -34,16 +37,18 @@ class AuthController
         $this->model = new ErabiltzaileaModel();
     }
 
-    /*
-     * registro()
-     * Gestiona el proceso de crear una cuenta nueva
+    /**
+     * Gestiona el proceso de registro de un nuevo usuario.
      *
-     * Flujo de datos:
-     * 1. Recibe datos del formulario vía $_POST
-     * 2. Valida que no estén vacíos
-     * 3. Encripta la contraseña con password_hash()
-     * 4. Llama al modelo para guardar en la base de datos
-     * 5. Redirige al usuario según el resultado
+     * Flujo:
+     * 1. Verifica que la petición sea POST
+     * 2. Recoge y trimsea los campos del formulario (izena, email, pasahitza)
+     * 3. Valida que ningún campo esté vacío
+     * 4. Encripta la contraseña con password_hash() (bcrypt)
+     * 5. Llama al modelo para insertar en la BD
+     * 6. Redirige a /login con parámetro de éxito o error
+     *
+     * @return void Nunca retorna (siempre redirige o termina el script)
      */
     public function registro(): void
     {
@@ -91,16 +96,23 @@ class AuthController
         exit;
     }
 
-    /*
-     * login()
-     * Gestiona el inicio de sesión
+    /**
+     * Gestiona el inicio de sesión de un usuario existente.
      *
-     * Flujo de datos:
-     * 1. Recibe email y contraseña del formulario vía $_POST
-     * 2. Pregunta al modelo si existe un usuario con ese email
+     * Flujo:
+     * 1. Verifica que la petición sea POST
+     * 2. Busca el usuario por email usando el modelo
      * 3. Compara la contraseña con password_verify()
-     * 4. Si es correcta, guarda datos en $_SESSION
-     * 5. Redirige según el resultado
+     * 4. Si coincide, almacena datos del usuario en $_SESSION
+     * 5. Redirige a la página principal (/) o muestra error
+     *
+     * Datos almacenados en sesión:
+     *   - usuario_id: ID numérico del usuario
+     *   - usuario_nombre: nombre display (izena)
+     *   - usuario_email: dirección de correo
+     *   - usuario_rol: 'admin' o 'erabiltzailea'
+     *
+     * @return void Nunca retorna (siempre redirige)
      */
     public function login(): void
     {
@@ -142,12 +154,15 @@ class AuthController
         exit;
     }
 
-    /*
-     * logout()
-     * Cierra la sesión del usuario
+    /**
+     * Cierra la sesión del usuario actualmente logueado.
      *
-     * session_unset() borra todas las variables de sesión
-     * session_destroy() destruye la sesión completamente
+     * Flujo:
+     * 1. session_unset() elimina todas las variables de sesión
+     * 2. session_destroy() cierra la sesión en el servidor
+     * 3. Redirige a la página principal
+     *
+     * @return void
      */
     public function logout(): void
     {

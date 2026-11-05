@@ -1,4 +1,21 @@
 <?php
+/**
+ * VIEWS/PAGES/INDEX.PHP
+ *
+ * Vista principal del marketplace (página de inicio).
+ * Muestra el catálogo de productos, buscador, filtro por categoría
+ * y botón para añadir al carrito/favoritos.
+ *
+ * Datos cargados:
+ * - Productos aprobados y disponibles (obtenerTodos)
+ * - Categorías (getAll)
+ * - Contador del carrito (SSR para badge del header)
+ *
+ * Scripts JS necesarios:
+ * - favoritos.js: gestión de favoritos en localStorage
+ * - buscador.js: búsqueda, filtro y paginación
+ * - saskia.js: interacciones de carrito (añadir/borrar)
+ */
 // Cargar modelo de productos para el catálogo dinámico y el contador del carrito
 require_once __DIR__ . '/../../models/ProductoModel.php';
 require_once __DIR__ . '/../../models/KategoriaModel.php';
@@ -9,6 +26,7 @@ $saskiaModel = new SaskiaModel();
 $productos = $productosModel->obtenerTodos();
 $categorias = $kategoriaModel->getAll();
 
+// Si el usuario está logueado, mostrar el contador del carrito; si no, 0
 if (isset($_SESSION['usuario_id'])) {
     $num_productos_carrito = $saskiaModel->getContador((int)$_SESSION['usuario_id']);
 } else {
@@ -25,7 +43,7 @@ if (isset($_SESSION['usuario_id'])) {
 </head>
 <body>
     <div class="page">
-        <!-- HEADER -->
+        <!-- HEADER: barra de navegación global -->
         <header class="header">
             <div class="container header__inner">
                 <a href="/" class="header__brand">
@@ -33,18 +51,21 @@ if (isset($_SESSION['usuario_id'])) {
                     <div class="header__logo">Soinu<span>Truk</span></div>
                 </a>
                 <div class="header__actions">
+                    <!-- Botón Admin: solo visible para usuarios con rol 'admin' -->
                     <?php if (isset($_SESSION['usuario_id']) && (($_SESSION['usuario_rol'] ?? '') === 'admin')): ?>
                         <a href="/admin" class="header__btn header__btn--admin" aria-label="Panel de administración">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg>
                             <span>Admin</span>
                         </a>
                     <?php endif; ?>
+                    <!-- Botón Carrito: muestra badge con cantidad de items -->
                     <a href="/carrito" class="header__icon-btn" aria-label="Carrito">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                         <?php if ($num_productos_carrito > 0): ?>
                         <span class="badge"><?= $num_productos_carrito ?></span>
                         <?php endif; ?>
                     </a>
+                    <!-- Botón Perfil o Login según estado de sesión -->
                     <?php if (isset($_SESSION['usuario_id'])): ?>
                     <a href="/perfil" class="header__icon-btn" aria-label="Perfil">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -58,7 +79,7 @@ if (isset($_SESSION['usuario_id'])) {
             </div>
         </header>
 
-        <!-- HERO -->
+        <!-- HERO: sección principal con llamada a la acción -->
         <section class="hero">
             <div class="container hero__grid">
                 <div>
@@ -73,7 +94,7 @@ if (isset($_SESSION['usuario_id'])) {
         </section>
 
         <main class="main container">
-            <!-- PRODUCTS -->
+            <!-- PRODUCTS: catálogo con buscador, filtros y paginación -->
             <section id="productos" class="products">
                 <div class="products__head">
                     <h2 class="products__title">Catálogo completo</h2>
@@ -84,6 +105,7 @@ if (isset($_SESSION['usuario_id'])) {
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                                 <input id="searchInput" placeholder="Buscar..." />
                             </div>
+                            <!-- Selector de categoría con datos desde PHP -->
                             <select id="categoryFilter" class="input category-select">
                                 <option value="">Todas las categorías</option>
                                 <?php foreach ($categorias ?? [] as $cat): ?>
@@ -94,6 +116,7 @@ if (isset($_SESSION['usuario_id'])) {
                     </div>
                 </div>
 
+                <!-- Grid de productos: se recarga vía JS cuando hay búsqueda/filtro -->
                 <div class="products__grid" id="catalogGrid">
                     <?php if (!empty($productos)): ?>
                     <?php foreach ($productos as $producto): ?>
@@ -116,11 +139,13 @@ if (isset($_SESSION['usuario_id'])) {
                         </div>
                         <div class="card__footer">
                             <span class="card__shipping">Envío disponible</span>
+                            <!-- Botón favoritos: gestionado por favoritos.js (localStorage) -->
                             <button class="btn-favorite" data-product-id="<?= (int)$producto['id'] ?>" aria-label="Añadir a favoritos">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </button>
+                            <!-- Botón carrito: gestionado por saskia.js (fetch POST) -->
                             <button class="btn-cart" data-product-id="<?= (int)$producto['id'] ?>" aria-label="Añadir al carrito">
                                 Añadir al Carrito
                             </button>
@@ -133,6 +158,7 @@ if (isset($_SESSION['usuario_id'])) {
                     </div>
                     <?php endif; ?>
                 </div>
+                <!-- Contenedor de paginación: gestionado por buscador.js -->
                 <div id="paginationContainer" class="pagination"></div>
             </section>
         </main>
@@ -145,6 +171,7 @@ if (isset($_SESSION['usuario_id'])) {
         </footer>
     </div>
 
+    <!-- JavaScript del frontend: favoritos, búsqueda y carrito -->
     <script src="/public/js/favoritos.js"></script>
     <script src="/public/js/buscador.js"></script>
     <script src="/public/js/saskia.js"></script>

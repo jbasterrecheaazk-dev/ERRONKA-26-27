@@ -1,28 +1,34 @@
 <?php
-/*
+/**
  * MODELS/ERABILTZAILEAMODEL.PHP
  *
- * En el patrón MVC, el Modelo es la parte que habla con la base de datos.
- * No muestra nada al usuario, solo guarda y recupera datos.
+ * Modelo para gestionar la entidad "Usuario" (erabiltzailea = usuario en euskera).
+ * Opera sobre la tabla "erabiltzaileak" de la base de datos.
  *
- * Este modelo gestiona a los usuarios: registrarse y buscar por email.
+ * Responsabilidades:
+ * - Registrar nuevos usuarios (INSERT con password_hash).
+ * - Buscar usuarios por email (para login).
+ * - Buscar usuarios por ID (para obtener datos del perfil).
  *
- * ¿Qué es un Modelo?
- * Es la capa de acceso a datos. Aquí viven las consultas SQL,
- * la lógica de negocio relacionada con los datos y las reglas de validación básicas.
+ * Seguridad: Todas las consultas usan sentencias preparadas PDO
+ * con parámetros nombrados (:param) para prevenir inyección SQL.
  */
 
 require_once __DIR__ . '/../config/Conexion.php';
 
+/**
+ * Clase que encapsula el acceso a datos de la entidad "Usuario".
+ * Implementa el patrón DAO (Data Access Object) del MVC.
+ */
 class ErabiltzaileaModel
 {
-    // La propiedad $db guarda la conexión a la base de datos
-    // Usamos PDO para seguridad y eficiencia
+    /** @var PDO Conexión a la base de datos (Singleton vía Conexion) */
     private PDO $db;
 
-    /*
-     * Constructor: se ejecuta automáticamente cuando creamos un objeto de esta clase
-     * Aquí obtenemos la conexión a la base de datos una sola vez
+    /**
+     * Constructor: obtiene la conexión a la BD una sola vez.
+     * El patrón Singleton en Conexion asegura que todas las models
+     * compartan la misma conexión, esencial para transacciones.
      */
     public function __construct()
     {
@@ -30,69 +36,58 @@ class ErabiltzaileaModel
         $this->db = $conexion->getConexion();
     }
 
-    /*
-     * registrar()
-     * Inserta un nuevo usuario en la tabla erabiltzaileak
+    /**
+     * Registrar un nuevo usuario en la base de datos.
      *
-     * Recibe un array con los datos del usuario
-     * Devuelve true si se insertó correctamente, false si falló
+     * La contraseña se encripta con bcrypt antes de almacenarse.
+     * NUNCA se guarda texto plano por seguridad.
      *
-     * IMPORTANTE: Usamos SENTENCIAS PREPARADAS para evitar inyección SQL.
-     * ¿Qué es inyección SQL?
-     * Es un ataque donde el usuario introduce código SQL malicioso en un formulario.
-     * Con sentencias preparadas, los datos se tratan siempre como texto,
-     * nunca como código SQL. Es la forma más segura de trabajar con bases de datos.
+     * @param array $datos Array con keys: 'izena', 'email', 'pasahitza', 'rol' (opcional)
+     * @return bool True si la inserción fue exitosa, false en caso contrario
      */
     public function registrar(array $datos): bool
     {
-        // SQL con marcadores :nombre que luego reemplazaremos con datos reales
+        // SQL preparado con marcadores nombrados para prevenir inyección SQL
         $sql = "INSERT INTO erabiltzaileak (izena, email, pasahitza, rol) VALUES (:izena, :email, :pasahitza, :rol)";
 
         // prepare() convierte el SQL en una plantilla segura
         $stmt = $this->db->prepare($sql);
 
-        // execute() sustituye los marcadores por los valores reales de forma segura
+        // execute() sustituye los marcadores por valores reales de forma segura
         return $stmt->execute([
             ':izena'     => $datos['izena'],
             ':email'     => $datos['email'],
             ':pasahitza' => $datos['pasahitza'],
-            ':rol'       => $datos['rol'] ?? 'erabiltzailea', // Si no se pasa rol, usa 'erabiltzailea' por defecto
+            // Si no se especifica rol, se asigna 'erabiltzailea' (usuario normal)
+            ':rol'       => $datos['rol'] ?? 'erabiltzailea',
         ]);
     }
 
-    /*
-     * buscarPorEmail()
-     * Busca un usuario en la base de datos por su dirección de correo
+    /**
+     * Buscar un usuario por su dirección de correo electrónico.
+     * Usado en el login para verificar credenciales.
      *
-     * Recibe un email como texto
-     * Devuelve un array con los datos del usuario o null si no existe
-     *
-     * También usa sentencias preparadas para máxima seguridad
+     * @param string $email Dirección de email a buscar
+     * @return array|null Array con datos del usuario o null si no existe
      */
     public function buscarPorEmail(string $email): ?array
     {
-        // SQL con marcador :email
+        // LIMIT 1 optimiza la consulta sabiendo que el email es único
         $sql = "SELECT * FROM erabiltzaileak WHERE email = :email LIMIT 1";
-
-        // Creamos la sentencia preparada
         $stmt = $this->db->prepare($sql);
-
-        // Ejecutamos con el valor real del email
         $stmt->execute([':email' => $email]);
 
-        // fetch() obtiene la primera fila del resultado como array asociativo
+        // fetch() obtiene la primera fila como array asociativo
         $usuario = $stmt->fetch();
-
-        // Si no encontramos usuario, devolvemos null
         return $usuario ?: null;
     }
 
-    /*
-     * buscarPorId()
-     * Busca un usuario en la base de datos por su ID
+    /**
+     * Buscar un usuario por su ID numérico.
+     * Usado para obtener datos completos del perfil (incluyendo fecha de registro).
      *
-     * Recibe un ID numérico
-     * Devuelve un array con los datos del usuario (incluyendo fecha de registro) o null si no existe
+     * @param int $id Identificador numérico del usuario
+     * @return array|null Array con datos del usuario o null si no existe
      */
     public function buscarPorId(int $id): ?array
     {

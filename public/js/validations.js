@@ -1,3 +1,15 @@
+// Módulo de validación de formularios de login y registro
+// Se ejecuta al cargar la página y adjunta validadores a los formularios
+//
+// Formularios gestionados:
+//   - #login (POST /controllers/AuthController.php?action=login)
+//   - #register (POST /controllers/AuthController.php?action=registro)
+//
+// Reglas de validación:
+//   Login: email no vacío + formato válido, contraseña no vacía
+//   Registro: nombre no vacío, email no vacío + formato válido,
+//             contraseña no vacía + mínimo 8 caracteres
+
 document.addEventListener('DOMContentLoaded', () => {
     // Seleccionamos ambos formularios: login y registro
     const loginForm = document.getElementById('login');
@@ -6,7 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Expresión regular simple pero robusta para validar formato de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Función auxiliar para mostrar mensaje de error debajo de un input
+    /**
+     * Mostrar mensaje de error debajo de un input
+     * Añade clase .input--error (borde rojo) y crea/actualiza un elemento .form__error
+     *
+     * @param {HTMLInputElement} inputElement - Campo que contiene el error
+     * @param {string} message - Mensaje de error a mostrar
+     */
     function showError(inputElement, message) {
         // Marcamos el input con borde rojo (siguiendo estilo brutalista)
         inputElement.classList.add('input--error');
@@ -21,7 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
         errorDiv.textContent = message;
     }
 
-    // Función auxiliar para limpiar el error si el campo es correcto
+    /**
+     * Limpiar el error visual de un input
+     * Quita clase .input--error y elimina el elemento .form__error
+     *
+     * @param {HTMLInputElement} inputElement - Campo a limpiar
+     */
     function clearError(inputElement) {
         inputElement.classList.remove('input--error');
         const errorDiv = inputElement.parentElement.querySelector('.form__error');

@@ -1,7 +1,26 @@
-// Perfil - gestión de paneles, formulario de venta y edición de artículos
+/**
+ * public/js/perfil.js
+ *
+ * Módulo para la gestión del perfil de usuario:
+ * - Navegación entre paneles (tabs)
+ * - Navegación por hash (ej: /perfil#sell)
+ * - Validación y envío AJAX del formulario de venta
+ * - Edición de artículos pendientes
+ * - Carga dinámica de favoritos
+ * - Mostrar/ocultar campos condicionales según categoría
+ *
+ * Interactúa con:
+ *   - Endpoints: /api/producto, /mis-articulos?action=create
+ *   - DOM: .nav__btn, .panel, #productForm, .form__conditional
+ */
 document.addEventListener('DOMContentLoaded', () => {
 
     // ---------- Utilidad: cambiar panel activo ----------
+    /**
+     * Cambiar el panel visible y el botón de navegación activo
+     *
+     * @param {string} target - ID del panel a mostrar (orders, panel-sell, articles, favorites)
+     */
     function switchPanel(target) {
         document.querySelectorAll('.nav__btn[data-target]').forEach(b => b.classList.remove('nav__btn--active'));
         const btn = document.querySelector(`.nav__btn[data-target="${target}"]`);
@@ -12,11 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------- Navegación entre paneles (botones del nav) ----------
+    // Cada botón .nav__btn tiene data-target que indica qué panel mostrar
     document.querySelectorAll('.nav__btn[data-target]').forEach(btn => {
         btn.addEventListener('click', () => switchPanel(btn.dataset.target));
     });
 
     // ---------- Navegación por hash (ej: /perfil#sell) ----------
+    /**
+     * Leer el hash de la URL y abrir el panel correspondiente
+     * Soporta: #sell → panel-sell, #orders, #articles, #favorites
+     */
     function handleHash() {
         const hash = window.location.hash?.slice(1);
         if (!hash) return;
@@ -37,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const categorySelect   = document.getElementById('category');
     const conditionals     = document.querySelectorAll('.form__conditional');
 
-    // ---------- Resetear formulario a modo crear ----------
+    /**
+     * Resetear formulario a modo crear (limpia todos los campos)
+     * Restaura título, botón y preview de imagen a estado inicial.
+     */
     function resetForm() {
         form.reset();
         document.getElementById('editId').value = '';
@@ -47,7 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         conditionals.forEach(el => { el.classList.remove('form__conditional--visible'); });
     }
 
-    // ---------- Limpiar errores visuales previos ----------
+    /**
+     * Limpiar errores visuales previos de todos los campos del formulario
+     */
     function clearErrors() {
         document.querySelectorAll('.input--error').forEach(el => el.classList.remove('input--error'));
         document.querySelectorAll('.form__error').forEach(el => el.remove());
@@ -59,7 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ---------- Validación estricta del formulario ----------
+    /**
+     * Validación estricta del formulario antes de enviar
+     * Comprueba título, precio, categoría, descripción e imagen.
+     *
+     * @returns {Object} {campo: mensaje} con los errores encontrados
+     */
     function validateForm() {
         const errors = {};
 
@@ -97,7 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return errors;
     }
 
-    // ---------- Renderizar errores en la UI ----------
+    /**
+     * Renderizar errores en la UI (bordes rojos + banner de resumen)
+     * Marca campos con clase .input--error y añade mensajes .form__error
+     *
+     * @param {Object} errors - Objeto con errores {campo: mensaje}
+     */
     function renderErrors(errors) {
         clearErrors();
 
@@ -136,7 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ---------- Enviar formulario vía AJAX si pasa la validación ----------
+    /**
+     * Enviar formulario vía AJAX si pasa la validación
+     * POST /mis-articulos?action=create con FormData (incluye archivo)
+     * Maneja respuestas de éxito/error del backend.
+     */
     form.addEventListener('submit', async (e) => {
         const errors = validateForm();
         if (Object.keys(errors).length > 0) {
@@ -207,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ---------- Mostrar campos condicionales según categoría ----------
+    // data-condition="1" = vinilo, "2" = CD, "3" = casete
     categorySelect?.addEventListener('change', () => {
         const val = categorySelect.value;
         conditionals.forEach(el => {
@@ -223,7 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
         switchPanel('panel-sell');
     }
 
-    // ---------- Cargar datos del producto para editar ----------
+    /**
+     * Cargar datos del producto para editar
+     * Fetch a /api/producto?id=X, luego rellena el formulario con los datos
+     * Solo funciona para productos en estado 'pendentea'
+     */
     document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
@@ -263,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Rellenar campos condicionales
+                // Rellenar campos condicionales (artista, año)
                 const selectedCond = document.querySelector(`.form__conditional[data-condition="${val}"]`);
                 if (selectedCond) {
                     const artistInput = selectedCond.querySelector('input[name="artista"]');
@@ -296,7 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ---------- Cargar favoritos ----------
+    /**
+     * Cargar favoritos desde localStorage y buscar sus datos en la API
+     * Renderiza las tarjetas en #favoritesGrid
+     */
     async function loadFavorites() {
         const favoritesPanel = document.getElementById('favorites');
         if (!favoritesPanel) return;

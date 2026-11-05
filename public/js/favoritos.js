@@ -9,15 +9,19 @@
  * - isFavorite(id): comprueba si un producto está en favoritos
  * - getFavorites(): devuelve array de IDs de favoritos
  * - updateFavoriteButtons(): actualiza visualmente todos los botones de corazón
+ *
+ * Patrón: IIFE (Immediately Invoked Function Expression) para evitar
+ * contaminación del scope global. Solo expone SoinutrukFavorites.
  */
 (function() {
     'use strict';
 
+    // Clave única para localStorage (evita colisiones con otras apps)
     const STORAGE_KEY = 'soinutruk_favoritos';
 
     /**
      * Obtener lista de favoritos desde localStorage
-     * @returns {number[]} Array de IDs de productos favoritos
+     * @returns {number[]} Array de IDs de productos favoritos (vacío si no hay)
      */
     function getFavorites() {
         try {
@@ -31,6 +35,8 @@
 
     /**
      * Guardar lista de favoritos en localStorage
+     * Serializa el array a JSON y almacena con la clave del módulo.
+     *
      * @param {number[]} favorites - Array de IDs
      */
     function setFavorites(favorites) {
@@ -43,15 +49,18 @@
 
     /**
      * Verificar si un producto está en favoritos
+     *
      * @param {number} id - ID del producto
-     * @returns {boolean}
+     * @returns {boolean} true si está en favoritos
      */
     function isFavorite(id) {
         return getFavorites().includes(id);
     }
 
     /**
-     * Añadir o quitar un producto de favoritos
+     * Añadir o quitar un producto de favoritos (toggle)
+     * Si ya existe, lo elimina; si no, lo añade.
+     *
      * @param {number} id - ID del producto
      * @returns {boolean} true si ahora está favorito, false si se quitó
      */
@@ -60,7 +69,7 @@
         const index = favorites.indexOf(id);
 
         if (index >= 0) {
-            // Quitar de favoritos
+            // Quitar de favoritos (splice elimina el elemento en esa posición)
             favorites.splice(index, 1);
         } else {
             // Añadir a favoritos
@@ -74,6 +83,7 @@
     /**
      * Actualizar visualmente todos los botones de favoritos en el DOM
      * Busca elementos con clase .btn-favorite y data-product-id
+     * Aplica/modifica clases CSS y atributos SVG según estado.
      */
     function updateFavoriteButtons() {
         const buttons = document.querySelectorAll('.btn-favorite');
@@ -90,11 +100,11 @@
             const icon = btn.querySelector('svg');
             if (icon) {
                 if (favorite) {
-                    // Corazón rojo relleno
+                    // Corazón rojo relleno (activo)
                     icon.setAttribute('fill', 'currentColor');
                     btn.classList.add('btn-favorite--active');
                 } else {
-                    // Corazón negro vacío
+                    // Corazón negro vacío (inactivo)
                     icon.setAttribute('fill', 'none');
                     btn.classList.remove('btn-favorite--active');
                 }
@@ -104,7 +114,8 @@
 
     /**
      * Inicializar eventos de favoritos
-     * Escucha clics en botones .btn-favorite y delega a toggleFavorite
+     * Escucha clics en botones .btn-favorite mediante delegación de eventos
+     * y delega a toggleFavorite para cambiar el estado.
      */
     function init() {
         // Delegación de eventos para botones de favoritos
@@ -124,7 +135,7 @@
             // Toggle favorito
             const nowFavorite = toggleFavorite(id);
 
-            // Actualizar UI
+            // Actualizar UI del botón
             const icon = btn.querySelector('svg');
             if (icon) {
                 if (nowFavorite) {
@@ -137,16 +148,18 @@
             }
             btn.setAttribute('aria-pressed', nowFavorite);
 
-            // Notificar al usuario
+            // Notificar al usuario con toast
             showFavoriteNotification(id, nowFavorite);
         });
 
-        // Actualizar botones al cargar página
+        // Actualizar botones al cargar página (para que coincidan con localStorage)
         updateFavoriteButtons();
     }
 
     /**
      * Mostrar notificación temporal al cambiar favorito
+     * Crea un elemento flotante que aparece y desaparece con opacidad.
+     *
      * @param {number} id - ID del producto
      * @param {boolean} isFavorite - Si ahora está en favoritos
      */
@@ -162,7 +175,7 @@
 
         document.body.appendChild(notification);
 
-        // Animar aparición
+        // Animar aparición (requestAnimationFrame para forzar reflow)
         requestAnimationFrame(() => {
             notification.style.opacity = '1';
         });
@@ -175,7 +188,7 @@
         }, 2000);
     }
 
-    // Exportar funciones globales para uso externo
+    // Exportar funciones globales para uso externo (desde buscador.js, perfil.js, etc.)
     window.SoinutrukFavorites = {
         getFavorites,
         isFavorite,

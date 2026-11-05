@@ -2,28 +2,39 @@
  * SoinuTruk - Módulo de Búsqueda y Filtrado con Paginación
  *
  * Implementa búsqueda en tiempo real, filtrado por categoría y paginación.
- * Usa fetch API con debounce para evitar peticiones excesivas.
+ * Usa fetch API con debounce para evitar peticiones excesivas al servidor.
+ *
+ * Endpoints consumidos:
+ *   GET /api/productos?q=&kategoria=&pagina=&limite= → JSON
+ *
+ * Interactúa con:
+ *   - #searchInput: campo de texto para búsqueda libre
+ *   - #categoryFilter: <select> para filtrar por categoría
+ *   - #catalogGrid: contenedor donde se renderizan las tarjetas
+ *   - #paginationContainer: contenedor de botones de paginación
  */
 (function() {
     'use strict';
 
-    // Configuración
-    const DEBOUNCE_DELAY = 300; // ms
+    // Configuración del módulo: delay de debounce y endpoint de la API
+    const DEBOUNCE_DELAY = 300; // ms — tiempo de espera tras dejar de escribir
     const API_ENDPOINT = '/api/productos';
 
-    // Estado global
+    // Estado global de la paginación y filtros actuales
     let searchTimeout = null;
     let currentPage = 1;
     let currentLimit = 20;
     let totalPages = 1;
 
     /**
-     * Realizar petición de búsqueda/filtrado con paginación
-     * @param {string} q - Término de búsqueda
+     * Realizar petición de búsqueda/filtrado con paginación al endpoint API
+     * Construye la URL con parámetros GET y retorna el JSON de respuesta.
+     *
+     * @param {string} q - Término de búsqueda (texto libre)
      * @param {number} kategoriaId - ID de categoría (0 = todas)
-     * @param {number} page - Página actual
-     * @param {number} limit - Límite por página
-     * @returns {Promise<Object>} Objeto con productos y datos de paginación
+     * @param {number} page - Página actual a cargar
+     * @param {number} limit - Límite de productos por página
+     * @returns {Promise<Object>} Objeto con {productos: [], paginacion: {total, pagina, paginas}}
      */
     async function fetchProductos(q, kategoriaId, page, limit) {
         const params = new URLSearchParams();
@@ -47,15 +58,17 @@
     }
 
     /**
-     * Renderizar productos en el grid
+     * Renderizar productos en el grid dinámico
+     * Reemplaza el contenido HTML del contenedor con nuevas tarjetas.
+     *
      * @param {Array} productos - Array de productos a renderizar
      * @param {Object} paginacion - Datos de paginación
-     * @param {HTMLElement} container - Contenedor del grid
+     * @param {HTMLElement} container - Contenedor del grid (#catalogGrid)
      */
     function renderProductos(productos, paginacion, container) {
         if (!container) return;
 
-        // Limpiar grid
+        // Limpiar grid antes de insertar nuevos resultados
         container.innerHTML = '';
 
         if (!productos || productos.length === 0) {
@@ -67,7 +80,7 @@
             return;
         }
 
-        // Renderizar cada producto
+        // Renderizar cada producto como tarjeta
         productos.forEach(producto => {
             const card = createProductCard(producto);
             container.appendChild(card);
@@ -78,10 +91,12 @@
     }
 
     /**
-     * Crear tarjeta de producto (HTML string)
-     * Mantiene la estructura BEM original
-     * @param {Object} producto - Datos del producto
-     * @returns {HTMLElement} Tarjeta del producto
+     * Crear tarjeta de producto (elemento DOM) desde datos JSON
+     * Mantiene la estructura BEM original (.card, .card__media, etc.)
+     * Inyecta el estado inicial del corazón según localStorage.
+     *
+     * @param {Object} producto - Datos del producto (izenburua, artista, prezioa, etc.)
+     * @returns {HTMLElement} Tarjeta del producto (<article class="card">)
      */
     function createProductCard(producto) {
         const article = document.createElement('article');
@@ -89,7 +104,7 @@
         article.dataset.url = `/producto?id=${producto.id}`;
         article.dataset.productId = producto.id;
 
-        // Imagen
+        // Imagen del producto (o placeholder si no tiene)
         const mediaDiv = document.createElement('div');
         mediaDiv.className = 'card__media';
 
@@ -108,7 +123,7 @@
 
         article.appendChild(mediaDiv);
 
-        // Cuerpo de la tarjeta
+        // Cuerpo de la tarjeta: título, metadatos, precio
         const bodyDiv = document.createElement('div');
         bodyDiv.className = 'card__body';
 
@@ -118,7 +133,7 @@
         titleDiv.textContent = producto.izenburua;
         bodyDiv.appendChild(titleDiv);
 
-        // Meta información
+        // Meta información: artista, año, categoría
         const metaDiv = document.createElement('div');
         metaDiv.className = 'card__meta';
 
@@ -140,7 +155,7 @@
 
         bodyDiv.appendChild(metaDiv);
 
-        // Precio
+        // Precio formateado con 2 decimales
         const priceDiv = document.createElement('div');
         priceDiv.className = 'card__price';
         priceDiv.textContent = `${Number(producto.prezioa).toFixed(2)} €`;
@@ -148,7 +163,7 @@
 
         article.appendChild(bodyDiv);
 
-        // Footer con botón de favorito
+        // Footer con botón de favorito y enlace a detalle
         const footerDiv = document.createElement('div');
         footerDiv.className = 'card__footer';
 
@@ -162,7 +177,7 @@
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
         `;
-        // Aplicar estado inicial del corazón según favoritos
+        // Aplicar estado inicial del corazón según favoritos (localStorage)
         const isFav = window.SoinutrukFavorites && window.SoinutrukFavorites.isFavorite(producto.id);
         if (isFav) {
             favBtn.classList.add('btn-favorite--active');
@@ -170,7 +185,7 @@
         }
         footerDiv.appendChild(favBtn);
 
-        // Botón de ver detalle
+        // Botón de ver detalle (cliquea la tarjeta entera para navegar)
         const buyBtn = document.createElement('span');
         buyBtn.className = 'card__buy';
         buyBtn.textContent = 'Ver detalle';
@@ -182,7 +197,10 @@
     }
 
     /**
-     * Adjuntar navegación por delegación a tarjetas
+     * Adjuntar navegación por delegación a tarjetas del grid
+     * Al hacer clic en una tarjeta, navega a /producto?id=X
+     * (excepto si se hace clic en el botón de favoritos)
+     *
      * @param {HTMLElement} container - Contenedor del grid
      */
     function attachCardNavigation(container) {
@@ -195,8 +213,10 @@
     }
 
     /**
-     * Crear controles de paginación
-     * @param {Object} paginacion - Datos de paginación
+     * Crear controles de paginación dinámicos
+     * Genera botones Anterior, números de página y Siguiente.
+     *
+     * @param {Object} paginacion - Datos de paginación {pagina, paginas, total}
      * @param {Function} onPageChange - Callback para cambiar de página
      * @returns {HTMLElement} Contenedor de paginación
      */
@@ -206,7 +226,7 @@
 
         const { pagina, paginas, total } = paginacion;
 
-        // Botón anterior
+        // Botón anterior (solo si no estamos en la primera página)
         if (pagina > 1) {
             const prevBtn = document.createElement('button');
             prevBtn.textContent = '← Anterior';
@@ -215,7 +235,7 @@
             container.appendChild(prevBtn);
         }
 
-        // Números de páginas
+        // Números de páginas (máximo 5 visibles: ±2 alrededor de la actual)
         const start = Math.max(1, pagina - 2);
         const end = Math.min(paginas, pagina + 2);
 
@@ -231,7 +251,7 @@
             container.appendChild(btn);
         }
 
-        // Botón siguiente
+        // Botón siguiente (solo si hay más páginas)
         if (pagina < paginas) {
             const nextBtn = document.createElement('button');
             nextBtn.textContent = 'Siguiente →';
@@ -244,7 +264,8 @@
     }
 
     /**
-     * Obtener valores actuales de búsqueda y categoría
+     * Obtener valores actuales de búsqueda y categoría desde el DOM
+     * @returns {{q: string, kategoriaId: number}}
      */
     function getCurrentSearch() {
         const searchInput = document.getElementById('searchInput');
@@ -258,6 +279,8 @@
 
     /**
      * Aplicar filtros y actualizar catálogo con paginación
+     * Muestra estado de carga mientras se obtienen los datos.
+     *
      * @param {string} q - Término de búsqueda
      * @param {number} kategoriaId - ID de categoría
      * @param {number} page - Página a cargar
@@ -278,13 +301,13 @@
             </div>
         `;
 
-        // Obtener productos filtrados con paginación
+        // Obtener productos filtrados con paginación desde el servidor
         const result = await fetchProductos(q, kategoriaId, page, limit);
 
-        // Renderizar resultados
+        // Renderizar resultados en el grid
         renderProductos(result.productos, result.paginacion, grid);
 
-        // Agregar controles de paginación
+        // Agregar controles de paginación si hay más de una página
         const paginationContainer = document.getElementById('paginationContainer');
         if (paginationContainer) {
             paginationContainer.innerHTML = '';
@@ -304,6 +327,7 @@
 
     /**
      * Actualizar contador visual de resultados (si existiera un elemento)
+     * @param {number} total - Total de resultados encontrados
      */
     function updateResultCount(total) {
         // Se puede expandir para mostrar "X resultados" si se desea
@@ -313,6 +337,7 @@
     /**
      * Manejador con debounce para búsqueda
      * Evita excesivas peticiones mientras el usuario escribe
+     * Reinicia el temporizador en cada tecla pulsada.
      */
     function handleSearchInput() {
         const searchInput = document.getElementById('searchInput');
@@ -323,12 +348,12 @@
         const q = searchInput.value.trim();
         const kategoriaId = parseInt(categorySelect.value, 10) || 0;
 
-        // Cancelar timeout anterior
+        // Cancelar timeout anterior para reiniciar el debounce
         if (searchTimeout) {
             clearTimeout(searchTimeout);
         }
 
-        // Aplicar filtros con debounce
+        // Aplicar filtros después de DEBOUNCE_DELAY ms de inactividad
         searchTimeout = setTimeout(() => {
             applyFilters(q, kategoriaId, 1, currentLimit);
         }, DEBOUNCE_DELAY);
@@ -336,7 +361,8 @@
 
     /**
      * Inicializar módulo de búsqueda
-     * Configura eventos en input de búsqueda y selector de categorías
+     * Configura eventos en input de búsqueda y selector de categorías.
+     * Carga los productos iniciales (página 1) al arrancar.
      */
     function init() {
         const searchInput = document.getElementById('searchInput');
@@ -350,14 +376,14 @@
             categorySelect.addEventListener('change', handleSearchInput);
         }
 
-        // Cargar productos iniciales
+        // Cargar productos iniciales (todos, página 1)
         const grid = document.getElementById('catalogGrid');
         if (grid) {
             applyFilters('', 0, 1, currentLimit);
         }
     }
 
-    // Exportar funciones globales para uso externo
+    // Exportar funciones globales para uso externo (por ejemplo, desde otras páginas)
     window.SoinutrukSearch = {
         applyFilters,
         currentPage,
@@ -372,7 +398,7 @@
         init();
     }
 
-    // Función para actualizar paginación desde fuera
+    // Función para actualizar paginación desde fuera (llamada por otros scripts si es necesario)
     window.updatePagination = (page, limit) => {
         const searchInput = document.getElementById('searchInput');
         const categorySelect = document.getElementById('categoryFilter');

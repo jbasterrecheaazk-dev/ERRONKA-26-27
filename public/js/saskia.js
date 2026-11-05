@@ -9,15 +9,28 @@
  * - Actualiza el contador del header sin recarga
  * - En /carrito: hace fetch('/api/saskia') y renderiza dinámicamente las cards
  * - Delegación de eventos para eliminar item
+ * - Checkout: POST /api/eskaerak/procesar
+ *
+ * Endpoints consumidos:
+ *   GET  /api/saskia?action=index → JSON con items y count
+ *   POST /api/saskia/gehitu      → JSON {success, error}
+ *   POST /api/saskia/kendu       → JSON {success, error}
+ *   POST /api/eskaerak/procesar  → JSON {success, error}
  */
 (function () {
     'use strict';
 
+    // URL base para todas las operaciones del carrito
     const API_CART = '/api/saskia';
 
     /** ------------------------------------------------------------------
      * Notificación brutalista tipo toast
-     * ------------------------------------------------------------------ */
+     * Muestra un mensaje flotante que aparece/desaparece con opacidad.
+     * Elimina toasts anteriores para no acumular elementos.
+     *
+     * @param {string} message - Texto a mostrar
+     * @param {string} type - 'success' | 'error'
+     */
     function showToast(message, type) {
         const existing = document.querySelector('.saskia-toast');
         if (existing) existing.remove();
@@ -39,7 +52,8 @@
 
     /** ------------------------------------------------------------------
      * Actualizar el badge del header con el contador real desde BD
-     * ------------------------------------------------------------------ */
+     * Fetch al endpoint index y actualiza el span .saskia-badge
+     */
     async function refreshCartBadge() {
         try {
             const res = await fetch(API_CART + '?action=index');
@@ -60,7 +74,8 @@
 
     /** ------------------------------------------------------------------
      * Interceptar botones "Añadir al carrito" (.btn-cart)
-     * ------------------------------------------------------------------ */
+     * Cada botón tiene data-product-id que se envía como produktu_id
+     */
     function initAddToCartButtons() {
         document.addEventListener('click', function (e) {
             const btn = e.target.closest('.btn-cart');
@@ -100,7 +115,9 @@
 
     /** ------------------------------------------------------------------
      * Renderizar la vista completa del carrito (/saskia)
-     * ------------------------------------------------------------------ */
+     * Obtiene los items del carrito y genera HTML dinámico para cada uno.
+     * También actualiza el resumen lateral y activa el botón de checkout.
+     */
     async function renderCartView() {
         const skeleton = document.getElementById('saskiaSkeleton');
         const content  = document.getElementById('saskiaContent');
@@ -120,6 +137,7 @@
             const res = await fetch(API_CART + '?action=index');
             if (!res.ok) {
                 if (res.status === 401) {
+                    // Redirigir al login si no está autenticado
                     window.location.href = '/login';
                 }
                 throw new Error('Error al cargar la cesta');
@@ -133,7 +151,7 @@
                 return;
             }
 
-            // Limpiar
+            // Limpiar contenedores
             itemsEl.innerHTML = '';
             summaryEl.innerHTML = '';
 
@@ -147,7 +165,7 @@
                 const irudia     = item.irudia || null;
                 subtotalNum += prezioa;
 
-                // Crear card del item
+                // Crear card del item con imagen y datos
                 const card = document.createElement('article');
                 card.className = 'saskia-item';
                 card.dataset.saskiaId = saskiaId;
@@ -192,6 +210,10 @@
         }
     }
 
+    /** ------------------------------------------------------------------
+     * Procesar checkout: enviar pedido al backend
+     * POST /api/eskaerak/procesar crea el pedido y bloquea los productos
+     */
     async function processCheckout() {
         const btn = document.getElementById('saskiaCheckout');
         btn.disabled = true;
@@ -212,7 +234,7 @@
 
             if (!res.ok) throw new Error(data.error || 'Error desconocido');
 
-            // Éxito: redirección brutalista
+            // Éxito: redirección brutalista (pantalla de confirmación)
             document.body.innerHTML =
                 '<div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; background: #121212;">' +
                 '<div style="max-width: 480px; width: 100%;">' +
@@ -234,7 +256,9 @@
 
     /** ------------------------------------------------------------------
      * Delegación de eventos: eliminar en el carrito
-     * ------------------------------------------------------------------ */
+     * Los botones .saskia-item__remove se generan dinámicamente,
+     * por lo que usamos delegación en document.
+     */
     function initCartInteractions() {
         document.addEventListener('click', function (e) {
             // Botón eliminar
@@ -251,7 +275,12 @@
 
     /** ------------------------------------------------------------------
      * Eliminar un item de la cesta
-     * ------------------------------------------------------------------ */
+     * POST /api/saskia/kendu con saskia_id y produktu_id
+     *
+     * @param {number} saskiaId - ID del registro en la tabla saskia
+     * @param {number} productId - ID del producto
+     * @param {HTMLElement} itemEl - Elemento DOM a eliminar
+     */
     function deleteItem(saskiaId, productId, itemEl) {
         const form = new FormData();
         form.append('saskia_id', saskiaId);
@@ -278,7 +307,8 @@
 
     /** ------------------------------------------------------------------
      * Recalcular totales tras eliminar un item
-     * ------------------------------------------------------------------ */
+     * Refresca el summary lateral y el total sin recargar toda la página
+     */
     async function recalcSummary() {
         try {
             const res = await fetch(API_CART + '?action=index');
@@ -317,18 +347,22 @@
     /** ------------------------------------------------------------------
      * Helpers
      * ------------------------------------------------------------------ */
+    // Escapar HTML para prevenir XSS al insertar contenido dinámico
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.appendChild(document.createTextNode(str));
         return div.innerHTML;
     }
 
+    // Formatear número como precio español (coma como separador decimal)
     function formatPrice(num) {
         return Number(num).toFixed(2).replace('.', ',');
     }
 
     /** ------------------------------------------------------------------
      * Inicialización principal
+     * Configura todos los listeners y, si estamos en /carrito,
+     * renderiza la vista del carrito.
      * ------------------------------------------------------------------ */
     function init() {
         initAddToCartButtons();
@@ -340,7 +374,7 @@
         }
     }
 
-    // Exponer API global
+    // Exponer API global para interacción desde otros scripts
     window.SoinutrukSaskia = {
         addToCart: function (productId) {
             var btn = document.querySelector('.btn-cart[data-product-id="' + productId + '"]');
