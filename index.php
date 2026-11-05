@@ -115,6 +115,8 @@ $routes = [
     '/admin'        => 'views/pages/admin.php',
     '/mis-compras'  => 'views/pages/mis-compras.php',
     '/producto'     => 'views/pages/producto.php',
+    '/terminos'     => 'views/pages/terminos.php',
+    '/privacidad'   => 'views/pages/privacidad.php',
     '/logout'       => 'controllers/AuthController.php?action=logout',
 ];
 

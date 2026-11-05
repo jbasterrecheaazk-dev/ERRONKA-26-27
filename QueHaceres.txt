@@ -1,1 +1,3 @@
 meter animación y crear hoja de términos y política. meter video o foto en la zona del landing page
+
+añadir QR en la presentacion para que la gente pueda meterse en la web.

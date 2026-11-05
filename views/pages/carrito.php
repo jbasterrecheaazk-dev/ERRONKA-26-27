@@ -111,7 +111,7 @@ if (isset($_SESSION['usuario_id'])) {
         <footer class="footer">
             <div class="container footer__inner">
                 <div>© 2026 SoinuTruk — Marketplace C2C de música física</div>
-                <div><a href="#">Términos</a> • <a href="#">Privacidad</a> • <a href="#">Contacto</a></div>
+                <div><a href="/terminos">Términos</a> • <a href="/privacidad">Privacidad</a></div>
             </div>
         </footer>
     </div>

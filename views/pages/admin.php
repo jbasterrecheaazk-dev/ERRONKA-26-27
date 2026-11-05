@@ -243,6 +243,7 @@
         <footer class="footer">
             <div class="container footer__inner">
                 <div>© 2026 SoinuTruk — Panel de Administración</div>
+                <div><a href="/terminos">Términos</a> • <a href="/privacidad">Privacidad</a></div>
             </div>
         </footer>
     </div>

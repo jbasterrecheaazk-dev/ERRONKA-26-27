@@ -50,7 +50,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
                         <?php endif; ?>
                     </a>
                     <!-- Botón Perfil o Login según estado de sesión -->
-                    <?php if (isset($_SESSION['usuario_id'])): -->
+                    <?php if (isset($_SESSION['usuario_id'])): ?>
                     <a href="/perfil" class="header__icon-btn" aria-label="Perfil">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </a>
@@ -122,7 +122,7 @@ $num_productos_carrito = isset($_SESSION['usuario_id']) ? $saskiaModel->getConta
         <footer class="footer">
             <div class="container footer__inner">
                 <div>© 2026 SoinuTruk — Marketplace C2C de música física</div>
-                <div><a href="#">Términos</a> • <a href="#">Privacidad</a> • <a href="#">Contacto</a></div>
+                <div><a href="/terminos">Términos</a> • <a href="/privacidad">Privacidad</a></div>
             </div>
         </footer>
     </div>

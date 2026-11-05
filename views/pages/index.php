@@ -90,6 +90,14 @@ if (isset($_SESSION['usuario_id'])) {
                         <a class="btn btn--ghost" href="/perfil#sell">Vender mi música</a>
                     </div>
                 </div>
+                <!-- VINYL: animación CSS de disco girando -->
+                <div class="vinyl-scene">
+                    <div class="vinyl">
+                        <div class="vinyl-label">
+                            <span class="vinyl-label-text">Soinu<span class="vinyl-label-accent">Truk</span></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -166,7 +174,7 @@ if (isset($_SESSION['usuario_id'])) {
         <footer class="footer">
             <div class="container footer__inner">
                 <div>© 2026 SoinuTruk — Marketplace C2C de música física</div>
-                <div><a href="#">Términos</a> • <a href="#">Privacidad</a> • <a href="#">Contacto</a></div>
+                <div><a href="/terminos">Términos</a> • <a href="/privacidad">Privacidad</a></div>
             </div>
         </footer>
     </div>
@@ -175,5 +183,6 @@ if (isset($_SESSION['usuario_id'])) {
     <script src="/public/js/favoritos.js"></script>
     <script src="/public/js/buscador.js"></script>
     <script src="/public/js/saskia.js"></script>
+    <script src="/public/js/hero-vinyl.js"></script>
 </body>
 </html>

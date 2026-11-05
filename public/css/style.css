@@ -57,15 +57,19 @@ a {
 
 .container {
     width: 100%;
+    max-width: 1120px;
     padding-inline: 16px;
     margin-inline: auto;
 }
 
 .header__inner {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: min(1120px, 92%);
+    margin-inline: auto;
+    padding: 16px 0;
     gap: 24px;
-    padding: 12px 16px;
 }
 
 .header__brand {
@@ -2185,7 +2189,7 @@ body {
         align-items: center !important;
         gap: 12px !important;
         padding: 12px 16px !important;
-        width: 100% !important;
+        width: min(1120px, 92%) !important;
     }
 
     .header__brand {
@@ -2422,4 +2426,256 @@ body {
 
 .admin__table {
     min-width: 540px !important; /* La tabla hace scroll dentro de su wrapper sin ensanchar la web */
+}
+
+/* ==========================================================================
+   FIX DEFINITIVO: CENTRADO DE CONTENEDORES PRINCIPALES (ESCRITORIO)
+   ========================================================================== */
+@media (min-width: 769px) {
+    .container {
+        width: 100% !important;
+        max-width: 1120px !important;
+        margin-inline: auto !important;
+    }
+
+    .hero {
+        padding: 120px 0 60px;
+    }
+
+    .main {
+        padding: 80px 0 120px;
+    }
+}
+
+/* ==========================================================================
+   HERO VINYL: Animación de disco de vinilo girando
+   ========================================================================== */
+.vinyl-scene {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    perspective: 800px;
+}
+
+.vinyl {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    /* Surcos del vinilo con gradientes radiales */
+    background:
+        radial-gradient(circle, #0a0a0a 0%, #0a0a0a 18%, transparent 18.5%),
+        radial-gradient(circle, transparent 18%, transparent 18.5%, #1a1a1a 18.5%, #1a1a1a 19%, transparent 19%),
+        radial-gradient(circle, transparent 20%, transparent 20.5%, #1a1a1a 20.5%, #1a1a1a 21%, transparent 21%),
+        radial-gradient(circle, transparent 22%, transparent 22.5%, #1a1a1a 22.5%, #1a1a1a 23%, transparent 23%),
+        radial-gradient(circle, transparent 24%, transparent 24.5%, #1a1a1a 24.5%, #1a1a1a 25%, transparent 25%),
+        radial-gradient(circle, transparent 26%, transparent 26.5%, #1a1a1a 26.5%, #1a1a1a 27%, transparent 27%),
+        radial-gradient(circle, transparent 28%, transparent 28.5%, #1a1a1a 28.5%, #1a1a1a 29%, transparent 29%),
+        radial-gradient(circle, transparent 30%, transparent 30.5%, #1a1a1a 30.5%, #1a1a1a 31%, transparent 31%),
+        radial-gradient(circle, transparent 32%, transparent 32.5%, #1a1a1a 32.5%, #1a1a1a 33%, transparent 33%),
+        radial-gradient(circle, transparent 34%, transparent 34.5%, #1a1a1a 34.5%, #1a1a1a 35%, transparent 35%),
+        radial-gradient(circle, transparent 36%, transparent 36.5%, #1a1a1a 36.5%, #1a1a1a 37%, transparent 37%),
+        radial-gradient(circle, transparent 38%, transparent 38.5%, #1a1a1a 38.5%, #1a1a1a 39%, transparent 39%),
+        radial-gradient(circle, transparent 40%, transparent 40.5%, #1a1a1a 40.5%, #1a1a1a 41%, transparent 41%),
+        radial-gradient(circle, transparent 42%, transparent 42.5%, #1a1a1a 42.5%, #1a1a1a 43%, transparent 43%),
+        radial-gradient(circle, transparent 44%, transparent 44.5%, #1a1a1a 44.5%, #1a1a1a 45%, transparent 45%),
+        radial-gradient(circle, transparent 46%, transparent 46.5%, #1a1a1a 46.5%, #1a1a1a 47%, transparent 47%),
+        radial-gradient(circle, transparent 48%, transparent 48.5%, #1a1a1a 48.5%, #1a1a1a 49%, transparent 49%),
+        radial-gradient(circle, transparent 50%, transparent 50.5%, #1a1a1a 50.5%, #1a1a1a 51%, transparent 51%),
+        radial-gradient(circle, transparent 52%, transparent 52.5%, #1a1a1a 52.5%, #1a1a1a 53%, transparent 53%),
+        radial-gradient(circle, transparent 54%, transparent 54.5%, #1a1a1a 54.5%, #1a1a1a 55%, transparent 55%),
+        radial-gradient(circle, transparent 56%, transparent 56.5%, #1a1a1a 56.5%, #1a1a1a 57%, transparent 57%),
+        radial-gradient(circle, transparent 58%, transparent 58.5%, #1a1a1a 58.5%, #1a1a1a 59%, transparent 59%),
+        radial-gradient(circle, transparent 60%, transparent 60.5%, #1a1a1a 60.5%, #1a1a1a 61%, transparent 61%),
+        radial-gradient(circle, transparent 62%, transparent 62.5%, #1a1a1a 62.5%, #1a1a1a 63%, transparent 63%),
+        radial-gradient(circle, transparent 64%, transparent 64.5%, #1a1a1a 64.5%, #1a1a1a 65%, transparent 65%),
+        radial-gradient(circle, transparent 66%, transparent 66.5%, #1a1a1a 66.5%, #1a1a1a 67%, transparent 67%),
+        radial-gradient(circle, transparent 68%, transparent 68.5%, #1a1a1a 68.5%, #1a1a1a 69%, transparent 69%),
+        radial-gradient(circle, transparent 70%, transparent 70.5%, #1a1a1a 70.5%, #1a1a1a 71%, transparent 71%),
+        radial-gradient(circle, transparent 72%, transparent 72.5%, #1a1a1a 72.5%, #1a1a1a 73%, transparent 73%),
+        radial-gradient(circle, transparent 74%, transparent 74.5%, #1a1a1a 74.5%, #1a1a1a 75%, transparent 75%),
+        radial-gradient(circle, transparent 76%, transparent 76.5%, #1a1a1a 76.5%, #1a1a1a 77%, transparent 77%),
+        radial-gradient(circle, transparent 78%, transparent 78.5%, #1a1a1a 78.5%, #1a1a1a 79%, transparent 79%),
+        radial-gradient(circle, transparent 80%, transparent 80.5%, #1a1a1a 80.5%, #1a1a1a 81%, transparent 81%),
+        radial-gradient(circle, transparent 82%, transparent 82.5%, #1a1a1a 82.5%, #1a1a1a 83%, transparent 83%),
+        radial-gradient(circle, transparent 84%, transparent 84.5%, #1a1a1a 84.5%, #1a1a1a 85%, transparent 85%),
+        radial-gradient(circle, transparent 86%, transparent 86.5%, #1a1a1a 86.5%, #1a1a1a 87%, transparent 87%),
+        radial-gradient(circle, transparent 88%, transparent 88.5%, #1a1a1a 88.5%, #1a1a1a 89%, transparent 89%),
+        radial-gradient(circle, transparent 90%, transparent 90.5%, #1a1a1a 90.5%, #1a1a1a 91%, transparent 91%),
+        radial-gradient(circle, transparent 92%, transparent 92.5%, #1a1a1a 92.5%, #1a1a1a 93%, transparent 93%),
+        radial-gradient(circle, transparent 94%, transparent 94.5%, #1a1a1a 94.5%, #1a1a1a 95%, transparent 95%),
+        radial-gradient(circle, transparent 96%, transparent 96.5%, #1a1a1a 96.5%, #1a1a1a 97%, transparent 97%),
+        radial-gradient(circle, transparent 98%, transparent 98.5%, #1a1a1a 98.5%, #1a1a1a 99%, transparent 99%),
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08) 0%, transparent 40%),
+        conic-gradient(from 0deg, #1a1a1a, #2a2a2a, #1a1a1a, #2a2a2a, #1a1a1a, #2a2a2a, #1a1a1a);
+    box-shadow:
+        0 0 0 4px #111,
+        0 0 0 5px #2a2a2a,
+        0 8px 32px rgba(0,0,0,0.6),
+        inset 0 0 60px rgba(0,0,0,0.3);
+    animation: vinyl-spin 4s linear infinite;
+    transform-style: preserve-3d;
+}
+
+/* Brillo dinámico que simula la luz reflejada al girar */
+.vinyl::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(255,255,255,0.06) 40%,
+        rgba(255,255,255,0.12) 50%,
+        transparent 60%
+    );
+    animation: vinyl-shine 4s linear infinite;
+}
+
+/* Sombra proyectada en el suelo */
+.vinyl-scene::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%);
+    filter: blur(4px);
+}
+
+.vinyl-scene {
+    position: relative;
+}
+
+.vinyl-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    /* Etiqueta amarilla/dorada estilo vinilo clásico */
+    background:
+        radial-gradient(circle at 35% 35%, #f5d76e, #c9a227 60%, #a07818 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 0 0 2px #8b6914,
+        inset 0 0 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: label-reveal 0.8s ease-out 3s forwards;
+}
+
+.vinyl-label::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #121212;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.vinyl-label-text {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #121212;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.2;
+    z-index: 1;
+}
+
+.vinyl-label-accent {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+@keyframes vinyl-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes vinyl-shine {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes label-reveal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Responsive: ajustar tamaño del vinilo en tablets */
+@media (max-width: 1024px) {
+    .vinyl {
+        width: 220px;
+        height: 220px;
+    }
+
+    .vinyl-label {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+/* Responsive: ocultar animación en móviles para mejor rendimiento */
+@media (max-width: 768px) {
+    .vinyl-scene {
+        min-height: 200px;
+    }
+
+    .vinyl {
+        width: 180px;
+        height: 180px;
+        animation: vinyl-spin 6s linear infinite;
+    }
+
+    .vinyl-label {
+        width: 60px;
+        height: 60px;
+    }
+
+    .vinyl-label-text {
+        font-size: 0.5rem;
+    }
+}
+
+/* ==========================================================================
+   HERO VINYL: Interactividad — toggle pause/resume con clic
+   ========================================================================== */
+.vinyl-scene {
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.vinyl.is-paused,
+.vinyl.is-paused::before {
+    animation-play-state: paused;
 }
