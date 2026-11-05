@@ -13,7 +13,6 @@
             margin: 0;
             padding: 0;
         }
-
         /* Iconos SVG visibles */
         svg {
             stroke: var(--text);
@@ -24,6 +23,10 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
+        }
+        a {
+            text-decoration: none;
+            color: white;
         }
 
         /* Layout */
