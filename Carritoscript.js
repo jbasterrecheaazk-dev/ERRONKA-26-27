@@ -55,7 +55,7 @@ function erakutsiLista() {
         line.append(text, borrar);
         cart__items.appendChild(line);
     });
-    cartresult.textContent = `Guztira: ${result.toFixed(2)} €`;
+    cartresult.textContent = `Total: ${result.toFixed(2)} €`;
 }
 
 carritoBtn.addEventListener('click', () => {
@@ -74,10 +74,10 @@ function ezabatuProduktua(id) {
 }
 erosi.addEventListener('click', () => {
     if (cart__items.length === 0) {
-        alert('Lista hutsik dago.')
+        alert('Lista vacia.')
         return;
     }
-    alert('Erosketa operazioa ondo egin da!');
+    alert('La operacion de compra a sido un exito!');
     cart__items.splice(0, cart__items.length);
     erakutsiLista();
     cart__items.hidden = true;
