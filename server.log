@@ -1,0 +1,83 @@
+[Thu Oct 29 09:58:44 2026] PHP 8.1.25 Development Server (http://localhost:8080) started
+[Thu Oct 29 09:59:12 2026] [::1]:63927 Accepted
+[Thu Oct 29 09:59:12 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 09:59:12 2026] [::1]:63927 [200]: HEAD /
+[Thu Oct 29 09:59:12 2026] [::1]:63927 Closing
+[Thu Oct 29 10:02:38 2026] [::1]:55446 Accepted
+[Thu Oct 29 10:02:38 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:02:38 2026] PHP Warning:  require_once(C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers/../config/Connection.php): Failed to open stream: No such file or directory in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php on line 9
+[Thu Oct 29 10:02:38 2026] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers/../config/Connection.php' (include_path='C:\xampp\php\PEAR') in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php:9
+Stack trace:
+#0 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\index.php(191): require_once()
+#1 {main}
+  thrown in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php on line 9
+[Thu Oct 29 10:02:38 2026] [::1]:55446 [200]: HEAD /api/saskia - Uncaught Error: Failed opening required 'C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers/../config/Connection.php' (include_path='C:\xampp\php\PEAR') in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php:9
+Stack trace:
+#0 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\index.php(191): require_once()
+#1 {main}
+  thrown in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php on line 9
+[Thu Oct 29 10:02:38 2026] [::1]:55446 Closing
+[Thu Oct 29 10:02:48 2026] [::1]:55463 Accepted
+[Thu Oct 29 10:02:48 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:02:48 2026] PHP Warning:  require_once(C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers/../config/Connection.php): Failed to open stream: No such file or directory in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php on line 9
+[Thu Oct 29 10:02:48 2026] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers/../config/Connection.php' (include_path='C:\xampp\php\PEAR') in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php:9
+Stack trace:
+#0 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\index.php(191): require_once()
+#1 {main}
+  thrown in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php on line 9
+[Thu Oct 29 10:02:48 2026] [::1]:55463 [200]: GET /api/saskia - Uncaught Error: Failed opening required 'C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers/../config/Connection.php' (include_path='C:\xampp\php\PEAR') in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php:9
+Stack trace:
+#0 C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\index.php(191): require_once()
+#1 {main}
+  thrown in C:\Users\e_martinmos\Desktop\Proyectos\Soinutruk\controllers\SaskiaController.php on line 9
+[Thu Oct 29 10:02:48 2026] [::1]:55463 Closing
+[Thu Oct 29 10:03:19 2026] [::1]:55474 Accepted
+[Thu Oct 29 10:03:19 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:03:19 2026] [::1]:55474 [200]: GET /
+[Thu Oct 29 10:03:19 2026] [::1]:55474 Closing
+[Thu Oct 29 10:04:21 2026] [::1]:55531 Accepted
+[Thu Oct 29 10:04:21 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:04:21 2026] [::1]:55531 [401]: GET /api/saskia
+[Thu Oct 29 10:04:21 2026] [::1]:55531 Closing
+[Thu Oct 29 10:11:39 2026] [::1]:64220 Accepted
+[Thu Oct 29 10:11:40 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:11:40 2026] [::1]:64220 [200]: HEAD /
+[Thu Oct 29 10:11:40 2026] [::1]:64220 Closing
+[Thu Oct 29 10:12:20 2026] [::1]:64244 Accepted
+[Thu Oct 29 10:12:20 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:12:20 2026] [::1]:64244 [401]: GET /api/saskia?action=index
+[Thu Oct 29 10:12:20 2026] [::1]:64244 Closing
+[Thu Oct 29 10:12:43 2026] [::1]:64263 Accepted
+[Thu Oct 29 10:12:44 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:12:44 2026] [::1]:64263 [200]: GET /
+[Thu Oct 29 10:12:44 2026] [::1]:64263 Closing
+[Thu Oct 29 10:13:33 2026] [::1]:64305 Accepted
+[Thu Oct 29 10:13:34 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:13:34 2026] [::1]:64305 [302]: GET /carrito
+[Thu Oct 29 10:13:34 2026] [::1]:64305 Closing
+[Thu Oct 29 10:14:18 2026] [::1]:64327 Accepted
+[Thu Oct 29 10:14:19 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:14:19 2026] [::1]:64327 [302]: GET /carrito
+[Thu Oct 29 10:14:19 2026] [::1]:64327 Closing
+[Thu Oct 29 10:14:31 2026] [::1]:64339 Accepted
+[Thu Oct 29 10:14:31 2026] [::1]:64339 [200]: GET /public/js/saskia.js
+[Thu Oct 29 10:14:31 2026] [::1]:64339 Closing
+[Thu Oct 29 10:15:40 2026] [::1]:64365 Accepted
+[Thu Oct 29 10:15:41 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:15:41 2026] [::1]:64365 [401]: POST /api/saskia/gehitu
+[Thu Oct 29 10:15:41 2026] [::1]:64365 Closing
+[Thu Oct 29 10:16:48 2026] [::1]:62910 Accepted
+[Thu Oct 29 10:16:48 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:16:48 2026] [::1]:62910 [401]: POST /api/saskia/kendu
+[Thu Oct 29 10:16:48 2026] [::1]:62910 Closing
+[Thu Oct 29 10:16:58 2026] [::1]:62921 Accepted
+[Thu Oct 29 10:16:58 2026] [::1]:62921 [200]: GET /public/js/saskia.js
+[Thu Oct 29 10:16:58 2026] [::1]:62921 Closing
+[Thu Oct 29 10:17:06 2026] [::1]:62926 Accepted
+[Thu Oct 29 10:17:06 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:17:06 2026] [::1]:62926 [200]: GET /
+[Thu Oct 29 10:17:06 2026] [::1]:62926 Closing
+[Thu Oct 29 10:17:09 2026] [::1]:62936 Accepted
+[Thu Oct 29 10:17:09 2026] Xdebug: [Step Debug] Time-out connecting to debugging client, waited: 200 ms. Tried: localhost:9003 (through xdebug.client_host/xdebug.client_port).
+[Thu Oct 29 10:17:10 2026] [::1]:62936 [200]: GET /producto?id=1
+[Thu Oct 29 10:17:10 2026] [::1]:62936 Closing
