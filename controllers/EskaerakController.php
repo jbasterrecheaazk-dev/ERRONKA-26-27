@@ -127,6 +127,9 @@ class EskaerakController
                 $total += (float)$item['prezioa'];
             }
 
+            // Inyectar la conexión transaccional en el modelo para evitar deadlocks
+            $this->eskaerakModel->setDb($db);
+
             if ($this->eskaerakModel->crear($userId, $productoIds, $total)) {
                 $db->commit();
                 $this->json(['success' => true, 'message' => 'Compra realizada correctamente']);

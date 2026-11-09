@@ -34,6 +34,15 @@ class EskaerakModel
     }
 
     /**
+     * Asigna una conexión PDO externa (por ejemplo, la de una transacción
+     * iniciada desde el controlador) para evitar bloqueos por doble conexión.
+     */
+    public function setDb(PDO $db): void
+    {
+        $this->db = $db;
+    }
+
+    /**
      * Registrar los detalles del pedido y marcar productos como vendidos.
      *
      * ATENCIÓN: Este método NO inicia transacciones propias para evitar
